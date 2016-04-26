@@ -1,0 +1,15 @@
+Objecitve:
+Be the player with the lowest score. When a player reaches score X the games ends.
+
+Scoring:
+At the end of each hand players count the number of hearts as well queen of spades they have taken. 
+Each hart equals 1 point & queens spade equals 13 points.
+If a player takes all points, he does not score 26 points. Instead the other players score 26 points each.
+
+The play:
+After receiving your cards you choose 3 cards to pass to the player to the left.
+
+The player with 2 of clubs starts by playing that card.
+You must follow suite if possible. If a player does not have the current suit, any suite may be discarded. The highest card of the suit led wins a trick and the winner leads next.
+
+The first time a hearts or queen of spades is discarded no other hearts may be played that hand.
