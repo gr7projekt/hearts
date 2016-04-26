@@ -5,6 +5,32 @@
 #include "account.h"
 #include "encrypt.h"
 
+
+
+Account getAccountByUsername(char *username)
+{
+	Account accs[100];
+	int cnt = getAccounts(accs);
+	int i;
+	for (i = 0; i < cnt; i++)
+		if (strcmp(accs[i].username, username) == 0) return accs[i];
+	Account error_acc;
+	error_acc.id = -1;	
+	return error_acc;
+}
+
+Account getAccountById(int id)
+{
+	Account accs[100];
+	int cnt = getAccounts(accs);
+	int i;
+	for (i = 0; i < cnt; i++) 
+		if (accs[i].id == id) return accs[i];
+	Account error_acc;
+	error_acc.id = -1;
+	return error_acc;
+}
+
 void display(char* ciphertext, int len){
   int v;
   for (v=0; v<len; v++){
@@ -35,7 +61,7 @@ int addAccount(char *usr, char *pwd)
       int cx;
       MCRYPT td, td2;
       char * bfr;
-      
+
       int buffer_len = 16;
       char * IV = "AAAAAAAAAAAAAAAA";
       bfr = calloc(1, buffer_len);
