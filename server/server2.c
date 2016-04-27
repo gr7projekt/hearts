@@ -108,11 +108,12 @@ int main(int argc,char const *argv[])
             do {
                 r = recv(s2, arguments,100, 0);
                 if (r <= 0) {
-                    if (r < 0) perror("recv");
+                    if (r < 0) syslog(LOG_ERR,"Not recieved!\n");
                     done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
                 }                                               //om recv returnerar 0 eller -1.
                 if (!done){                                     //Inget fel eller avslut, enligt tilldelning
                     if(!(hearts(arguments,s2))){
+                    	memset(arguments,'\0',sizeof(arguments));
                         strcpy(arguments,"ENDOFTRANS");
                         if (send(s2,arguments,strlen(arguments),0) < 0) {  //skicka tillbaka strängen
                             perror("send");
@@ -120,7 +121,7 @@ int main(int argc,char const *argv[])
                         }
                         else done = 0;
                     }
-                    //memset(arguments,'\0',sizeof(arguments));
+                    memset(arguments,'\0',sizeof(arguments));
                 }
             } while (!done);                        //så länge klienten skickar data håller vi öppet 24/7
             printf("I'm server %d and my client just signed off!\n",getpid());
@@ -263,10 +264,10 @@ void daemonize(const char *lockfile)
 
 int hearts (char* arguments,int fd){
     pid_t child_pid;
-    if(strcmp("hearts",arguments) || strcmp("port",arguments)){             //Avsluta
-        close(1);
-        dup(fd);
-        return SIGTERM;
+    if(strcmp("hearts",arguments)){             //Avsluta
+	close(1);
+	syslog(LOG_ERR,"%s, argument = %s ",strerror(errno), arguments);
+	exit (EXIT_FAILURE);
     }
     else {
         /* Duplicate this process. */
@@ -275,7 +276,7 @@ int hearts (char* arguments,int fd){
             /* This is the parent process. */
             close(1);
             wait(0);
-            return 0;
+            return 1;
         }
         
         else {
@@ -283,10 +284,13 @@ int hearts (char* arguments,int fd){
             close(1);
             dup(fd);
             /* Now execute the commands in a new session*/
-            if (arguments == "hearts") execlp("/bin/sh","bash","-c", "echo diamonds", NULL);
-            else execlp("/bin/sh","bash","-c", "echo 41337", NULL);
+            if (arguments == "hearts"){
+		syslog(LOG_INFO, "%s is what the client says!",arguments); 
+		execlp("/bin/sh","sh","-c", "echo diamonds", NULL);
+            }
+	    else execlp("/bin/sh","sh","-c", "echo 41337", NULL);
             /* The execlp function returns only if an error occurs. */
-            perror("Exec\n");
+            syslog(LOG_ERR, "%s", strerror(errno));
             abort ();
         }
     }
