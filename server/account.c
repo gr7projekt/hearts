@@ -62,15 +62,16 @@ int addAccount(char *usr, char *pwd)
       MCRYPT td, td2;
       char * bfr;
 
-      int buffer_len = 16;
-      char * IV = "AAAAAAAAAAAAAAAA";
-      bfr = calloc(1, buffer_len);
-      strncpy(bfr, pwd, buffer_len);
-      encrypt(bfr, buffer_len, IV, "gr7hearts", 16);
+      	int buffer_len = 16;
+      	char * IV = "AAAAAAAAAAAAAAAA";
+      	bfr = calloc(1, buffer_len);
+      	strncpy(bfr, pwd, buffer_len);
+      	encrypt(bfr, buffer_len, IV, "gr7hearts", 16);
 	display(bfr, buffer_len);
-      char * newpass = (char *) malloc(200);
-      strcpy(newpass, bfr);
-      cx = sprintf(buffer, "insert into accounts (username, password) values ('%s', '%s')", usr, newpass);
+      	char * newpass = (char *) malloc(200);
+      	strcpy(newpass, bfr);
+	printf("%c\n%c", bfr[0], newpass[0]);
+      cx = sprintf(buffer, "insert into accounts (username, password) values ('%s', '%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d')", usr, bfr[0], bfr[1], bfr[2], bfr[3], bfr[3], bfr[4], bfr[5], bfr[6], bfr[7], bfr[8], bfr[9], bfr[10], bfr[11], bfr[12], bfr[13], bfr[14], bfr[15]);
 
       if (mysql_query(conn, buffer)) {
             fprintf(stderr, "%s\n", mysql_error(conn));
