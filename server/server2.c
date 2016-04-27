@@ -113,6 +113,7 @@ int main(int argc,char const *argv[])
                 }                                               //om recv returnerar 0 eller -1.
                 if (!done){                                     //Inget fel eller avslut, enligt tilldelning
                     if(!(hearts(arguments,s2))){
+                    	memset(arguments,'\0',sizeof(arguments));
                         strcpy(arguments,"ENDOFTRANS");
                         if (send(s2,arguments,strlen(arguments),0) < 0) {  //skicka tillbaka strängen
                             perror("send");
@@ -120,7 +121,7 @@ int main(int argc,char const *argv[])
                         }
                         else done = 0;
                     }
-                    //memset(arguments,'\0',sizeof(arguments));
+                    memset(arguments,'\0',sizeof(arguments));
                 }
             } while (!done);                        //så länge klienten skickar data håller vi öppet 24/7
             printf("I'm server %d and my client just signed off!\n",getpid());
@@ -275,7 +276,7 @@ int hearts (char* arguments,int fd){
             /* This is the parent process. */
             close(1);
             wait(0);
-            return 0;
+            return 1;
         }
         
         else {
