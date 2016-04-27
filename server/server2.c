@@ -263,11 +263,10 @@ void daemonize(const char *lockfile)
 
 int hearts (char* arguments,int fd){
     pid_t child_pid;
-    if(strcmp("hearts",arguments) || strcmp("port\n",arguments)){             //Avsluta
-        printf("no can do! Length: %d", strlen(arguments));
+    if(strcmp("hearts",arguments)){             //Avsluta
 	close(1);
-        dup(fd);
 	syslog(LOG_ERR,"%s, argument = %s ",strerror(errno), arguments);
+	exit (EXIT_FAILURE);
     }
     else {
         /* Duplicate this process. */
