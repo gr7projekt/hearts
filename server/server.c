@@ -50,7 +50,7 @@ int main(int argc,char const *argv[])
     memset(str,'\0',sizeof(str));
     
     /* Initialize the logging interface */
-    openlog(DAEMON_NAME, LOG_PID, LOG_LOCAL5 );
+    openlog(DAEMON_NAME, LOG_PID, LOG_DAEMON );
     syslog(LOG_INFO, "Starting_daemon" );
     
     /* Daemonize */
@@ -81,11 +81,11 @@ int main(int argc,char const *argv[])
     }
     syslog(LOG_INFO, "listening for up to 4 connections!\n");
     
+    struct sigaction sa;
+    sa.sa_handler = sigchld_handlr; // reap all dead processes
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART;
     for(;;) {
-        struct sigaction sa;
-        sa.sa_handler = sigchld_handlr; // reap all dead processes
-        sigemptyset(&sa.sa_mask);
-        sa.sa_flags = SA_RESTART;
         if (sigaction(SIGCHLD, &sa, NULL) == -1) {      //WNOHANG!
             syslog(LOG_ERR,  "%s",strerror(errno));
             exit(EXIT_FAILURE);
@@ -142,17 +142,20 @@ void sigchld_handlr(int s)
 void sigchld_handler(int s)
 {
     switch(s) {
-        case(SIGTSTP):  exit((int)SIG_IGN);  break;/* Various TTY signals */
-        case(SIGTTOU):  exit((int)SIG_IGN); break;
-        case(SIGTTIN):  exit((int)SIG_IGN); break;
-        case(SIGHUP):   exit((int)SIG_IGN); break;/* Ignore hangup signal */
-        case SIGALRM:   exit(EXIT_FAILURE); break;
+        case SIGTSTP :  exit((long) SIG_IGN);  break;/* Various TTY signals */
+        case SIGTTOU :  exit((long) SIG_IGN); break;
+        case SIGTTIN :  exit((long) SIG_IGN); break;
+        case SIGHUP :   exit((long) SIG_IGN); break;/* Ignore hangup signal */
+        case SIGALRM :   exit(EXIT_FAILURE); break;
+            
+        //Här måste vi hantera avslut. Skriv om!
+//En användare avslutar sin uppkoppling till servern utan att vara uppkopplad till ett spelbord.
         case SIGUSR1:   exit(EXIT_SUCCESS); break;
-        case SIGCHLD:   exit(EXIT_FAILURE); break;
-        default:        exit((int)SIG_DFL); break;
+//En användare har avslutat, skicka ett meddelande till de andra spelarna!!!  
+        case SIGCHLD:   exit(2); break;            
+        default:        exit((long) SIG_DFL); break;
     }
 }
-
 void daemonize(const char *lockfile)
 {
     pid_t pid, sid, parent,child;
@@ -260,7 +263,7 @@ void daemonize(const char *lockfile)
 
 int hearts (char* arguments,int fd){
     pid_t child_pid;
-    if(strcmp("quit",arguments)){             //Avsluta
+    if(strcmp("hearts",arguments) || strcmp("port",arguments)){             //Avsluta
         close(1);
         dup(fd);
         return SIGTERM;
@@ -280,7 +283,8 @@ int hearts (char* arguments,int fd){
             close(1);
             dup(fd);
             /* Now execute the commands in a new session*/
-            execlp("/bin/sh","bash","-c", "echo Hello World!", NULL);
+            if (arguments == "hearts") execlp("/bin/sh","bash","-c", "echo diamonds", NULL);
+            else execlp("/bin/sh","bash","-c", "echo 41337", NULL);
             /* The execlp function returns only if an error occurs. */
             perror("Exec\n");
             abort ();
