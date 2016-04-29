@@ -105,6 +105,7 @@ int main(int argc,char const *argv[])
             memset(ascii_port,'\0',(size_t) sizeof(ascii_port));
             memset(sent_arguments,'\0',(size_t) sizeof(sent_arguments));
             do {
+                dup(s2);
                 //Inget fel eller avslut, enligt tilldelning
                 r = recv (s2,arguments,sizeof(arguments), 0);
                 if (r <= 0) {

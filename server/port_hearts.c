@@ -86,9 +86,9 @@ int syn_ack(char* arguments,int syn,int fd){
     return PARENT;
      */
      if(!strcmp(arguments,SYN0)){
-         syslog(LOG_INFO,"argument0: %s", arguments, SYN0);
+         syslog(LOG_INFO,"argument0: %s", arguments);
          if(!syn) strcpy(arguments,ACK0);
-         syslog(LOG_INFO,"argument1: %s", arguments, ACK0);
+         syslog(LOG_INFO,"argument1: %s", arguments);
      }
      else if(!strcmp(arguments,SYN1)){
          syslog(LOG_INFO,"argument2: %s", arguments);
