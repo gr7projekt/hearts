@@ -133,6 +133,7 @@ int main(int argc,char const *argv[])
                         perror("send");
                         done = 1;                   //försäkrar oss om att accept-loopen avslutas
                     }
+                    memset(arguments,'\0',(size_t) sizeof(argument));
                 }
                 i++; //syn-ack räknare
                 close(s2);
