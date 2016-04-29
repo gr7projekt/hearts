@@ -57,7 +57,7 @@ int syn_ack(char* arguments,int syn,int fd){
         // This is the parent process.
         close(fd);
         wait(0);
-        return 1;
+        return PARENT;
     }
     else {
         //child
@@ -73,7 +73,6 @@ int syn_ack(char* arguments,int syn,int fd){
         else if(!strcmp(arguments,SYN1)){
             syslog(LOG_INFO,"argument2: %s", arguments);
         }
-        }
         else strcpy(arguments,"it's the ping of death for you my friend!");
         // Now execute the commands in a new session
         execlp("/bin/sh","bash","-c", "echo" ,arguments, NULL);
@@ -81,8 +80,7 @@ int syn_ack(char* arguments,int syn,int fd){
         syslog(LOG_ERR,"%s",strerror(errno));
         abort();
     }
-    wait(0);
-    return PARENT;
+    return 0;
      /*
      if(!strcmp(arguments,SYN0)){
          syslog(LOG_INFO,"argument0: %s", arguments, SYN0);
