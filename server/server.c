@@ -111,7 +111,7 @@ int main(int argc,char const *argv[])
                     if (r <= 0) {
                         if (r < 0) perror("recv");
                         done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
-                    }
+                    } syslog(LOG_INFO, "received: %s", arguments);
                 }
                 syslog(LOG_INFO, "argument recieved: %s", arguments);
                 if(!(syn_ack(arguments,i,s2))){
@@ -135,7 +135,7 @@ int main(int argc,char const *argv[])
                         perror("send");
                         done = 1;                   //försäkrar oss om att accept-loopen avslutas
                     }
-                    strcpy(sent_arguments,arguments);
+                    syslog(LOG_INFO,"sent string: %s",strcpy(sent_arguments,arguments);
                 }
                 i++; //syn-ack räknare
                 close(s2);
