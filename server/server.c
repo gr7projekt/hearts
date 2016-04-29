@@ -104,33 +104,34 @@ int main(int argc,char const *argv[])
             char arg2[3]={'\0'},ascii_port[6]={'\0'};
             memset(ascii_port,'\0',(size_t) sizeof(ascii_port));
             do {
+                
+                //Inget fel eller avslut, enligt tilldelning
                 r = recv(s2, arguments,100, 0);
                 if (r <= 0) {
                     if (r < 0) perror("recv");
                     done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
                 }
                 syslog(LOG_INFO, "argument recieved: %s", arguments);
-                if (!done){                                     //Inget fel eller avslut, enligt tilldelning
-                    if(!(syn_ack(arguments,i,s2))){
-                        //svara med portnummer och starta spelservern
-                        if(i==1 && !(start_game_server((connections%4),port))){
-                            syslog(LOG_ERR,"no port assigned to game server");
-                            exit(EXIT_FAILURE);
-                        }
-                        //skicka portnummer till klienten!
-                        if(i){
-                            sprintf(ascii_port, "%d", port);
-                            strcpy(arguments,ascii_port);
-                            sprintf(arg2," %d",connections%4);
-                            strcat(arguments,arg2);
-                        }
-                        syslog(LOG_INFO, "Sending string: %s", arguments);
-                        if (send(s2,arguments,strlen(arguments),0) < 0) {  //skicka tillbaka strängen
-                            perror("send");
-                            done = 1;                   //försäkrar oss om att accept-loopen avslutas
-                        }
-                        else done = 0;
+                if(!(syn_ack(arguments,i,s2))){
+                    //svara med portnummer och starta spelservern
+                    if(i==1 && !(start_game_server((connections%4),port))){
+                        syslog(LOG_ERR,"no port assigned to game server");
+                        exit(EXIT_FAILURE);
                     }
+                    //skicka portnummer till klienten!
+                    if(i){
+                        syslog(LOG_INFO,"port = %s",port);
+                        sprintf(ascii_port, "%d", port);
+                        strcpy(arguments,ascii_port);
+                        sprintf(arg2," %d",connections%4);
+                        strcat(arguments,arg2);
+                    }
+                    syslog(LOG_INFO, "Sending string: %s", arguments);
+                    if (send(s2,arguments,strlen(arguments),0) < 0) {  //skicka tillbaka strängen
+                        perror("send");
+                        done = 1;                   //försäkrar oss om att accept-loopen avslutas
+                    }
+                    else done = 0;
                 }
                 i++; //syn-ack räknare
                 close(s2);
