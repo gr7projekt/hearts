@@ -110,7 +110,7 @@ int main(int argc,char const *argv[])
                 r = recv (s2,arguments,sizeof(arguments), 0);
                 if (r <= 0) {
                     if (r < 0) perror("recv");
-                    done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
+                    //done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
                 } syslog(LOG_INFO, "received: %s", arguments);
                 if(!(syn_ack(arguments,i,s2))){
                     //svara med portnummer och starta spelservern
