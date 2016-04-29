@@ -37,7 +37,7 @@ int start_game_server(int players, int port){
             syslog(LOG_ERR,"%s",strerror(errno));
         }
         else {
-            wait(0)
+            wait(0);
             return 0;
             //no waiting around for child? zombie creator?
         }
