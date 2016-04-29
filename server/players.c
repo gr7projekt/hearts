@@ -26,7 +26,7 @@ void *play_hand(void *parameters) {
     return NULL;
 }
 
-int main (int argc, char* argv[])
+int player_waits_or_plays (int argc, char* argv[])
 {
     pthread_t phils[4]; /*Some sort of array of phils are needed*/
     struct player_parms control_player[3];
