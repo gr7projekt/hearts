@@ -130,7 +130,7 @@ int main(int argc,char const *argv[])
                     }
                 } i++; //syn-ack räknare
             } while (!done);
-            close(fd);
+            close(s2);
             syslog(LOG_INFO, "I'm server %d and my client just signed off!\n",getpid());
             syslog(LOG_NOTICE, "terminated" );
             closelog();
