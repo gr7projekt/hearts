@@ -113,7 +113,7 @@ int main(int argc,char const *argv[])
                 if (!done){                                     //Inget fel eller avslut, enligt tilldelning
                     if(!(syn_ack(arguments,i,s2))){
                         //svara med portnummer och starta spelservern
-                        if(i && !(start_game_server((connections%4),port))){
+                        if(i==1 && !(start_game_server((connections%4),port))){
                             syslog(LOG_ERR,"no port assigned to game server");
                             exit(EXIT_FAILURE);
                         }
@@ -122,6 +122,7 @@ int main(int argc,char const *argv[])
                         strcpy(arguments,ascii_port);
                         sprintf(arg2," %d",connections%4);
                         strcat(arguments,arg2);
+                        syslog(LOG_INFO, "Sending string: %s", arguments);
                         if (send(s2,arguments,strlen(arguments),0) < 0) {  //skicka tillbaka strängen
                             perror("send");
                             done = 1;                   //försäkrar oss om att accept-loopen avslutas
