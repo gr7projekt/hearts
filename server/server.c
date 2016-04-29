@@ -101,15 +101,17 @@ int main(int argc,char const *argv[])
         else if(!pid){                              //serverbarnet ärver accepten, socketen och fildeskriptorn.
             syslog(LOG_INFO,"Connected.\n");
             int i=0, done = 0;
-            char arg2[3]={'\0'},ascii_port[6]={'\0'};
+            char arg2[3]={'\0'},ascii_port[6]={'\0'},sent_arguments[100]={'\0'};
             memset(ascii_port,'\0',(size_t) sizeof(ascii_port));
+            memset(sent_arguments,'\0',(size_t) sizeof(sent_arguments));
             do {
-                
                 //Inget fel eller avslut, enligt tilldelning
-                r = recv(s2, arguments,100, 0);
-                if (r <= 0) {
-                    if (r < 0) perror("recv");
-                    done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
+                while(!strcmp (arguments,sent_arguments)){
+                    r = recv (s2,arguments,100, 0);
+                    if (r <= 0) {
+                        if (r < 0) perror("recv");
+                        done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
+                    }
                 }
                 syslog(LOG_INFO, "argument recieved: %s", arguments);
                 if(!(syn_ack(arguments,i,s2))){
@@ -133,7 +135,7 @@ int main(int argc,char const *argv[])
                         perror("send");
                         done = 1;                   //försäkrar oss om att accept-loopen avslutas
                     }
-                    memset(arguments,'\0',(size_t) sizeof(arguments));
+                    strcpy(arguments);
                 }
                 i++; //syn-ack räknare
                 close(s2);
