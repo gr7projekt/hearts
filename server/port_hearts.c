@@ -63,7 +63,7 @@ int syn_ack(char* arguments,int syn,int fd){
         //child
         //Redirect stdout to socket
         close(1);
-        //dup(fd);
+        dup(fd);
         //SYN-ACK switch
         if(!strcmp(arguments,SYN0)){
             syslog(LOG_INFO,"argument0: %s", arguments);

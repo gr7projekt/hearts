@@ -107,7 +107,7 @@ int main(int argc,char const *argv[])
             do {
                 //Inget fel eller avslut, enligt tilldelning
                 while(!strcmp (arguments,sent_arguments)){
-                    r = recv (s2,arguments,100, 0);
+                    r = recv (s2,arguments,sizeof(arguments), 0);
                     if (r <= 0) {
                         if (r < 0) perror("recv");
                         done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
@@ -138,7 +138,7 @@ int main(int argc,char const *argv[])
                     syslog(LOG_INFO,"sent string: %s",strcpy(sent_arguments,arguments));
                 }
                 i++; //syn-ack räknare
-                close(s2);
+                //close(s2);
             } while (!done);
             close(s2);
             syslog(LOG_INFO, "I'm server %d and my client just signed off!\n",getpid());
