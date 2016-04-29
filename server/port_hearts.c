@@ -64,7 +64,10 @@ int syn_ack(char* arguments,int syn,int fd){
         close(1);
         dup(fd);
         //SYN-ACK switch
-        if(arguments == SYN0) if(!syn) arguments = ACK0;
+        if(arguments == SYN0){
+            syslog(LOG_INFO,"argument: %s\n SYN0: %s", arguments, SYN0);
+            if(!syn) arguments = ACK0;
+            syslog(LOG_INFO,"argument: %s\n SYN0: %s", arguments, SYN0);
         else if(arguments == SYN1) if(syn==1) return 0;
         else arguments="it's the ping of death for you my friend!";
         /* Now execute the commands in a new session*/
