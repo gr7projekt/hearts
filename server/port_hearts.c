@@ -27,7 +27,7 @@
 
 #define PARENT 1
 
-int static get_random_port_numer(void);
+int get_random_port_numer(void);
 int start_game_server(int players, int port){
      /* forka processen när spelare 0 ansluter*/
     if(!players){
