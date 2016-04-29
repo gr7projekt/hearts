@@ -57,7 +57,7 @@ int syn_ack(char* arguments,int syn,int fd){
         /* This is the parent process. */
         close(1);
         wait(0);
-        return 0;
+        return 1;
     }
     else {
         //child
