@@ -114,9 +114,11 @@ int main(int argc,char const *argv[])
                 syslog(LOG_INFO, "argument recieved: %s", arguments);
                 if(!(syn_ack(arguments,i,s2))){
                     //svara med portnummer och starta spelservern
-                    if(i==1 && !(start_game_server((connections%4),port))){
-                        syslog(LOG_ERR,"no port assigned to game server");
-                        exit(EXIT_FAILURE);
+                    if(i==2){
+                        if(!(start_game_server((connections%4),port))){
+                            syslog(LOG_ERR,"no port assigned to game server");
+                            exit(EXIT_FAILURE);
+                        }
                     }
                     //skicka portnummer till klienten!
                     if(i){
@@ -131,7 +133,6 @@ int main(int argc,char const *argv[])
                         perror("send");
                         done = 1;                   //försäkrar oss om att accept-loopen avslutas
                     }
-                    else done = 0;
                 }
                 i++; //syn-ack räknare
                 close(s2);
