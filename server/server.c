@@ -133,6 +133,7 @@ int main(int argc,char const *argv[])
                         done = 1;                   //försäkrar oss om att accept-loopen avslutas
                     }
                     syslog(LOG_INFO,"sent string: %s",strcpy(sent_arguments,arguments));
+                    strcpy(arguments, "ENDOFTRANS");
                 }
                 i++; //syn-ack räknare
                 //close(s2);
