@@ -77,11 +77,14 @@ int main(int argc,char const *argv[])
     }
     syslog(LOG_INFO, "listening for up to 8 connections!\n");
     
-    struct sigaction sa;
-    sa.sa_handler = sigchld_handlr; // reap all dead processes
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART;
+
     for(;;) {
+        struct sigaction sa;
+        sa.sa_handler = sigchld_handlr; // reap all dead processes
+        sigemptyset(&sa.sa_mask);
+        sa.sa_flags = SA_RESTART;
+        
+        
         if (!(connections%4)) port=get_random_port_number();
         if (sigaction(SIGCHLD, &sa, NULL) == -1) {      //WNOHANG!
             syslog(LOG_ERR,  "%s",strerror(errno));
@@ -135,7 +138,7 @@ int main(int argc,char const *argv[])
                         done = 1;                   //försäkrar oss om att accept-loopen avslutas
                     }
                     syslog(LOG_INFO,"sent string: %s",strcpy(sent_arguments,arguments));
-                    strcpy(arguments, "ENDOFTRANS");
+                    //strcpy(arguments, "ENDOFTRANS");
                 }
                 i++; //syn-ack räknare
                 close(s2);

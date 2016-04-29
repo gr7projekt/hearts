@@ -89,6 +89,7 @@ int syn_ack(char* arguments,int syn,int fd){
          syslog(LOG_INFO,"argument0: %s", arguments);
          if(!syn) strcpy(arguments,ACK0);
          syslog(LOG_INFO,"argument1: %s", arguments);
+         return 0;
      }
      else if(!strcmp(arguments,SYN1)){
          syslog(LOG_INFO,"argument2: %s", arguments);
@@ -97,7 +98,6 @@ int syn_ack(char* arguments,int syn,int fd){
          strcpy(arguments,"it's the ping of death for you my friend!");
          return 1;
      }
-    close(fd);
     return 0;
 }
 
