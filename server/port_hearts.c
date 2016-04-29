@@ -52,10 +52,10 @@ int syn_ack(char* arguments,int syn,int fd){
     int static port;
     /* Duplicate this process. */
     
-    /* child_pid = fork ();
+    child_pid = fork ();
     if(child_pid != 0){
         // This is the parent process.
-        close(1);
+        close(fd);
         wait(0);
         return 1;
     }
@@ -63,17 +63,16 @@ int syn_ack(char* arguments,int syn,int fd){
         //child
         //Redirect stdout to socket
         close(1);
-        dup(fd);
+        //dup(fd);
         //SYN-ACK switch
         if(!strcmp(arguments,SYN0)){
-            syslog(LOG_INFO,"argument: %s", arguments, SYN0);
+            syslog(LOG_INFO,"argument0: %s", arguments);
             if(!syn) strcpy(arguments,ACK0);
-            syslog(LOG_INFO,"argument: %s", arguments, ACK0);
-            return 0;
+            syslog(LOG_INFO,"argument1: %s", arguments);
         }
-        else if(strcmp(arguments,SYN1)){
-            if(syn) return 0;
-            syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1);
+        else if(!strcmp(arguments,SYN1)){
+            syslog(LOG_INFO,"argument2: %s", arguments);
+        }
         }
         else strcpy(arguments,"it's the ping of death for you my friend!");
         // Now execute the commands in a new session
@@ -84,7 +83,7 @@ int syn_ack(char* arguments,int syn,int fd){
     }
     wait(0);
     return PARENT;
-     */
+     /*
      if(!strcmp(arguments,SYN0)){
          syslog(LOG_INFO,"argument0: %s", arguments, SYN0);
          if(!syn) strcpy(arguments,ACK0);
@@ -97,12 +96,6 @@ int syn_ack(char* arguments,int syn,int fd){
          strcpy(arguments,"it's the ping of death for you my friend!");
          return 1;
      }
-    close(1);
-    dup(fd);
-    execlp("/bin/sh","bash","-c", "echo" ,arguments, NULL);
-    // The execlp function returns only if an error occurs.
-    syslog(LOG_ERR,"%s",strerror(errno));
-    abort();
-    //return 0;
+    return 0;*/
 }
 
