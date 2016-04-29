@@ -65,9 +65,9 @@ int syn_ack(char* arguments,int syn,int fd){
         dup(fd);
         //SYN-ACK switch
         if(!strcmp(arguments,SYN0)){
-            syslog(LOG_INFO,"argument: %s, SYN0: %s", arguments, SYN0);
+            syslog(LOG_INFO,"argument: %s", arguments, SYN0);
             if(!syn) strcpy(arguments,ACK0);
-            syslog(LOG_INFO,"argument: %s, ACK0: %s", arguments, ACK0);
+            syslog(LOG_INFO,"argument: %s", arguments, ACK0);
             return 0;
         }
         else if(strcmp(arguments,SYN1)){
