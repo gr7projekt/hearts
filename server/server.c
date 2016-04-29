@@ -118,7 +118,7 @@ int main(int argc,char const *argv[])
                             exit(EXIT_FAILURE);
                         }
                         //skicka portnummer till klienten!
-                        if(syn){
+                        if(i){
                             sprintf(ascii_port, "%d", port);
                             strcpy(arguments,ascii_port);
                             sprintf(arg2," %d",connections%4);
