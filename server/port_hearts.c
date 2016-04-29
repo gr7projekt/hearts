@@ -28,23 +28,23 @@
 #define PARENT 1
 
 int static get_random_port_numer(void);
-int start_game_server(int players){
+int start_game_server(int players, int port){
      /* forka processen när spelare 0 ansluter*/
-    int static port;
     if(!players){
-        port=get_random_port_numer();
         if(!(fork())){
             //Executing as child process
             execlp("bin/sh","sh","-c",GAME_SERVER,port,NULL);
             syslog(LOG_ERR,"%s",strerror(errno));
         }
         else {
-            return port;
+            wait(0)
+            return 0;
             //no waiting around for child? zombie creator?
         }
     }
+    else return port;
 }
-int static get_random_port_numer(){
+int get_random_port_numer(){
     srandom(time(NULL));
     return (random()%10000 + 40000);
 }

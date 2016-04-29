@@ -37,7 +37,7 @@ void daemonize(const char *);
 
 int main(int argc,char const *argv[])
 {
-    int pid, s2, inet_fd, connections=0;
+    int pid, s2, inet_fd, port=0, connections=0;
     ssize_t r;
     socklen_t t;
     struct sockaddr_in inet, inet2;
@@ -82,6 +82,7 @@ int main(int argc,char const *argv[])
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
     for(;;) {
+        if (!(connections%4)) port=get_random_port_number();
         if (sigaction(SIGCHLD, &sa, NULL) == -1) {      //WNOHANG!
             syslog(LOG_ERR,  "%s",strerror(errno));
             exit(EXIT_FAILURE);
@@ -99,7 +100,7 @@ int main(int argc,char const *argv[])
         }
         else if(!pid){                              //serverbarnet ärver accepten, socketen och fildeskriptorn.
             syslog(LOG_INFO,"Connected.\n");
-            int port, i=0, done = 0;
+            int i=0, done = 0;
             char arg2[3]={'\0'},ascii_port[6]={'\0'};
             memset(ascii_port,'\0',(size_t) sizeof(ascii_port));
             do {
@@ -112,7 +113,7 @@ int main(int argc,char const *argv[])
                 if (!done){                                     //Inget fel eller avslut, enligt tilldelning
                     if(!(syn_ack(arguments,i,s2))){
                         //svara med portnummer och starta spelservern
-                        if(!(port=start_game_server((connections%4)))){
+                        if(!(start_game_server((connections%4),port))){
                             syslog(LOG_ERR,"no port assigned to game server");
                             exit(EXIT_FAILURE);
                         }
