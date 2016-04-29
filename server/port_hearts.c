@@ -97,6 +97,7 @@ int syn_ack(char* arguments,int syn,int fd){
          strcpy(arguments,"it's the ping of death for you my friend!");
          return 1;
      }
+    close(fd);
     return 0;
 }
 
