@@ -135,7 +135,7 @@ int main(int argc,char const *argv[])
                         perror("send");
                         done = 1;                   //försäkrar oss om att accept-loopen avslutas
                     }
-                    strcpy(arguments);
+                    strcpy(sent_arguments,arguments);
                 }
                 i++; //syn-ack räknare
                 close(s2);
