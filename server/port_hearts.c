@@ -64,10 +64,12 @@ int syn_ack(char* arguments,int syn,int fd){
         close(1);
         dup(fd);
         //SYN-ACK switch
-        if(!strcmp(arguments,SYN0){
+        if(!strcmp(arguments,SYN0)){
             syslog(LOG_INFO,"argument: %s\n SYN0: %s", arguments, SYN0);
             if(!syn) strcpy(arguments,ACK0);
             syslog(LOG_INFO,"argument: %s\n SYN0: %s", arguments, SYN0);
+            return 0;
+        }
         else if(strcmp(arguments,SYN1)) if(syn) return 0;
         else strcpy(arguments,"it's the ping of death for you my friend!");
         /* Now execute the commands in a new session*/
@@ -76,6 +78,7 @@ int syn_ack(char* arguments,int syn,int fd){
         syslog(LOG_ERR,"%s",strerror(errno));
         abort();
     }
+    wait(0);
     return PARENT;
 }
 
