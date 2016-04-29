@@ -106,14 +106,11 @@ int main(int argc,char const *argv[])
             memset(sent_arguments,'\0',(size_t) sizeof(sent_arguments));
             do {
                 //Inget fel eller avslut, enligt tilldelning
-                while(!strcmp (arguments,sent_arguments)){
-                    r = recv (s2,arguments,sizeof(arguments), 0);
-                    if (r <= 0) {
-                        if (r < 0) perror("recv");
-                        done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
-                    } syslog(LOG_INFO, "received: %s", arguments);
-                }
-                syslog(LOG_INFO, "argument recieved: %s", arguments);
+                r = recv (s2,arguments,sizeof(arguments), 0);
+                if (r <= 0) {
+                    if (r < 0) perror("recv");
+                    done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
+                } syslog(LOG_INFO, "received: %s", arguments);
                 if(!(syn_ack(arguments,i,s2))){
                     //svara med portnummer och starta spelservern
                     if(i==2){
@@ -150,6 +147,7 @@ int main(int argc,char const *argv[])
         connections++;
     }
     /* Finish up */
+    closelog();
     return 0;
 }
 

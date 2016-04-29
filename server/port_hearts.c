@@ -52,12 +52,12 @@ int syn_ack(char* arguments,int syn,int fd){
     int static port;
     /* Duplicate this process. */
     
-    child_pid = fork ();
+    /* child_pid = fork ();
     if(child_pid != 0){
         // This is the parent process.
-        close(fd);
+        close(1);
         wait(0);
-        return PARENT;
+        return 1;
     }
     else {
         //child
@@ -66,12 +66,14 @@ int syn_ack(char* arguments,int syn,int fd){
         dup(fd);
         //SYN-ACK switch
         if(!strcmp(arguments,SYN0)){
-            syslog(LOG_INFO,"argument0: %s", arguments);
+            syslog(LOG_INFO,"argument: %s", arguments, SYN0);
             if(!syn) strcpy(arguments,ACK0);
-            syslog(LOG_INFO,"argument1: %s", arguments);
+            syslog(LOG_INFO,"argument: %s", arguments, ACK0);
+            return 0;
         }
-        else if(!strcmp(arguments,SYN1)){
-            syslog(LOG_INFO,"argument2: %s", arguments);
+        else if(strcmp(arguments,SYN1)){
+            if(syn) return 0;
+            syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1);
         }
         else strcpy(arguments,"it's the ping of death for you my friend!");
         // Now execute the commands in a new session
@@ -80,8 +82,9 @@ int syn_ack(char* arguments,int syn,int fd){
         syslog(LOG_ERR,"%s",strerror(errno));
         abort();
     }
-    return 0;
-     /*
+    wait(0);
+    return PARENT;
+     */
      if(!strcmp(arguments,SYN0)){
          syslog(LOG_INFO,"argument0: %s", arguments, SYN0);
          if(!syn) strcpy(arguments,ACK0);
@@ -94,6 +97,6 @@ int syn_ack(char* arguments,int syn,int fd){
          strcpy(arguments,"it's the ping of death for you my friend!");
          return 1;
      }
-    return 0;*/
+    return 0;
 }
 
