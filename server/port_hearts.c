@@ -86,14 +86,14 @@ int syn_ack(char* arguments,int syn,int fd){
     return PARENT;
      */
      if(!strcmp(arguments,SYN0)){
-     syslog(LOG_INFO,"argument: %s", arguments, SYN0);
-     if(!syn) strcpy(arguments,ACK0);
-     syslog(LOG_INFO,"argument: %s", arguments, ACK0);
-     return 0;
+         syslog(LOG_INFO,"argument0: %s", arguments, SYN0);
+         if(!syn) strcpy(arguments,ACK0);
+         syslog(LOG_INFO,"argument1: %s", arguments, ACK0);
+         return 0;
      }
      else if(strcmp(arguments,SYN1)){
-     if(syn) return 0;
-     syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1);
+         syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1);
+         if(syn) return 0;
      }
      else {
          strcpy(arguments,"it's the ping of death for you my friend!");
