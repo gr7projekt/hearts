@@ -21,6 +21,6 @@
 #include <stdio.h>
 int start_game_server(int,int); //
 int syn_ack(char *,int,int);
-int get_random_port_numer(void);
+int get_random_port_number(void);
 
 #endif /* port_hearts_h */

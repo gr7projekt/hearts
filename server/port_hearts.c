@@ -43,7 +43,7 @@ int start_game_server(int players, int port){
     }
     else return port;
 }
-int get_random_port_numer(void){
+int get_random_port_number(void){
     srandom(time(NULL));
     return (random()%10000 + 40000);
 }
