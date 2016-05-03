@@ -77,14 +77,11 @@ int main(int argc,char const *argv[])
     }
     syslog(LOG_INFO, "listening for up to 8 connections!\n");
     
-
+    struct sigaction sa;
+    sa.sa_handler = sigchld_handlr; // reap all dead processes
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART;
     for(;;) {
-        struct sigaction sa;
-        sa.sa_handler = sigchld_handlr; // reap all dead processes
-        sigemptyset(&sa.sa_mask);
-        sa.sa_flags = SA_RESTART;
-        
-        
         if (!(connections%4)) port=get_random_port_number();
         if (sigaction(SIGCHLD, &sa, NULL) == -1) {      //WNOHANG!
             syslog(LOG_ERR,  "%s",strerror(errno));
@@ -143,7 +140,7 @@ int main(int argc,char const *argv[])
                 i++; //syn-ack räknare
                 close(s2);
             } while (!done);
-            close(s2);
+            //close(s2);
             syslog(LOG_INFO, "I'm server %d and my client just signed off!\n",getpid());
             syslog(LOG_NOTICE, "terminated" );
             closelog();
