@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1462270260 source:c:\users\robert\documents\codeblocks\sdl_ttf_test\main.c
+	<stdio.h>
+	<stdbool.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<string.h>
+
+1462278423 source:c:\users\robert\documents\codeblocks\sdl_ttf_test\ttf_hello_world.c
+	<stdio.h>
+	<stdbool.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<string.h>
+

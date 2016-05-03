@@ -1,0 +1,109 @@
+//
+//  main.c
+//  sdl_ttf-test
+//
+//  Created by Niclas Ragnar on 2016-04-26.
+//  Copyright (c) 2016 Niclas Ragnar. All rights reserved.
+//
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <string.h>
+
+#define RES_Y 768
+#define RES_X 1024
+#define SHAPE_SIZE 18
+
+bool init();
+
+SDL_Window* gWindow = NULL;
+SDL_Renderer* gRenderer = NULL;
+TTF_Font* gFont = NULL;
+
+int main(int argc, char* args[])
+{
+    bool quit;
+    SDL_Event e;
+    SDL_Rect src;
+    SDL_Rect dst;
+
+    char str[]="hello world!\n";
+    printf("%s", str);
+
+    src.x = 0;
+    src.y = 0;
+    src.w = SHAPE_SIZE*6;
+    src.h = SHAPE_SIZE;
+
+    dst.x = RES_X/2-SHAPE_SIZE*6/2;
+    dst.y = RES_Y/2-SHAPE_SIZE/2;
+    dst.w = SHAPE_SIZE*6;
+    dst.h = SHAPE_SIZE;
+
+
+    if (init()) {
+        printf("init worked\n");
+    }
+
+    //TTL initiering
+    if (TTF_Init() != 0){
+        fprintf(stderr,"\nUnable to initialize TTF: %s\n", TTF_GetError());
+        return 1;
+    }
+    //Open font
+    gFont = TTF_OpenFont( "Calibri.ttf", SHAPE_SIZE);
+    //misslyckad öppning?
+    if( gFont == NULL ){
+		printf( "Failed to load font! SDL_ttf Error: %s\n", TTF_GetError() );
+	}
+
+	SDL_Color textColor = { 0, 0, 0 };
+	//SDL_Color backColor = {255,255,255};
+	TTF_SetFontStyle(gFont,TTF_STYLE_NORMAL);
+
+    SDL_Surface* surfaceMessage = TTF_RenderUTF8_Blended(gFont,"Hello World!",textColor);
+
+
+    if(surfaceMessage == NULL){
+        printf("Failed to render %s\n", TTF_GetError());
+    }
+
+    SDL_Texture* message = SDL_CreateTextureFromSurface(gRenderer, surfaceMessage);
+
+
+
+    while (!quit) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT) {
+                quit = true;
+            }
+        }
+
+        SDL_SetRenderDrawColor(gRenderer, 0xF0, 0xF0, 0xF0, 0xFF);
+        SDL_RenderClear(gRenderer);
+
+        SDL_RenderCopy(gRenderer, message, &src , &dst);
+
+        SDL_RenderPresent(gRenderer);
+    }
+    return 0;
+}
+
+bool init(){
+    bool test = true;
+    SDL_Init(SDL_INIT_VIDEO);
+    gWindow = SDL_CreateWindow("Heartstart", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED, RES_X, RES_Y, SDL_WINDOW_SHOWN);
+    if(gWindow == NULL){
+        printf("Fungerar ej\n");
+        test = false;
+    }
+    gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+    if(gRenderer == NULL){
+        printf("Fungerar ej\n");
+        test = false;
+    }
+    return test;
+}
