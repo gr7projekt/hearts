@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <SDL2/SDL.h>
-#include <SDL2_net/SDL_net.h>
+#include "projekarbete_kortspel/SDL2/SDL.h"
+#include "projekarbete_kortspel/SDL2_net/SDL_net.h"
 
 #define PORT 1337
 #define MAXLEN 1024
