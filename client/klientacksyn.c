@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include <SDL2/SDL.h>
 #include <SDL2_net/SDL_net.h>
 
@@ -13,7 +14,7 @@ int main(void)
     char server[25] = "", newport[MAXLEN], SYN0[MAXLEN] = "hearts", SYN1[MAXLEN] = "port";
     int port, result, len, len2;
     
-    strcpy(server, "130.237.84.89");
+    strcpy(server, "192.168.56.101");
     port = PORT;
     
     if (SDLNet_ResolveHost(&ip, server, port) < 0)
@@ -27,6 +28,7 @@ int main(void)
         fprintf(stderr, "SDLNet_TCP_Open: %s\n", SDLNet_GetError());
         exit(EXIT_FAILURE);
     }
+    printf("socket open\n");
     
     
     len = (int) strlen(SYN0)+1;
@@ -36,10 +38,12 @@ int main(void)
         fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
         exit(EXIT_FAILURE);
     }
+    printf("hearts sent\n");
     
     memset(SYN0, '\0', sizeof(SYN0));
     
     result=SDLNet_TCP_Recv(sd,SYN0,MAXLEN);
+    printf("%d\n",result);
 
     printf("%s\n",SYN0);
 
@@ -53,10 +57,13 @@ int main(void)
         }
         
         memset(SYN1, '\0', sizeof(SYN1));
-        result=SDLNet_TCP_Recv(sd,SYN1,MAXLEN);
-        
-        strcpy(newport, SYN1);
-        printf("new port: %s \n", newport);
+        do {
+            result=SDLNet_TCP_Recv(sd,SYN1,MAXLEN);
+        } while (!strcmp(SYN1, "ENDOFTRANS"));
+        strcpy(newport, "./game_client ");
+        strcat(newport, SYN1);
+        printf("commandline argument: %s \n", newport);
+        execlp("/bin/sh","sh","-c",newport,NULL);
     }
     
     return 0;
