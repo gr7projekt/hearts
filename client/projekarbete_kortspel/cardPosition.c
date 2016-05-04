@@ -1,8 +1,7 @@
 #include "cardPosition.h"
-#define DISTANCE_X 25
-#define DISTANCE_Y 15
 
-void initCardPosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[], SDL_Rect adv[])
+
+void initCardPosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[], SDL_Rect adv[], SDL_Rect drop[])
 {
     for(int i=0 ; i<13; i++)
     {
@@ -26,8 +25,13 @@ void initCardPosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[],
         p4[i].h = HEIGHT;
         p4[i].w = WIDTH;
     }
-    adv[0].y=RES_Y/2-200;
-    adv[0].x=RES_X+10;  //+10 för att få avstånd från högra korten till reklamen
-    adv[0].h=400;
-    adv[0].w=65;        //75 pixlar höger om de högra korten, 65 för reklamen.
+    adv[0].y = RES_Y/2-200;
+    adv[0].x = RES_X+10;  //+10 för att få avstånd från högra korten till reklamen
+    adv[0].h = 400;
+    adv[0].w = 65;        //75 pixlar höger om de högra korten, 65 för reklamen.
+
+    drop[0].y = RES_Y/2-DROP_Y/2;
+    drop[0].x = RES_X/2-DROP_X/2;
+    drop[0].h = DROP_Y;
+    drop[0].w = DROP_X;
 }
