@@ -18,6 +18,7 @@ typedef struct player_parms{
     int pos;
     int id;
     int score;
+    char guid[33];
     Card game_hand[13];
     Card won_hand[52];
 }Player;
