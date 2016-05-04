@@ -16,4 +16,12 @@
 #define HEIGHT 105  //kortets höjd
 #define WIDTH 70    //kortets bredd
 
+/***
+*storleken på dropzone i mitten
+*
+***/
+
+#define DROP_X 300
+#define DROP_Y 200
+
 #endif // RESOLUTION_H_INCLUDED

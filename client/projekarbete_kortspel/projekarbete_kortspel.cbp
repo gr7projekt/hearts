@@ -49,6 +49,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="loadMedia.h" />
+		<Unit filename="openWeb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="openWeb.h" />
 		<Unit filename="resolution.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
