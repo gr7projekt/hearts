@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <string.h>
+#include <errno.h>
 #include <SDL2/SDL.h>
 #include <SDL2_net/SDL_net.h>
 
 #define PORT 1337
 #define MAXLEN 1024
+#define IP_ADDRESS "130.237.84.89"
+#define GAME_CLIENT "game_client"
 
 int main(void)
 {
@@ -14,7 +18,7 @@ int main(void)
     char server[25] = "", newport[MAXLEN], SYN0[MAXLEN] = "hearts", SYN1[MAXLEN] = "port";
     int port, result, len, len2;
     
-    strcpy(server, "192.168.56.101");
+    strcpy(server, IP_ADDRESS);
     port = PORT;
     
     if (SDLNet_ResolveHost(&ip, server, port) < 0)
@@ -57,15 +61,23 @@ int main(void)
         }
         
         memset(SYN1, '\0', sizeof(SYN1));
+        // Servern skickar "ENDOFTRANS" efter varje ACK
+        // Klienten väntar på ett portnummer(40-50 k) och spelarposition[0:3]
         do {
             result=SDLNet_TCP_Recv(sd,SYN1,MAXLEN);
         } while (!strcmp(SYN1, "ENDOFTRANS"));
-        strcpy(newport, "./game_client ");
+        
+        //sammanfoga strängen som startar spelklienten
+        strcpy(newport, "./");
+        strcat(newport, GAME_CLIENT);
+        
+        //lägg till portnumret och starta en ny spelprocess
         strcat(newport, SYN1);
         printf("commandline argument: %s \n", newport);
         execlp("/bin/sh","sh","-c",newport,NULL);
+        fprintf(stderr, "%s", strerror(errno));
+        exit(EXIT_FAILURE);
     }
-    
-    return 0;
+    return -1;
 }
 
