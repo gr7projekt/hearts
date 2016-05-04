@@ -1,5 +1,6 @@
 /*
-** Laboration 2 för kursen Operativsystem, Vt 16
+** Syn-Ack-Server för projektkursen Programvaruteknik, KTH Vt -16
+** Johan Lipecki, 2016-05-04
 */
 
 #include <stdio.h>
@@ -20,16 +21,17 @@
 #include <arpa/inet.h>
 
 /* Change this to whatever your daemon is called */
-#define DAEMON_NAME "Yohan"
+#define DAEMON_NAME "Hearts SYN-ACK"
 
 /* Change this to the user under which to run */
-#define RUN_AS_USER "jlipecki"
+#define RUN_AS_USER "grupp 7"
 
-#define SOCKET "/tmp/server"
-#define FILENAME "/var/run/labb2.pid"
+#define FILENAME "/var/run/hearts_syn-ack.pid"
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
+#define IP_ADDRESS "130.237.84.89"
+#define PORT "1337"
 
 void sigchld_handlr(int s)
 {
@@ -39,11 +41,11 @@ while(waitpid(-1, NULL, WNOHANG) > 0);
 void sigchld_handler(int s)
 {
     switch(s) {
-        case(SIGTSTP):  exit((int)SIG_IGN);  break;/* Various TTY signals */
-        case(SIGTTOU):  exit((int)SIG_IGN);  break;
-        case(SIGTTIN):  exit((int)SIG_IGN);  break;
-        case(SIGHUP):   exit((int)SIG_IGN);  break;/* Ignore hangup signal */
-        default:        exit((int)SIG_DFL);  break;
+        case(SIGTSTP):  exit((long)SIG_IGN);  break;/* Various TTY signals */
+        case(SIGTTOU):  exit((long)SIG_IGN);  break;
+        case(SIGTTIN):  exit((long)SIG_IGN);  break;
+        case(SIGHUP):   exit((long)SIG_IGN);  break;/* Ignore hangup signal */
+        default:        exit((long)SIG_DFL);  break;
     }
 }
 
@@ -54,7 +56,7 @@ void child_handler(int signum)
         case SIGALRM:   exit(EXIT_FAILURE); break;
         case SIGUSR1:   syslog(LOG_INFO, "child_handler: SIGUSR1"); exit(EXIT_SUCCESS); break;
         case SIGCHLD:   exit(EXIT_FAILURE); break;
-        default:        exit((int)SIG_DFL); break;
+        default:        exit((long)SIG_DFL); break;
     }
 }
 
@@ -220,11 +222,11 @@ int main(int argc,char const *argv[])
     if ((inet_fd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         syslog(LOG_ERR, "%s", strerror(errno));
         exit(1);
-    } else syslog(LOG_INFO, "192.168.56.101");
+    } else syslog(LOG_INFO, IP_ADDRESS);
 
     inet.sin_family = AF_INET;
-    inet.sin_port = htons(1337);
-    inet_pton(AF_INET,"192.168.56.101",&inet.sin_addr);
+    inet.sin_port = htons(atoi(PORT));
+    inet_pton(AF_INET,IP_ADDRESS,&inet.sin_addr);
     /*(strcpy(inet.sin_path, argv[1]));
     syslog(LOG_INFO, "path copied!\n");
 
