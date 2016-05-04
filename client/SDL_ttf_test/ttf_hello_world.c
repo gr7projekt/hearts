@@ -27,9 +27,38 @@ int main(int argc, char* args[])
     SDL_Event e;
     SDL_Rect src;
     SDL_Rect dst;
+    char trash[40];
+    char str[21];
+
+    printf("skriv in anvandarnamn.\n");
+    printf("max 20 tecken sparas: ");
+    fgets(trash,sizeof(trash),stdin);
+
+//    int len = strlen(trash);
+//    printf("len: %d\n",len);
+
+    if(strlen(trash)>21 || strlen(trash)<2) //enterslaget räknas som 1 i längd
+    {
+        while(strlen(trash)>21 || strlen(trash)<2)
+        {
+            printf("for langt eller kort namn, max 20 tecken: ");
+            fgets(trash,sizeof(trash),stdin);
+//            len = strlen(trash);
+//            printf("len: %d\n",len);
+        }
+    }
+
+    for(int i=0;i<21;i++)
+    {
+        if(trash[i]=='\n')
+        {
+            trash[i]='\0';
+        }
+        str[i]=trash[i];
+    }
 
 
-    char str[]="hello world!";
+//    char str[]="hello world!";
     printf("%s\n", str);
 
     src.x = 0;
