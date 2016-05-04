@@ -3,20 +3,29 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <SDL2/SDL.h>
 #include <SDL2_net/SDL_net.h>
 
 #define PORT 1337
 #define MAXLEN 1024
 #define IP_ADDRESS "130.237.84.89"
-#define GAME_CLIENT "game_client"
+#define GAME_CLIENT "game_client "
+#define ERROR_LOG "/var/tmp/hearts_error_log"
 
 int main(void)
 {
     IPaddress ip;
     TCPsocket sd;
-    char server[25] = "", newport[MAXLEN], SYN0[MAXLEN] = "hearts", SYN1[MAXLEN] = "port";
-    int port, result, len, len2;
+    char server[25] = "", newport[MAXLEN], SYN0[MAXLEN] = "hearts", SYN1[MAXLEN] = "port", error_log_string[40], pid[7];
+    int port, result, len, len2, fd;
+    
+    sprintf(pid,".%d",getpid());
+    strcpy(error_log_string, ERROR_LOG);
+    strcat(error_log_string, pid);
+    fd = open(error_log_string,O_RDWR|O_CREAT,0640);
+    close(2);
+    dup(fd);
     
     strcpy(server, IP_ADDRESS);
     port = PORT;
@@ -78,6 +87,7 @@ int main(void)
         fprintf(stderr, "%s", strerror(errno));
         exit(EXIT_FAILURE);
     }
+    else fprintf(stderr, "Returned error string: %s\n", SYN0);
     return -1;
 }
 
