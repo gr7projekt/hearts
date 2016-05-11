@@ -19,14 +19,16 @@
 #include <signal.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include "port_hearts.h"
+#include "account.h"
 
 /* Change this to whatever your daemon is called */
-#define DAEMON_NAME "Hearts SYN-ACK"
+#define DAEMON_NAME "Hearts_SYN-ACK"
 
 /* Change this to the user under which to run */
 #define RUN_AS_USER "grupp 7"
 
-#define FILENAME "/var/run/hearts_syn-ack.pid"
+#define FILENAME "/var/tmp/hearts_syn-ack.pid"
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
@@ -183,27 +185,12 @@ void daemonize(const char *lockfile)
     syslog(LOG_INFO, "parent killed!");
 }
 
-int spawn (char* arguments,int fd, char* port, int *i){
-
-    if(strcmp(arguments,"ENDOFTRANS")){
-        syslog(LOG_INFO, "spawn argument %d: %s",*i, arguments);
-        if (!strcmp(arguments, "hearts") && !(*i)) strcpy(arguments,"diamonds");
-        else if(!(strcmp(arguments, "port")) && (*i)) strcpy(arguments, port);
-        else strcpy(arguments, "This incident will be reported!");
-
-        if (send(fd,arguments,100,0) < 0) {  //skicka tillbaka strängen
-            syslog(LOG_ERR, "%s", strerror(errno));
-        }
-    }
-    return 0;
-}
-
 int main(int argc,char const *argv[])
 {
-    int done, i, j, len, n, pid, r, s, s2, t, inet_fd;
+    int done, len, n, pid, s, s2, t, inet_fd, connections=0;
     struct sockaddr_in inet, inet2;
     struct hostent* hostinfo;
-    char arguments[100],str[10000];
+    char arguments[100],hearts_start[140];
     memset(arguments,'\0',sizeof(arguments));
     memset(str,'\0',sizeof(str));
 
@@ -241,13 +228,15 @@ int main(int argc,char const *argv[])
         exit(1);
     } else syslog(LOG_INFO, "socket bound!\n");
 
-    if (listen(inet_fd, 5) == -1) {
+    if (listen(inet_fd, 8) == -1) {
         syslog(LOG_ERR, strerror(errno));
         exit(1);
     }
-    syslog(LOG_INFO, "listening for up to 5 connections!\n");
+    syslog(LOG_INFO, "listening for up to 8 connections!\n");
 
-    for(;;) {
+    for(connections=0;;connections++) {
+        //signalhantering, kunde kanske vara utanför loopen men varför ändra ett vinnande koncept?
+        int connection_no = (connections%4);
         struct sigaction sa;
         sa.sa_handler = sigchld_handlr; // reap all dead processes
         sigemptyset(&sa.sa_mask);
@@ -256,8 +245,6 @@ int main(int argc,char const *argv[])
             syslog(LOG_ERR, strerror(errno));
             exit(1);
         }
-        int port=41337;
-        sprintf(str, "%d", port);
         //syslog(LOG_INFO, "Waiting for a connection...\n");
         t = sizeof(inet2);
         if ((s2 = accept(inet_fd, (struct sockaddr *)&inet2, &t)) == -1) {
@@ -265,32 +252,64 @@ int main(int argc,char const *argv[])
           exit(1);
         }
         /* fork efter acceptet! */
-        if((pid=fork())==-1){               // fork och felhantering
+        if((pid=fork())==-1){                                   // fork och felhantering
             syslog(LOG_ERR, strerror(errno));
             exit(1);
         }
-        else if(!pid){                              //serverbarnet ärver accepten, socketen och fildeskriptorn.
+        else if(!pid){                                          //serverbarnet ärver accepten, socketen och fildeskriptorn.
             //printf("Connected.\n");
-            i = 0;
+            i = 0,j=0, r;
             done = 0;
+            Account account;
             do {
                 r = recv(s2, arguments,100, 0);
                 if (r <= 0) {
                     if (r < 0) perror("recv");
                     done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
                 }                                               //om recv returnerar 0 eller -1.
+                
+                /*
+                while(i) {
+                    // You get three tries to login
+                    if((account=prompt_for_login(&s2)) < 0){
+                        j += 1;
+                        if (j==3){ 
+                            strcpy(arguments,"login failed");
+                            if (send(s2,arguments,30,0) < 0) syslog(LOG_ERR,"%s",strerror(errno));
+                            close(s2);
+                            exit(EXIT_FAILURE);
+                        }
+                        else continue;
+                    }
+                    else {
+                        if((connection_no) == 0) memset(guid,'\0',4);
+                        guid[connection_no] = assign_guid();
+                        if((connection_no) == 3) {
+                            if(start_game_server(&port, &guid) < 0){
+                                syslog(LOG_ERR,"%s",strerror(errno));
+                                send(s2,"game failed, try again",sizeof("game failed, try again"));
+                                syslog(LOG_INFO,"game start failed");
+                            }
+                        }
+                 
+                 
+                        else
+                 
+                 
+                    }break;
+                }*/
+                
                 if (!done){                                     //Inget fel eller avslut, enligt tilldelning
                     syslog(LOG_INFO, "!done\n");
-                        if(!(spawn (arguments,s2,str,&i))){
-                            strcpy(arguments,"ENDOFTRANS");
-                            if (send(s2,arguments,100,0) < 0) {  //skicka tillbaka strängen
-                                perror("send");
-                                done = 1;                   //försäkrar oss om att accept-loopen avslutas
-                            }
-                            else done = 0;
-                            memset(arguments,'\0',sizeof(arguments));
+                    if(!(syn_ack(arguments,&i,s2,port,connection_no))){
+                        strcpy(arguments,"ENDOFTRANS");
+                        if (send(s2,arguments,30,0) < 0) {  //meddela att meddelandet är klart
+                            syslog(LOG_ERR,"%s",strerror(errno);
+                            done = 1;                   //försäkrar oss om att accept-loopen avslutas
                         }
-
+                        else done = 0;
+                        memset(arguments,'\0',sizeof(arguments));
+                    }
                 } i += 1;
             } while (!done);                        //så länge klienten skickar data håller vi öppet 24/7
             printf("I'm server %d and my client just signed off!\n",getpid());

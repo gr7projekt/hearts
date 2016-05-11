@@ -23,81 +23,47 @@
 #include <arpa/inet.h>
 #include <time.h>
 #include "port_hearts.h"
+#include "account.h"
 
-
-#define PARENT 1
-
-int start_game_server(int players, int port){
-     /* forka processen när spelare 0 ansluter*/
-    if(!players){
-        if(!(fork())){
-            //Executing as child process
-            execlp("bin/sh","sh","-c",GAME_SERVER,port,NULL);
-            syslog(LOG_ERR,"%s",strerror(errno));
-        }
-        else {
-            wait(0);
-            return 0;
-            //no waiting around for child? zombie creator?
-        }
-    }
-    else return port;
+long assign_guid(void);  //hur ska vi göra detta?
+int start_game_server(char *port[], char *guid[]){
+    char static hearts_start[200];
+    sprintf(hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, guid[0],guid[1],guid[2],guid[3]);
+    return system(hearts_start);
 }
 int get_random_port_number(void){
     srandom(time(NULL));
     return (random()%10000 + 40000);
 }
-int syn_ack(char* arguments,int syn,int fd){
-    pid_t child_pid;
-    int static port;
-    /* Duplicate this process. */
-    
-    /* child_pid = fork ();
-    if(child_pid != 0){
-        // This is the parent process.
-        close(1);
-        wait(0);
-        return 1;
-    }
-    else {
-        //child
-        //Redirect stdout to socket
-        close(1);
-        dup(fd);
-        //SYN-ACK switch
-        if(!strcmp(arguments,SYN0)){
-            syslog(LOG_INFO,"argument: %s", arguments, SYN0);
-            if(!syn) strcpy(arguments,ACK0);
-            syslog(LOG_INFO,"argument: %s", arguments, ACK0);
-            return 0;
+int syn_ack(char* arguments, int *i,int sd, char *port, int connection_no){
+    if(strcmp(arguments,"ENDOFTRANS")){
+        syslog(LOG_INFO, "syn-ack argument %d: %s",*i, arguments);
+        
+        if (!strcmp(arguments, "hearts") && !(*i)) strcpy(arguments,"diamonds");
+        
+        else if(!(strcmp(arguments, "port")) && (*i)){
+            
+            sprintf(arguments, "%s %d", port, connection_no);
         }
-        else if(strcmp(arguments,SYN1)){
-            if(syn) return 0;
-            syslog(LOG_INFO,"argument: %s, SYN1: %s", arguments, SYN1);
+        else strcpy(arguments, "This incident will be reported!");
+        
+        //skicka tillbaka strängen
+        if (send(sd,arguments,100,0) < 0) {
+            syslog(LOG_ERR, "%s", strerror(errno));
         }
-        else strcpy(arguments,"it's the ping of death for you my friend!");
-        // Now execute the commands in a new session
-        execlp("/bin/sh","bash","-c", "echo" ,arguments, NULL);
-        // The execlp function returns only if an error occurs.
-        syslog(LOG_ERR,"%s",strerror(errno));
-        abort();
-    }
-    wait(0);
-    return PARENT;
-     */
-     if(!strcmp(arguments,SYN0)){
-         syslog(LOG_INFO,"argument0: %s", arguments);
-         if(!syn) strcpy(arguments,ACK0);
-         syslog(LOG_INFO,"argument1: %s", arguments);
-         return 0;
-     }
-     else if(!strcmp(arguments,SYN1)){
-         syslog(LOG_INFO,"argument2: %s", arguments);
-     }
-     else {
-         strcpy(arguments,"it's the ping of death for you my friend!");
-         return 1;
-     }
     return 0;
+    }
+}
+Account prompt_for_login(int *socketDescriptor){
+    static Account account;
+    if (send(*socketDescriptor,"account",sizeof("account"),0) < 0) {
+        syslog(LOG_ERR,"%s",strerror(errno));
+        return -1;
+    }
+    if (recv(*socketDescriptor, account,100, 0) < 0) {
+        syslog(LOG_ERR,"%s",strerror(errno));
+        return -2;
+    }
+    return account;
 }
 
