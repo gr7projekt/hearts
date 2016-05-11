@@ -1,7 +1,7 @@
 #include "cardPosition.h"
 
 
-void initCardPosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[], SDL_Rect adv[], SDL_Rect drop[])
+void initSpritePosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[], SDL_Rect adv[], SDL_Rect drop[], SDL_Rect played_pos[])
 {
     for(int i=0 ; i<13; i++)
     {
@@ -25,6 +25,27 @@ void initCardPosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[],
         p4[i].h = HEIGHT;
         p4[i].w = WIDTH;
     }
+
+    played_pos[0].y = RES_Y/2;
+    played_pos[0].x = RES_X/2 - WIDTH/2;
+    played_pos[0].h = HEIGHT;
+    played_pos[0].w = WIDTH;
+
+    played_pos[1].y = RES_Y/2 - HEIGHT/2;
+    played_pos[1].x = RES_X/2 - 3*WIDTH/2;
+    played_pos[1].h = HEIGHT;
+    played_pos[1].w = WIDTH;
+
+    played_pos[2].y = RES_Y/2 - HEIGHT;
+    played_pos[2].x = RES_X/2 - WIDTH/2;
+    played_pos[2].h = HEIGHT;
+    played_pos[2].w = WIDTH;
+
+    played_pos[3].y = RES_Y/2 - HEIGHT/2;
+    played_pos[3].x = RES_X/2 + WIDTH/2;
+    played_pos[3].h = HEIGHT;
+    played_pos[3].w = WIDTH;
+
     adv[0].y = RES_Y/2-200;
     adv[0].x = RES_X+10;  //+10 för att få avstånd från högra korten till reklamen
     adv[0].h = 400;

@@ -1,6 +1,6 @@
 #include "loadCard.h"
 
-void loadCard(Card_struct player_client[],Card_struct player_2[], Card_struct player_3[], Card_struct player_4[])
+void loadCard(Card player_client[],Card player_2[], Card player_3[], Card player_4[])
 {
     int k=0;
     for(int i=0; i<13; i++) // HÄR SKA DET LADDAS IN INFORMATION FRÅN SERVERN OM VILKA KORT SOM DELAS UT
