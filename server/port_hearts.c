@@ -5,25 +5,9 @@
 //  Created by Johan Lipecki on 2016-04-20.
 //
 //
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <syslog.h>
-#include <pwd.h>
-#include <signal.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <time.h>
+
 #include "port_hearts.h"
-#include "account.h"
+
 
 char *assign_guid(void);  //hur ska vi göra detta?
 int start_game_server(char *port, char *guid[]){
@@ -31,8 +15,8 @@ int start_game_server(char *port, char *guid[]){
     sprintf(hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, guid[0],guid[1],guid[2],guid[3]);
     return system(hearts_start);
 }
-int get_random_port_number(void){
-    srandom(time(NULL));
+long get_random_port_number(void){
+    srandom((unsigned)time(NULL));
     return (random()%10000 + 40000);
 }
 int syn_ack(char* arguments, int *i,int sd, char *port, int connection_no){
@@ -54,16 +38,35 @@ int syn_ack(char* arguments, int *i,int sd, char *port, int connection_no){
     return 0;
     }
 }
-Account prompt_for_login(int *socketDescriptor){
+Account prompt_for_login(int *socketDescriptor) {
     static Account account;
-    if (send(*socketDescriptor,"account",sizeof("account"),0) < 0) {
-        syslog(LOG_ERR,"%s",strerror(errno));
-        return -1;
+    char arguments[100];
+    char *account_values[10];
+    strcpy(account.username, NULL);
+    if (0 > send(*socketDescriptor, "account", sizeof("account")+1, 0)) {
+        syslog(LOG_ERR, "%s", strerror(errno));
+        return account;
     }
-    if (recv(*socketDescriptor, account,100, 0) < 0) {
-        syslog(LOG_ERR,"%s",strerror(errno));
-        return -2;
+    if (0 > recv(*socketDescriptor, arguments, 101, 0)) {
+        syslog(LOG_ERR, "%s", strerror(errno));
+        return account;
     }
+    strcpy(account_values,separate_strings(arguments));
+    strcpy(account.username,account_values[0]);
+    strcpy(account.password,account_values[1]);
+    if ((account.username == getAccountByUsername(account.username).username) &&
+            (account.password == getAccountByUsername(account.username).password)) account = getAccountByUsername(account_values[0]);
     return account;
+}
+
+char* separate_strings(char *inputstring) {
+    //From strsep() manual:
+    // The following uses strsep() to parse a string,
+    // containing tokens delimited by white space, into an argument vector:
+    char **ap, *list[10];
+
+    for (ap = list; (*ap = strsep(&inputstring, " \t")) != NULL;)
+        if (**ap != '\0') if (++ap >= &list[10]) break;
+    return *list;
 }
 

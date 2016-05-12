@@ -178,7 +178,8 @@ int main(int argc,char const *argv[])
     socklen_t t;
     struct sockaddr_in inet, inet2;
     struct hostent* hostinfo;
-    char arguments[100],hearts_start[140];
+    char arguments[100],hearts_start[200];
+    char *all_guids[24];
     memset(arguments,'\0',sizeof(arguments));
     memset(hearts_start,'\0',sizeof(hearts_start));
 
@@ -227,6 +228,7 @@ int main(int argc,char const *argv[])
         int connection_no = (connections%4);
         FILE *log_fp;
         char gamelog[40],port[7];
+
         struct sigaction sa;
         sa.sa_handler = sigchld_handlr; // reap all dead processes
         sigemptyset(&sa.sa_mask);
@@ -265,8 +267,7 @@ int main(int argc,char const *argv[])
                 if (0 >= r) {
                     if (r < 0) perror("recv");
                     done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
-                }                                               //om recv returnerar 0 eller -1.
-                /*
+                }                                               //om recv returnerar 0 eller -1
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wfor-loop-analysis"
                 while(i) {
@@ -287,22 +288,18 @@ int main(int argc,char const *argv[])
                     else {
                         if((connection_no) == 0) memset(guid,'\0',4);
                         strcpy(guid[connection_no],assign_guid());
+                        strcpy(all_guids[connections],guid[connection_no]);
                         if((connection_no) == 3) {
                             if(start_game_server(&port, &guid) < 0){
                                 syslog(LOG_ERR,"%s",strerror(errno));
-                                send(s2,"game failed, try again",sizeof("game failed, try again"));
+                                send(s2,"game failed, try again",sizeof("game failed, try again"),0);
                                 syslog(LOG_INFO,"game start failed");
                             }
                         }
                  
-                 
-                        else
-                 
-                 
                     }break;
                 }
 #pragma clang diagnostic pop
-                 */
                 
                 if (!done){                                     //Inget fel eller avslut, enligt tilldelning
                     syslog(LOG_INFO, "!done\n");

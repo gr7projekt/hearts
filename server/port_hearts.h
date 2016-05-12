@@ -33,6 +33,24 @@
 #define PORT "1337"
 
 #include <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <syslog.h>
+#include <pwd.h>
+#include <signal.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <time.h>
+#include "account.h"
 
 // Forks a game server if provided with a port number and an array of 4 guids,
 // returns what system(3) returns, -1 indicates an error.
@@ -42,11 +60,11 @@ int start_game_server(char *,char *[]);
 // arguments 4 and 5 are returned to the socket for SYN1
 int syn_ack(char *,int*,int,char*,int);
 // Returns a random number between 40 k and 50 k
-int get_random_port_number(void);
+long get_random_port_number(void);
 // Sends the string "login" using provided socket descriptor pointer and send(2)
 // Receives an Account struct using recv(2) and returns it on success.
-// A negative value is returned on failure.
+// Login failure returns account username NULL
 Account prompt_for_login(int*);
 char *assign_guid(void);
-
+char* separate_strings(char*);
 #endif /* port_hearts_h */
