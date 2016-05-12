@@ -11,7 +11,6 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "deck.h"
 #include "card.h"
 
 void *play_hand(void *parameters) {
@@ -19,9 +18,16 @@ void *play_hand(void *parameters) {
     return NULL;
 }
 
-int player_waits_or_plays (int argc, char* argv[])
-{
-    pthread_t player_threads[4]; /*Some sort of array of players is needed*/
+void* player_waits_or_plays (int argc, char* argv[]) {
+    Player me;
+    
+
+
+}
+
+int main(){
+
+    pthread_t player[4]; /*Some sort of array of players is needed*/
     Player control_player[4];
     int i=0;
     int lock;
@@ -33,6 +39,8 @@ int player_waits_or_plays (int argc, char* argv[])
      program that prints out the contents of the string table. This means that
      we are separating the task of computation/simulation from the task of
      presentation of the results*/
+
+    for(;i<4;i++) pthread_create(&player[i],NULL,player_waits_or_plays,control_player);
     while(round<13)
     {
         printf("Round %2d: %s\n", round+1, table);

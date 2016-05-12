@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "card.h"
 
-int player_waits_or_plays (int argc, char *argv[]);
+void* player_waits_or_plays (int, char *[]);
 // Pekare eftersom pthread_create() tar en pekare
 void *play_hand(void *parameters);
 
