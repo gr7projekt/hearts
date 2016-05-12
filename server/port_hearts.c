@@ -8,8 +8,18 @@
 
 #include "port_hearts.h"
 
+int getGuid(char guid[])
+{
+        int i;
+        int vals[32];
+        for (i = 0; i < 32; i++)
+        {
+                vals[i] = rand() % 15;
+                sprintf(&guid[i], "%x", vals[i]);
+        }
+	guid[32] = '\0';
+}
 
-char *assign_guid(void);  //hur ska vi göra detta?
 int start_game_server(char *port, char *guid[]){
     char static hearts_start[200];
     sprintf(hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, guid[0],guid[1],guid[2],guid[3]);

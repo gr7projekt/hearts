@@ -52,6 +52,8 @@
 #include <time.h>
 #include "account.h"
 
+// Generates a 32 char length (33 with \0) GUID and stores it in "guid"
+int getGuid(char guid[]);
 // Forks a game server if provided with a port number and an array of 4 guids,
 // returns what system(3) returns, -1 indicates an error.
 int start_game_server(char *,char *[]);
