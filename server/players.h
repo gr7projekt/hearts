@@ -10,9 +10,10 @@
 #define players_h
 
 #include <stdio.h>
+#include "card.h"
 
 int player_waits_or_plays (int argc, char *argv[]);
-// Pekare eftersom att pthread_create() tar en pekare
+// Pekare eftersom pthread_create() tar en pekare
 void *play_hand(void *parameters);
 
 struct player_parms;

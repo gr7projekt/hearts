@@ -12,40 +12,28 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "deck.h"
-
-struct player_parms;
-typedef struct player_parms{
-    int pos;
-    int id;
-    int score;
-    char guid[33];
-    Card game_hand[13];
-    Card won_hand[52];
-}Player;
+#include "card.h"
 
 void *play_hand(void *parameters) {
+
     return NULL;
 }
 
 int player_waits_or_plays (int argc, char* argv[])
 {
-    pthread_t phils[4]; /*Some sort of array of phils are needed*/
-    struct player_parms control_player[3];
+    pthread_t player_threads[4]; /*Some sort of array of players is needed*/
+    Player control_player[4];
     int i=0;
-    int noPlayers, lock;
+    int lock;
     int round = 0;
-    /*Overall design of the program
-     1. Take in commandline arguments to set up how many phils are going to be
-     simulated and if deadlock is going occur. Commandline arguments need to
-     be checked and the program needs to exit if they are not in the correct format
-     see Advanced Linux Programming for excellent advice on commandline arguments.
+    /*
      2. Start simulation by starting the phil-threads and let the main program
      print out the contents of the string table declared above. No thread is going
      to communicate with the user but through the string table, it is the main
      program that prints out the contents of the string table. This means that
      we are separating the task of computation/simulation from the task of
      presentation of the results*/
-    while(round<48)
+    while(round<13)
     {
         printf("Round %2d: %s\n", round+1, table);
         sleep(1);
