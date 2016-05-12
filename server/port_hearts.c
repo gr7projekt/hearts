@@ -25,8 +25,8 @@
 #include "port_hearts.h"
 #include "account.h"
 
-long assign_guid(void);  //hur ska vi göra detta?
-int start_game_server(char *port[], char *guid[]){
+char *assign_guid(void);  //hur ska vi göra detta?
+int start_game_server(char *port, char *guid[]){
     char static hearts_start[200];
     sprintf(hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, guid[0],guid[1],guid[2],guid[3]);
     return system(hearts_start);

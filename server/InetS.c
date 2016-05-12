@@ -22,19 +22,6 @@
 #include "port_hearts.h"
 #include "account.h"
 
-/* Change this to whatever your daemon is called */
-#define DAEMON_NAME "Hearts_SYN-ACK"
-
-/* Change this to the user under which to run */
-#define RUN_AS_USER "grupp 7"
-
-#define FILENAME "/var/tmp/hearts_syn-ack.pid"
-
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
-#define IP_ADDRESS "130.237.84.89"
-#define PORT "1337"
-
 void sigchld_handlr(int s)
 {
 while(waitpid(-1, NULL, WNOHANG) > 0);
@@ -140,7 +127,7 @@ void daemonize(const char *lockfile)
 
     /* At this point we are executing as the child process */
     if(!(pid_fp = fopen(FILENAME,"w"))){
-        syslog(LOG_ERR,"pid_fd",strerror(errno));
+        syslog(LOG_ERR,"pid_fp",strerror(errno));
         exit(EXIT_FAILURE);
     }
 
@@ -192,7 +179,7 @@ int main(int argc,char const *argv[])
     struct hostent* hostinfo;
     char arguments[100],hearts_start[140];
     memset(arguments,'\0',sizeof(arguments));
-    memset(str,'\0',sizeof(str));
+    memset(hearts_start,'\0',sizeof(hearts_start));
 
     /* Initialize the logging interface */
     openlog(DAEMON_NAME, LOG_PID, LOG_LOCAL5 );
@@ -237,6 +224,8 @@ int main(int argc,char const *argv[])
     for(connections=0;;connections++) {
         //signalhantering, kunde kanske vara utanför loopen men varför ändra ett vinnande koncept?
         int connection_no = (connections%4);
+        FILE *log_fp;
+        char gamelog[40],port[7];
         struct sigaction sa;
         sa.sa_handler = sigchld_handlr; // reap all dead processes
         sigemptyset(&sa.sa_mask);
@@ -244,6 +233,15 @@ int main(int argc,char const *argv[])
         if (sigaction(SIGCHLD, &sa, NULL) == -1) {      //WNOHANG!
             syslog(LOG_ERR, strerror(errno));
             exit(1);
+        }
+        if(!connection_no) {
+            (gamelog, "%s%s", GAMELOG, strcpy(port, get_random_port_number()));
+            if ((log_fp = fopen(gamelog, 'w')) == NULL) syslog(LOG_ERR,"%s", strerror(errno));
+            else {
+                fprintf(log_fp, "%s", port);
+                fclose(log_fp);
+            }
+            log_fp = fopen(gamelog, 'a+');
         }
         //syslog(LOG_INFO, "Waiting for a connection...\n");
         t = sizeof(inet2);
@@ -283,7 +281,7 @@ int main(int argc,char const *argv[])
                     }
                     else {
                         if((connection_no) == 0) memset(guid,'\0',4);
-                        guid[connection_no] = assign_guid();
+                        strcpy(guid[connection_no],assign_guid());
                         if((connection_no) == 3) {
                             if(start_game_server(&port, &guid) < 0){
                                 syslog(LOG_ERR,"%s",strerror(errno));
@@ -310,7 +308,8 @@ int main(int argc,char const *argv[])
                         else done = 0;
                         memset(arguments,'\0',sizeof(arguments));
                     }
-                } i += 1;
+                }
+                i += 1;
             } while (!done);                        //så länge klienten skickar data håller vi öppet 24/7
             printf("I'm server %d and my client just signed off!\n",getpid());
             syslog(LOG_NOTICE, "terminated" );

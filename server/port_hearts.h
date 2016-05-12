@@ -19,6 +19,19 @@
 #define EXIT_FAILURE 1
 #define PARENT 1
 
+/* Change this to whatever your daemon is called */
+#define DAEMON_NAME "Hearts_SYN-ACK"
+
+/* Change this to the user under which to run */
+#define RUN_AS_USER "grupp 7"
+
+#define FILENAME "/var/tmp/hearts_syn-ack.pid"
+#define GAMELOG "/var/tmp/hearts_log_"
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
+#define IP_ADDRESS "130.237.84.89"
+#define PORT "1337"
+
 #include <stdio.h>
 
 // Forks a game server if provided with a port number and an array of 4 guids,
@@ -34,6 +47,6 @@ int get_random_port_number(void);
 // Receives an Account struct using recv(2) and returns it on success.
 // A negative value is returned on failure.
 Account prompt_for_login(int*);
-long assign_guid(void);
+char *assign_guid(void);
 
 #endif /* port_hearts_h */
