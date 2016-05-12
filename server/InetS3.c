@@ -279,24 +279,24 @@ int main(int argc,char const *argv[])
                         j += 1;
                         if (j==3){ 
                             strcpy(arguments,"login failed");
-                            if (send(s2,arguments,30,0) < 0) syslog(LOG_ERR,"%s",strerror(errno));
+                            if (send(s2,arguments,30,0) < 0)
+				syslog(LOG_ERR,"%s",strerror(errno));
                             close(s2);
                             exit(EXIT_FAILURE);
                         }
                         else continue;
                     }
                     else {
-                        if((connection_no) == 0) memset(guid,'\0',4);
-                        strcpy(guid[connection_no],assign_guid());
-                        strcpy(all_guids[connections],guid[connection_no]);
+                        //if((connection_no) == 0) memset(guid,'\0',4);
+                        //strcpy(guid[connection_no],assign_guid());
+                        //strcpy(all_guids[connections],guid[connection_no]);
                         if((connection_no) == 3) {
-                            if(start_game_server(&port, &guid) < 0){
+                            if(start_game_server(get_random_port_number()) < 0){
                                 syslog(LOG_ERR,"%s",strerror(errno));
                                 send(s2,"game failed, try again",sizeof("game failed, try again"),0);
                                 syslog(LOG_INFO,"game start failed");
                             }
                         }
-                 
                     }break;
                 }
 #pragma clang diagnostic pop

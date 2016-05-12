@@ -20,12 +20,12 @@ int getGuid(char guid[])
 	guid[32] = '\0';
 }
 
-int start_game_server(char *port, char *guid[]){
+int start_game_server(char port){
     char static hearts_start[200];
-    sprintf(hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, guid[0],guid[1],guid[2],guid[3]);
+    sprintf(hearts_start, "%s %s", GAME_SERVER, port);
     return system(hearts_start);
 }
-long get_random_port_number(void){
+int get_random_port_number(void){
     srandom((unsigned)time(NULL));
     return (random()%10000 + 40000);
 }

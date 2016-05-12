@@ -1,8 +1,9 @@
-all: clean account.o gameserver.o encrypt.o gameserver
+all: clean account.o gameserver.o encrypt.o InetS3.o port_hearts.o gameserver InetS3
 
 clean:
 	rm -f *.o
 	rm -f gameserver
+	rm -f inets3
 
 account.o: 
 	gcc -c `mysql_config --cflags --libs` -lmysql account.c
@@ -15,3 +16,13 @@ gameserver.o:
 
 gameserver:
 	gcc -o gameserver gameserver.o encrypt.o account.o `sdl2-config --libs` `mysql_config --libs` -lSDL2_net -lmysqlclient -lmcrypt -lpthread
+
+port_hearts.o:
+	gcc -c port_hearts.o `mysql_config --cflags --libs` port_hearts.c
+
+InetS3.o:
+	gcc -c InetS3.c `mysql_config --cflags --libs` -lmysqlclient
+
+InetS3:
+	gcc -o InetS3 InetS3.o account.o encrypt.o -lmysqlclient
+
