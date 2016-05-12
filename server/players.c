@@ -23,7 +23,7 @@ void* player_waits_or_plays (char* argv[]) {
     Player me;
     strcpy(me.pos,argv[0]);
     strcpy(me.guid,argv[1]);
-    
+
 
 
     
