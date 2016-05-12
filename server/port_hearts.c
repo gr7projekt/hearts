@@ -11,7 +11,7 @@
 int getGuid(char guid[])
 {
         int i;
-        int vals[32];
+        int vals[33];
         for (i = 0; i < 32; i++)
         {
                 vals[i] = rand() % 15;
