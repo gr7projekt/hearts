@@ -24,9 +24,13 @@ int main(int argc, char *argv[])
 	if (init_net()) printf("Success on init\n");
 	pthread_t threads[4];
 	int i = 0;
-	for(;i < 4; i++)
-		pthread_create(&threads[i], NULL, player_waits_or_plays, &i);
-
+	for(;i < 4; i++) {
+		char guid[33];
+		char *arguments[2];
+		sprintf(arguments[0],"%d",i);
+		strcpy(arguments[1],guid[i]);
+		pthread_create(&threads[i], NULL, player_waits_or_plays, arguments);
+	}
 	return 0;
 }
 

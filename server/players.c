@@ -11,6 +11,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include "card.h"
 
 void *play_hand(void *parameters) {
@@ -18,8 +19,13 @@ void *play_hand(void *parameters) {
     return NULL;
 }
 
-void* player_waits_or_plays (int argc, char* argv[]) {
+void* player_waits_or_plays (char* argv[]) {
     Player me;
+    strcpy(me.pos,argv[0]);
+    strcpy(me.guid,argv[1]);
+    
+
+
     
 
 

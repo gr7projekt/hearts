@@ -12,12 +12,13 @@
 #include <stdio.h>
 #include "card.h"
 
-void* player_waits_or_plays (int, char *[]);
+void* player_waits_or_plays (char *[]);
 // Pekare eftersom pthread_create() tar en pekare
 void *play_hand(void *parameters);
 
 struct player_parms;
 typedef struct player_parms{
+    char guid[33];
     int pos;
     int id;
     int score;
