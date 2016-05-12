@@ -75,7 +75,7 @@ char* separate_strings(char *inputstring) {
     // containing tokens delimited by white space, into an argument vector:
     char **ap, *list[10];
 
-    for (ap = list; (*ap = strsep(&inputstring, " \t")) != NULL;)
+    for (ap = list; (*ap = strsep(&inputstring, ";")) != NULL;)
         if (**ap != '\0') if (++ap >= &list[10]) break;
     return *list;
 }
