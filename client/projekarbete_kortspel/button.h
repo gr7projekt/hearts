@@ -9,7 +9,7 @@
 #ifndef __surface__createButton__
 #define __surface__createButton__
 
-#include "libraries.h"
+#include "includes.h"
 
 bool clickButton(SDL_Event e, SDL_Rect rect); // Checks if button was clicked or not.
 SDL_Rect createRect(int x, int y, int w, int h); // Creates a rectangle, used in Button struct.

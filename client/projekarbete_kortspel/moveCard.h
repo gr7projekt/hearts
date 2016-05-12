@@ -1,11 +1,7 @@
 #ifndef MOVECARD_H_INCLUDED
 #define MOVECARD_H_INCLUDED
 
-#include "cardPosition.h"
-#include "resolution.h"
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdbool.h>
+#include "includes.h"
 
 /** \brief
  *

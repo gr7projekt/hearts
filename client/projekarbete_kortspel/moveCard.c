@@ -1,5 +1,5 @@
 #include "moveCard.h"
-#include <stdio.h>
+
 
 int liftCard(SDL_Rect initial_pos[0],SDL_Rect p1[], int mouse_x, int mouse_y,bool picked[])
 {

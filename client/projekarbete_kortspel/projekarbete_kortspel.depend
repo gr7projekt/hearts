@@ -1,17 +1,6 @@
 # depslib dependency file v1.0
-1462975217 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\sdl_test.c
-	<stdio.h>
-	<SDL.h>
-	<SDL_image.h>
-	<stdbool.h>
-	<time.h>
-	"resolution.h"
-	"loadCard.h"
-	"cardPosition.h"
-	"loadMedia.h"
-	"openWeb.h"
-	"moveCard.h"
-	"libraries.h"
+1463047815 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\sdl_test.c
+	"includes.h"
 
 1460725493 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\shuffle.c
 	<stdio.h>
@@ -23,17 +12,17 @@
 1461749311 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadfunctions.h
 	"cardStruct.h"
 
-1462971100 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardstruct.h
+1463040225 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardstruct.h
 
-1462971123 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.h
-	"cardStruct.h"
+1463047349 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.h
+	"includes.h"
 
-1462971143 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.c
+1463047443 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.c
 	"loadCard.h"
 
 1461764084 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardpositions.h
 
-1462976880 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.c
+1463047439 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.c
 	"cardPosition.h"
 
 1462976846 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.h
@@ -43,9 +32,8 @@
 1462370092 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.c
 	"loadMedia.h"
 
-1462366436 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.h
-	<SDL_image.h>
-	"resolution.h"
+1463047357 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.h
+	"includes.h"
 
 1462351168 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.c
 	"openWeb.h"
@@ -53,22 +41,17 @@
 
 1462350722 c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.h
 
-1462969580 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.c
+1463047450 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.c
 	"moveCard.h"
-	<stdio.h>
 
-1462969579 c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.h
-	"cardPosition.h"
-	"resolution.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdbool.h>
+1463047667 c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.h
+	"includes.h"
 
 1462975148 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\button.c
 	"button.h"
 
-1462902678 c:\users\robert\documents\codeblocks\projekarbete_kortspel\button.h
-	"libraries.h"
+1463047365 c:\users\robert\documents\codeblocks\projekarbete_kortspel\button.h
+	"includes.h"
 
 1462974909 c:\users\robert\documents\codeblocks\projekarbete_kortspel\libraries.h
 	<stdio.h>
@@ -83,9 +66,30 @@
 
 1462902678 c:\users\robert\documents\codeblocks\projekarbete_kortspel\struct.h
 
-1462902678 c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.h
-	"libraries.h"
+1463047360 c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.h
+	"includes.h"
 
 1462902678 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.c
 	"window.h"
+
+1463047633 c:\users\robert\documents\codeblocks\projekarbete_kortspel\includes.h
+	<stdio.h>
+	<stdbool.h>
+	<time.h>
+	<string.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	"cardStruct.h"
+	"resolution.h"
+	"loadCard.h"
+	"cardPosition.h"
+	"loadMedia.h"
+	"openWeb.h"
+	"moveCard.h"
+	"buttonStruct.h"
+	"window.h"
+	"button.h"
+
+1462902678 c:\users\robert\documents\codeblocks\projekarbete_kortspel\buttonstruct.h
 

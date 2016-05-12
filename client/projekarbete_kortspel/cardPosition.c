@@ -1,6 +1,5 @@
 #include "cardPosition.h"
 
-
 void initSpritePosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[], SDL_Rect adv[], SDL_Rect drop[], SDL_Rect played_pos[])
 {
     for(int i=0 ; i<13; i++)
