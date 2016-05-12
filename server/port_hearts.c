@@ -18,9 +18,10 @@ int getGuid(char guid[])
                 sprintf(&guid[i], "%x", vals[i]);
         }
 	guid[32] = '\0';
+    return 0;
 }
 
-int start_game_server(char port){
+int start_game_server(int port){
     char static hearts_start[200];
     sprintf(hearts_start, "%s %s", GAME_SERVER, port);
     return system(hearts_start);

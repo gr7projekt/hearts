@@ -291,7 +291,7 @@ int main(int argc,char const *argv[])
                         //strcpy(guid[connection_no],assign_guid());
                         //strcpy(all_guids[connections],guid[connection_no]);
                         if((connection_no) == 3) {
-                            if(start_game_server(get_random_port_number()) < 0){
+                            if(start_game_server((char[])get_random_port_number()) < 0){
                                 syslog(LOG_ERR,"%s",strerror(errno));
                                 send(s2,"game failed, try again",sizeof("game failed, try again"),0);
                                 syslog(LOG_INFO,"game start failed");

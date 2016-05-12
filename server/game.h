@@ -11,7 +11,6 @@
 int calculate_hand(char* []);
 bool is_hearts(char);
 bool is_queen_of_diamonds(char[]);
-bool is_donald_trump(char);
 
 #endif SERVER_GAME_H
 
