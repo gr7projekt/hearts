@@ -13,6 +13,17 @@
 #include <stdlib.h>
 #include "encrypt.h"
 
+void encrypt_str(char *plaintext, char *encrypted)
+{
+	char * bfr;
+        int buffer_len = 16;
+        char * IV = "AAAAAAAAAAAAAAAA";
+	bfr = calloc(1, buffer_len);
+        strncpy(bfr, plaintext, buffer_len);
+        encrypt(bfr, buffer_len, IV, "gr7hearts", 16);
+	sprintf(encrypted, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", bfr[0], bfr[1], bfr[2], bfr[3], bfr[4], bfr[5], bfr[6], bfr[7], bfr[8], bfr[9], bfr[10], bfr[11], bfr[12], bfr[13], bfr[14], bfr[15], bfr[16]);
+}
+
 int encrypt(
     void* buffer,
     int buffer_len, /* Because the plaintext could include null bytes*/

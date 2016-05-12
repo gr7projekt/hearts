@@ -15,6 +15,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+// Encrypts plaintext and stores it in encrypted
+void encrypt_str(char * paintext, char * encrypted);
 int encrypt(void *buffer, int buffer_len, char *IV, char *key, int key_len);
 
 #endif
