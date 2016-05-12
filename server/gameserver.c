@@ -9,15 +9,20 @@
 #include <signal.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <pthread.h>
 #include "SDL2/SDL_net.h"
 #include "SDL2/SDL.h"
+
 
 int init_net();
 
 int main(int argc, char *argv[])
 {
 	if (init_net()) printf("Success on init\n");
-	printf("Hello World!\n");
+	pthread_t threads[4];
+	int i = 0;
+	for(;i < 4; i++)
+		pthread_create(&threads[i], NULL, player_waits_or_plays, &i);
 	return 0;
 }
 
