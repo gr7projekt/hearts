@@ -8,17 +8,10 @@
 
 #include "port_hearts.h"
 
-int getGuid(char guid[])
+uint32_t getIP(char *str)
 {
-        int i;
-        int vals[33];
-        for (i = 0; i < 32; i++)
-        {
-                vals[i] = rand() % 15;
-                sprintf(&guid[i], "%x", vals[i]);
-        }
-	guid[32] = '\0';
-    return 0;
+	
+	return 0;
 }
 
 int start_game_server(int port){
@@ -62,7 +55,7 @@ Account prompt_for_login(int *socketDescriptor) {
         syslog(LOG_ERR, "%s", strerror(errno));
         return account;
     }
-    strcpy(account_values,separate_strings(arguments));
+    strcpy(account_values,separate_strings(arguments, ";"));
     strcpy(account.username,account_values[0]);
     strcpy(account.password,account_values[1]);
     if ((account.username == getAccountByUsername(account.username).username) &&
