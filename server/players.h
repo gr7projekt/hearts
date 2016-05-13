@@ -9,6 +9,8 @@
 #ifndef players_h
 #define players_h
 
+#include <stdlib.h>
+#include <string.h>
 #include <stdint.h>
 #include <pthread.h>
 #include <unistd.h>
