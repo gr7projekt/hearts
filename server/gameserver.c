@@ -22,20 +22,21 @@ int main(int argc, char *argv[])
 
 	if (init_net()) printf("Success on init\n");
 	pthread_t threads[4];
-	IPadress ipv4[4];
+	IPaddress ipv4[4];
 	
 	int i = 0;
 	for(i = 0;i < 4; i++) {
-		Uint32 host;
+		uint8_t host;
 		
 
 	}
 
 	for(i = 0;i < 4; i++) {
 		//char guid[33];
-		char *arguments[3];
-		sprintf(*arguments[0],"%d",i);
-		strcpy(arguments[1],guid[i]);
+		Args thread_args;
+		thread_args.pos = i;
+		thread_args.address = ipv4[i];
+		//thread_args.hand = argv[]
 		pthread_create(&threads[i], NULL, player_waits_or_plays, arguments);
 	}
 	return 0;
