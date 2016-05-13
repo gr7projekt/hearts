@@ -10,9 +10,10 @@ typedef struct my_Card
 
 struct player_parms;
 typedef struct player_parms{
-    int pos;
-    int id;
+    int relativ_pos;    //klienten ska alltid harelativ_pos 0
+    int id;     //identifierar 1 2 3 el 4, kortet placeras relativt till spelarens position
     int score;
+    int turn;
     Card game_hand[13];
     Card won_hand[52];
 }Player;

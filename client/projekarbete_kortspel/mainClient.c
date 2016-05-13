@@ -5,7 +5,7 @@
 //  Created by Jonas Wåhslen on 2015-03-31.
 //  Copyright (c) 2015 wahslen. All rights reserved.
 //
-//  Modified by Robert Kärrbrant on 2016-05-12 (13:55)
+//  Modified by Robert Kärrbrant on 2016-04-20
 //
 
 #include "includes.h"
@@ -35,10 +35,10 @@ int main(int argc, char* args[])
     int mouse_x;
     int mouse_y;
 
-    Player player_1[1];     //spelarens riktiga kort
-    Player player_2[1];
-    Player player_3[1];
-    Player player_4[1];
+    Player player_1_card[1];     //spelarens riktiga kort
+    Card player_2_card[13];
+    Card player_3_card[13];
+    Card player_4_card[13];
 
     SDL_Event e;
 
@@ -49,8 +49,6 @@ int main(int argc, char* args[])
     bool picked[13] = {false};
     bool winner = true;
     int turn = 0;
-    int leadCard = 0;       //färgen som startade ska man följa.
-    bool brokenHeart = false;
 
     SDL_Rect position_1[13]; //positionen för korten till spelaren
     SDL_Rect position_2[13];
@@ -71,39 +69,38 @@ int main(int argc, char* args[])
     button help = createButton(0,0,20,20,"help.png",gRenderer);
     initSpritePosition(position_1,position_2,position_3,position_4,advertism_pos,dropzone_pos,played_pos);
 
-    loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
-    loadMediaDropzone(dropzone, gRenderer, gSpriteClipsDropzone);
-
     while(!quit)
     {
         while(turn < 13 && !quit)
         {
-            if(winner)  //om runda är klar och någon vunnit, ladda nya kort.
+            if(winner)
             {
-                resetTurn(player_1,player_2,player_3,player_4);
                 winner = false;
-                loadCard(player_1, player_2, player_3, player_4); //kortet som delas ut
+                loadCard(player_1_card, player_2_card, player_3_card, player_4_card);
 
 //                for(int i=0; i<13; i++)
 //                {
-//                    printf("kort: %i , suit: %i \n", i, player_1[0].game_hand[i].suit);
+//                    printf("kort: %i , suit: %i \n", i, player_1_card[0].game_hand[i].suit);
 //                }
+
+                loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
+                loadMediaDropzone(dropzone, gRenderer, gSpriteClipsDropzone);
 
                 for(int i=0; i<13; i++)
                 {
                     loadMediaBack(i, card_2, card_3, card_4, gRenderer, gSpriteClipsBack);
 
-                    if(player_1[0].game_hand[i].suit == 0){
-                        loadMediaClubs(player_1[0].game_hand[i].value, card, gRenderer, gSpriteClipsClubs);
+                    if(player_1_card[0].game_hand[i].suit == 0){
+                        loadMediaClubs(player_1_card[0].game_hand[i].value, card, gRenderer, gSpriteClipsClubs);
                     }
-                    else if(player_1[0].game_hand[i].suit == 1){
-                        loadMediaDiamonds(player_1[0].game_hand[i].value, card, gRenderer, gSpriteClipsDiamonds);
+                    else if(player_1_card[0].game_hand[i].suit == 1){
+                        loadMediaDiamonds(player_1_card[0].game_hand[i].value, card, gRenderer, gSpriteClipsDiamonds);
                     }
-                    else if(player_1[0].game_hand[i].suit == 2){
-                        loadMediaHearts(player_1[0].game_hand[i].value, card, gRenderer, gSpriteClipsHearts);
+                    else if(player_1_card[0].game_hand[i].suit == 2){
+                        loadMediaHearts(player_1_card[0].game_hand[i].value, card, gRenderer, gSpriteClipsHearts);
                     }
-                    else if(player_1[0].game_hand[i].suit == 3){
-                        loadMediaSpades(player_1[0].game_hand[i].value, card, gRenderer, gSpriteClipsSpades);
+                    else if(player_1_card[0].game_hand[i].suit == 3){
+                        loadMediaSpades(player_1_card[0].game_hand[i].value, card, gRenderer, gSpriteClipsSpades);
                     }
                     else{
                         printf("error, unvalid card.");
@@ -144,11 +141,11 @@ int main(int argc, char* args[])
                             {
                                 cardNr = liftCard(initial_pos, position_1, mouse_x, mouse_y, picked);
                                 click = true;
-                               // printf("initial x pos: %d\n",initial_pos[0].x);
-                               // printf("cardNr: %d\n", cardNr);
+                                printf("initial x pos: %d\n",initial_pos[0].x);
+                                printf("cardNr: %d\n", cardNr);
                             }
 
-                            if(click==true && cardNr >-1)
+                            if(click==true)
                             {
                                 mouse_x = e.motion.x;
                                 mouse_y = e.motion.y;
@@ -159,33 +156,22 @@ int main(int argc, char* args[])
                 }
                 else
                 {
-                    click = false;
+                    click=false;
                 }
 
                 if(click == false && cardNr >-1)        //cardNr> -1 måste finnas för att undvika en bugg att baksidan laddas hos spelaren och blockerar kort.
                 {
                     if(((position_1[cardNr].x + WIDTH/2 > dropzone_pos[0].x) && (position_1[cardNr].x + WIDTH/2 < dropzone_pos[0].x+dropzone_pos[0].w))&&((position_1[cardNr].y + HEIGHT/2 > dropzone_pos[0].y) && (position_1[cardNr].y + HEIGHT/2 < dropzone_pos[0].y + dropzone_pos[0].h)))
                     {
-                        position_1[cardNr].x = played_pos[0].x; //droppas in på exakt plats
-                        position_1[cardNr].y = played_pos[0].y; //droppas in på exakt plats
+                        position_1[cardNr].x = played_pos[0].x;
+                        position_1[cardNr].y = played_pos[0].y;
+                        //printf("innanfor dropzone \n");
+                        turn++;
+                        printf("turn: %d\n",turn);
+                        cardNr = -1;
 
-
-                        if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked))
-                        {
-                            sendCard(player_1, cardNr);
-
-                            turn++;
-                            printf("turn %i\n",turn);
-                            cardNr = -1;
-                        }
-                        else    //om kortet inte fick läggas i mitten
-                        {
-                            position_1[cardNr].x = initial_pos[0].x;
-                            position_1[cardNr].y = initial_pos[0].y;
-                            picked[cardNr] = false;
-                        }
                     }
-                    else    //
+                    else
                     {
                         position_1[cardNr].x = initial_pos[0].x;
                         position_1[cardNr].y = initial_pos[0].y;
@@ -204,32 +190,28 @@ int main(int argc, char* args[])
 //                SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsHearts[i],&played_pos[i]);
 //            }
 
-            for(int i = 0; i < 13 ; i++ )   //Renderar spelarens egna kort
+
+            for(int i = 0; i < 13 ; i++ )
             {
-                if(player_1[0].game_hand[i].suit == 0 )
-                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsClubs[player_1[0].game_hand[i].value],&position_1[i] );
-                else if(player_1[0].game_hand[i].suit == 1 )
-                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsDiamonds[player_1[0].game_hand[i].value],&position_1[i] );
-                else if(player_1[0].game_hand[i].suit == 2 )
-                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsHearts[player_1[0].game_hand[i].value],&position_1[i] );
-                else if(player_1[0].game_hand[i].suit == 3 )
-                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsSpades[player_1[0].game_hand[i].value],&position_1[i] );
+                SDL_RenderCopy(gRenderer, card_2[i], &gSpriteClipsBack[player_2_card[i].value],&position_2[i] );
+                SDL_RenderCopy(gRenderer, card_3[i], &gSpriteClipsBack[player_3_card[i].value],&position_3[i] );
+                SDL_RenderCopy(gRenderer, card_4[i], &gSpriteClipsBack[player_4_card[i].value],&position_4[i] );
+
+                if(player_1_card[0].game_hand[i].suit == 0)
+                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsClubs[player_1_card[0].game_hand[i].value],&position_1[i] );
+                else if(player_1_card[0].game_hand[i].suit == 1)
+                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsDiamonds[player_1_card[0].game_hand[i].value],&position_1[i] );
+                else if(player_1_card[0].game_hand[i].suit == 2)
+                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsHearts[player_1_card[0].game_hand[i].value],&position_1[i] );
+                else if(player_1_card[0].game_hand[i].suit == 3)
+                    SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsSpades[player_1_card[0].game_hand[i].value],&position_1[i] );
                 else
                     continue;
             }
-            for(int i = 0; i < 13 - player_2[0].turn ; i++ ){  //Renderar baksida kort till vänster
-                SDL_RenderCopy(gRenderer, card_2[i], &gSpriteClipsBack[0],&position_2[i] );
-            }
-            for(int i = 0; i < 13 - player_3[0].turn ; i++ ){  //Renderar baksida kort mittemot
-                SDL_RenderCopy(gRenderer, card_3[i], &gSpriteClipsBack[0],&position_3[i] );
-            }
-            for(int i = 0; i < 13 - player_4[0].turn ; i++ ){  //Renderar baksida kort höger
-                SDL_RenderCopy(gRenderer, card_4[i], &gSpriteClipsBack[0],&position_4[i] );
-            }
 
             SDL_RenderCopy(gRenderer, advertisment[0], &gSpriteClipsAdvertisment[0],&advertism_pos[0] );
-            SDL_RenderPresent(gRenderer);
 
+            SDL_RenderPresent(gRenderer);
         }
         winner = true;
         turn = 0;

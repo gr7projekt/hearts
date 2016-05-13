@@ -38,6 +38,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="button.h" />
+		<Unit filename="buttonStruct.h" />
 		<Unit filename="cardPosition.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -45,7 +46,7 @@
 		<Unit filename="cardStruct.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="libraries.h" />
+		<Unit filename="includes.h" />
 		<Unit filename="loadCard.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -54,6 +55,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="loadMedia.h" />
+		<Unit filename="logik.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="logik.h" />
 		<Unit filename="moveCard.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -62,10 +67,17 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="openWeb.h" />
+		<Unit filename="resetTurn.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="resetTurn.h" />
 		<Unit filename="resolution.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="struct.h" />
+		<Unit filename="send.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="send.h" />
 		<Unit filename="window.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -7,7 +7,7 @@
  *
  */
 
-void loadCard(Player player_client[],Card player_2[], Card player_3[], Card player_4[]);
+void loadCard(Player player_client[],Player player_2[], Player player_3[], Player player_4[]);
 
 
 #endif // LOADCARD_H_INCLUDED
