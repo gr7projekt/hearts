@@ -27,7 +27,7 @@ struct args
 };
 typedef struct args Args;
 
-void* player_waits_or_plays (Args args);
+void* player_waits_or_plays (void *);
 // Pekare eftersom pthread_create() tar en pekare
 UDPpacket createPacket(int, uint8_t, int, int, int, IPaddress);
 

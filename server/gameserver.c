@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 		thread_args.pos = i;
 		thread_args.address = ipv4[i];
 		//thread_args.hand = argv[]
-		pthread_create(&threads[i], NULL, player_waits_or_plays, arguments);
+		pthread_create(&threads[i], NULL, player_waits_or_plays, (void *) &thread_args);
 	}
 	return 0;
 }
