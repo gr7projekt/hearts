@@ -40,3 +40,4 @@ bool is_queen_of_spades(char card[]){
     if(strcmp(card,"0A")) return true;
     else return false;
 }
+

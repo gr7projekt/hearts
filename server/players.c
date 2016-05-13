@@ -19,10 +19,13 @@ void *play_hand(void *parameters) {
     return NULL;
 }
 
-void* player_waits_or_plays (char* argv[]) {
+void* player_waits_or_plays (int) {
     Player me;
-    strcpy(me.pos,argv[0]);
-    strcpy(me.guid,argv[1]);
+    strcpy(me.pos,arg);
+
+    if(my_turn()){
+
+    }
 
 
 

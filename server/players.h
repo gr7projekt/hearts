@@ -18,7 +18,7 @@ void *play_hand(void *parameters);
 
 struct player_parms;
 typedef struct player_parms{
-    char guid[33];
+    char ipv4[16];
     int pos;
     int id;
     int score;
