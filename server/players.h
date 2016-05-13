@@ -10,6 +10,8 @@
 #define players_h
 
 #include <stdio.h>
+#include <syslog.h>
+#include <errno.h>
 #include "card.h"
 
 void* player_waits_or_plays (char *[]);
@@ -18,7 +20,7 @@ void *play_hand(void *parameters);
 
 struct player_parms;
 typedef struct player_parms{
-    char ipv4[16];
+    IPaddress ip;
     int pos;
     int id;
     int score;

@@ -70,13 +70,13 @@ Account prompt_for_login(int *socketDescriptor) {
     return account;
 }
 
-char* separate_strings(char *inputstring) {
+char* separate_strings(char *inputstring, char *separators) {
     //From strsep() manual:
     // The following uses strsep() to parse a string,
-    // containing tokens delimited by white space, into an argument vector:
+    // containing tokens delimited by *separators, into an argument vector:
     char **ap, *list[10];
 
-    for (ap = list; (*ap = strsep(&inputstring, ";")) != NULL;)
+    for (ap = list; (*ap = strsep(&inputstring, (const char *) *separators)) != NULL;)
         if (**ap != '\0') if (++ap >= &list[10]) break;
     return *list;
 }

@@ -19,11 +19,29 @@ void *play_hand(void *parameters) {
     return NULL;
 }
 
-void* player_waits_or_plays (int) {
+void* player_waits_or_plays (int pos) {
     Player me;
-    strcpy(me.pos,arg);
+    me.pos = pos;
+    me.ipv4 = ipv4[pos];
+    // Bind address to the first free channel
+    // UDPsocket udpsock;
+    // IPaddress *address;
+    int channel;
 
-    if(my_turn()){
+    channel=SDLNet_UDP_Bind(udpsock, -1, &);
+    if(channel==-1) {
+        syslog(LOG_ERR,"SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
+        // do something because we failed to bind
+    }
+
+    while(1)
+        if(my_turn()){
+            if(!(SDLNet_UDP_Send(udpsock, packet->channel, packet))) syslog(LOG_ERR,"%s", SDLNET_GetError());
+            else{
+
+            }
+
+
 
     }
 
