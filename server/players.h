@@ -24,7 +24,7 @@
 struct args
 {
     int pos;
-    IPaddress address;
+    IPaddress *address;
     char *hand[];
 
 };
