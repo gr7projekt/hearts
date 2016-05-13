@@ -15,7 +15,7 @@ void* player_waits_or_plays (void *arguments) {
     Args *args = (Args*) arguments;
     Player me;
     me.pos = args->pos;
-    IPaddress *ipv4 = args->address;
+    IPaddress ipv4 = args->(address);
     // Bind address to the first free channel
     // UDPsocket udpsock;
     // IPaddress *address;
@@ -26,6 +26,18 @@ void* player_waits_or_plays (void *arguments) {
     sprintf(str,"%x%x%x%x%x%x%x%x",*args->hand[0],*args->hand[1],*args->hand[2],
             *args->hand[3],*args->hand[4],*args->hand[5],*args->hand[6],*args->hand[7]);
     hand_data = atoi(str);
+
+
+
+    // create a UDPsocket on port 6666 (server)
+    UDPsocket udpsock;
+
+    udpsock=SDLNet_UDP_Open(ipv4.port);
+    if(!udpsock) {
+        printf("SDLNet_UDP_Open: %s\n", SDLNet_GetError());
+        exit(2);
+    }
+
 
     UDPpacket spela = createPacket(chanL, speila, 1, 100, 0, ipv4);
     UDPpacket skicka_hand = createPacket(chanL,hand_data,sizeof(hand_data),100,0,ipv4);

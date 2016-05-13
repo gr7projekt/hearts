@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
 	if (init_net()) printf("Success on init\n");
 	pthread_t threads[4];
-	IPaddress ipv4[4];
+	__uint32_t *ipv4;
 	
 	int i = 0;
 	for(i = 0;i < 4; i++) {
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 		//char guid[33];
 		Args thread_args;
 		thread_args.pos = i;
-		thread_args.address = ipv4[i];
+		thread_args.(address).host = htonl("localhost");
 		//thread_args.hand = argv[]
 		pthread_create(&threads[i], NULL, player_waits_or_plays, (void *) &thread_args);
 	}
