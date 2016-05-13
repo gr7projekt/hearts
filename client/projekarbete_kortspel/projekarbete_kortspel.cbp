@@ -34,9 +34,6 @@
 		<Unit filename="Button.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="SDL_test.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="button.h" />
 		<Unit filename="buttonStruct.h" />
 		<Unit filename="cardPosition.c">
@@ -59,6 +56,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="logik.h" />
+		<Unit filename="mainClient.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="moveCard.c">
 			<Option compilerVar="CC" />
 		</Unit>

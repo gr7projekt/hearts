@@ -45,7 +45,7 @@ int liftCard(SDL_Rect initial_pos[0],SDL_Rect p1[], int mouse_x, int mouse_y, bo
     printf("initial x pos: %d\n",initial_pos[0].x);
     printf("k: %i\n\n",k);
 
-    if(k>0 && !picked[k-1])   //undviker en bugg att två kort plockas upp men endast det högra fortsätter följa musen. Lägger tillbaka det undere kortet
+    if((k>0 && !picked[k-1]) && !picked[k])   //undviker en bugg att två kort plockas upp men endast det högra fortsätter följa musen. Lägger tillbaka det undere kortet
     {
         p1[k-1].x = initial_pos[0].x-DISTANCE_X;
         p1[k-1].y = initial_pos[0].y;
