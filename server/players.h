@@ -22,8 +22,9 @@
 struct args
 {
     int pos;
-    char *hand[];
     IPaddress address;
+    char *hand[];
+
 };
 typedef struct args Args;
 
