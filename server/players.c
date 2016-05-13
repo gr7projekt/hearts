@@ -14,6 +14,18 @@
 #include <string.h>
 #include "card.h"
 
+UDPpacket createPacket(int cnl, Uint8 *data, int len, int maxlen, int status, IPadress adr)
+{
+	UDPpacket pkt;
+	pkt.channel = pnl;
+	pkt.data = data;
+	pkt.len = len;
+	pkt.maxlen = maxlen;
+	pkt.status = status;
+	pkt.address = adr;
+	return pkt;
+}
+
 void *play_hand(void *parameters) {
 
     return NULL;

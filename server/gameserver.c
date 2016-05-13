@@ -19,13 +19,21 @@ int init_net();
 
 int main(int argc, char *argv[])
 {
-	// receives hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, guid[0],guid[1],guid[2],guid[3]
+	// receives hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, ipv4 array
 
 	if (init_net()) printf("Success on init\n");
 	pthread_t threads[4];
+	IPadress ipv4[4];
+	
 	int i = 0;
-	for(;i < 4; i++) {
-		char guid[33];
+	for(i = 0;i < 4; i++) {
+		Uint32 host;
+		
+
+	}
+
+	for(i = 0;i < 4; i++) {
+		//char guid[33];
 		char *arguments[2];
 		sprintf(*arguments[0],"%d",i);
 		//strcpy(arguments[1],guid[i]);
