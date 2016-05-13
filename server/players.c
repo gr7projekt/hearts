@@ -11,7 +11,7 @@
 
 
 
-void* player_waits_or_plays (int pos, char* hand[], IPaddress ipv4, UDPsocket udPsocket) {
+void* player_waits_or_plays (int pos, char* hand[], IPaddress ipv4, UDPsocket udpSocket) {
     Player me;
     me.pos = pos;
     // Bind address to the first free channel
@@ -56,11 +56,6 @@ UDPpacket createPacket(int cnl, uint8_t *data, int len, int maxlen, int status, 
         pkt.status = status;
         pkt.address = adr;
         return pkt;
-}
-
-    
-
-
 }
 
 int main(){
