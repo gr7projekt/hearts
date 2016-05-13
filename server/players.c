@@ -20,7 +20,7 @@ void* player_waits_or_plays (void *arguments) {
     // UDPsocket udpsock;
     // IPaddress *address;
     int chanL;
-    int speila = 1;
+    uint8_t speila = 1;
     uint8_t hand_data;
     char *str;
     sprintf(str,"%x%x%x%x%x%x%x%x",*args->hand[0],*args->hand[1],*args->hand[2],
@@ -28,7 +28,7 @@ void* player_waits_or_plays (void *arguments) {
     hand_data = atoi(str);
 
     UDPpacket spela = createPacket(chanL, &(speila), 1, 100, 0, ipv4);
-    UDPpacket skicka_hand = createPacket(chanL,args->hand,sizeof(*args->hand),100,0,ipv4);
+    UDPpacket skicka_hand = createPacket(chanL,hand_data,sizeof(*args->hand),100,0,ipv4);
 
     if ((chanL = SDLNet_UDP_Bind(udpSocket, -1, ipv4)) < 0) {
         syslog(LOG_ERR, "SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
