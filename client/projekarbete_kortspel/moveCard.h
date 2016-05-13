@@ -1,11 +1,7 @@
 #ifndef MOVECARD_H_INCLUDED
 #define MOVECARD_H_INCLUDED
 
-#include "cardPosition.h"
-#include "resolution.h"
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdbool.h>
+#include "includes.h"
 
 /** \brief
  *
@@ -14,7 +10,7 @@
  * \return void
  *
  */
-int liftCard(SDL_Rect initial_pos[0], SDL_Rect p1[], int mouse_x, int mouse_y);
+int liftCard(SDL_Rect initial_pos[0], SDL_Rect p1[], int mouse_x, int mouse_y, bool picked[]);
 
 /** \brief
  *

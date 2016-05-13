@@ -1,9 +1,7 @@
 #ifndef LOADMEDIA_H_INCLUDED
 #define LOADMEDIA_H_INCLUDED
 
-#include <SDL_image.h>
-#include "resolution.h"
-
+#include "includes.h"
 
 /** \brief
  *
