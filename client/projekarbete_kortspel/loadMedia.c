@@ -4,8 +4,6 @@ void loadMediaDropzone(SDL_Texture *dropzone[], SDL_Renderer *gRenderer, SDL_Rec
 {
     SDL_Surface* gDropSurface = IMG_Load("dropzone.png");
 
-    SDL_SetColorKey(gDropSurface,SDL_TRUE,SDL_MapRGB(gDropSurface->format, 255,0,255));
-
     dropzone[0] = SDL_CreateTextureFromSurface(gRenderer, gDropSurface);
 
     gSpriteClipsDropzone[ 0 ].x = 0;
@@ -18,8 +16,6 @@ void loadMediaAdvertisment(SDL_Texture *advertisment[], SDL_Renderer *gRenderer,
 {
     SDL_Surface* gAdvSurface = IMG_Load("advertisment.png");
 
-    SDL_SetColorKey(gAdvSurface,SDL_TRUE,SDL_MapRGB(gAdvSurface->format, 255,0,255));
-
     advertisment[0] = SDL_CreateTextureFromSurface(gRenderer, gAdvSurface);
 
     gSpriteClipsAdvertisment[ 0 ].x = 0;
@@ -31,8 +27,6 @@ void loadMediaAdvertisment(SDL_Texture *advertisment[], SDL_Renderer *gRenderer,
 void loadMediaClubs(int i, SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsClubs[])
 {
     SDL_Surface* gCardSurface = IMG_Load("CARD.png");
-
-    SDL_SetColorKey(gCardSurface,SDL_TRUE,SDL_MapRGB(gCardSurface->format, 255,0,255));
 
     card[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
 
@@ -106,8 +100,6 @@ void loadMediaDiamonds(int i,SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_R
 {
     SDL_Surface* gCardSurface = IMG_Load("CARD.png");
 
-    SDL_SetColorKey(gCardSurface,SDL_TRUE,SDL_MapRGB(gCardSurface->format, 255,0,255));
-
     card[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
 
     gSpriteClipsDiamonds[ 0 ].x = WIDTH*0;
@@ -180,8 +172,6 @@ void loadMediaHearts(int i,SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rec
 {
     SDL_Surface* gCardSurface = IMG_Load("CARD.png");
 
-    SDL_SetColorKey(gCardSurface,SDL_TRUE,SDL_MapRGB(gCardSurface->format, 255,0,255));
-
     card[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
 
     gSpriteClipsHearts[ 0 ].x = WIDTH*0;
@@ -253,8 +243,6 @@ void loadMediaHearts(int i,SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rec
 void loadMediaSpades(int i,SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsSpades[])
 {
     SDL_Surface* gCardSurface = IMG_Load("CARD.png");
-
-    SDL_SetColorKey(gCardSurface,SDL_TRUE,SDL_MapRGB(gCardSurface->format, 255,0,255));
 
     card[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
 
@@ -329,8 +317,6 @@ void loadMediaSpades(int i,SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rec
 void loadMediaBack(int i, SDL_Texture *card_2[], SDL_Texture *card_3[], SDL_Texture *card_4[],SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsBack[])
 {
     SDL_Surface* gCardSurface = IMG_Load("CARD.png");
-
-    SDL_SetColorKey(gCardSurface,SDL_TRUE,SDL_MapRGB(gCardSurface->format, 255,0,255));
 
     card_2[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
     card_3[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
