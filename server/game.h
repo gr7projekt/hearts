@@ -11,6 +11,8 @@
 
 //Takes an array of four cards and returns the score
 int calculate_trick(char* []);
+void update_round_score(int *[],char *[]);
+int check_winner(char *[],int);
 bool is_hearts(char);
 bool is_queen_of_spades(char[]);
 

@@ -9,18 +9,22 @@
 #ifndef players_h
 #define players_h
 
+#include <stdint.h>
+#include <pthread.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <syslog.h>
 #include <errno.h>
 #include "card.h"
+#include "SDL2/SDL_net.h"
+#include "SDL2/SDL.h"
 
-void* player_waits_or_plays (char *[]);
+void* player_waits_or_plays (int,IPaddress,UDPsocket);
 // Pekare eftersom pthread_create() tar en pekare
-void *play_hand(void *parameters);
+UDPpacket createPacket(int, uint8_t, int, int, int, IPaddress);
 
 struct player_parms;
 typedef struct player_parms{
-    IPaddress ip;
     int pos;
     int id;
     int score;

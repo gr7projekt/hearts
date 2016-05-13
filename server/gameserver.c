@@ -14,7 +14,6 @@
 #include "SDL2/SDL.h"
 #include "players.h"
 
-
 int init_net();
 
 int main(int argc, char *argv[])

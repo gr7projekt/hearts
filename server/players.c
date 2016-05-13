@@ -8,56 +8,55 @@
 
 #include "players.h"
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include "card.h"
 
-UDPpacket createPacket(int cnl, Uint8 *data, int len, int maxlen, int status, IPadress adr)
-{
-	UDPpacket pkt;
-	pkt.channel = pnl;
-	pkt.data = data;
-	pkt.len = len;
-	pkt.maxlen = maxlen;
-	pkt.status = status;
-	pkt.address = adr;
-	return pkt;
-}
 
-void *play_hand(void *parameters) {
 
-    return NULL;
-}
-
-void* player_waits_or_plays (int pos) {
+void* player_waits_or_plays (int pos, IPaddress ipv4, UDPsocket udPsocket) {
     Player me;
     me.pos = pos;
-    me.ipv4 = ipv4[pos];
     // Bind address to the first free channel
     // UDPsocket udpsock;
     // IPaddress *address;
-    int channel;
+    int chanL;
 
-    channel=SDLNet_UDP_Bind(udpsock, -1, &);
-    if(channel==-1) {
-        syslog(LOG_ERR,"SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
+    if ((chanL = SDLNet_UDP_Bind(udpSocket, -1, ipv4)) < 0) {
+        syslog(LOG_ERR, "SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
         // do something because we failed to bind
     }
 
-    while(1)
-        if(my_turn()){
-            if(!(SDLNet_UDP_Send(udpsock, packet->channel, packet))) syslog(LOG_ERR,"%s", SDLNET_GetError());
-            else{
+    int speila = 1;
+
+    UDPpacket spela = createPacket(chanL, &(speila), 1, sizeof(speila), 0, ipv4);
+    else {
+
+        while (1) {
+            if (my_turn()) {
+
+
+                if (!(SDLNet_UDP_Send(udpSocket, (&spela)->channel, &spela)))
+                    syslog(LOG_ERR, "%s", SDLNET_GetError());
+                else {
+                    // wait(15)
+                    // lyssna
+                    // lägg till spelade kort
+                }
 
             }
 
 
-
+        }
     }
-
-
+}
+UDPpacket createPacket(int cnl, uint8_t *data, int len, int maxlen, int status, IPaddress adr){
+        UDPpacket pkt;
+        pkt.channel = cnl;
+        pkt.data = data;
+        pkt.len = len;
+        pkt.maxlen = maxlen;
+        pkt.status = status;
+        pkt.address = adr;
+        return pkt;
+}
 
     
 
