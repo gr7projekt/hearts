@@ -40,4 +40,16 @@ bool is_queen_of_spades(char card[]){
     if(strcmp(card,"0A")) return true;
     else return false;
 }
-
+bool is_two_of_clubs(char card[]){
+    if(strcmp(card,"00")) return true; // 2 of Clubs
+    else return false;
+}
+void search_hand(char* hand[],int *has_00, int my_pos){
+    for(int i = 0;i < 13;i++){
+        if (has_00(card[i])) *next_player = my_pos;
+    }
+}
+bool is_hundred(char score[]){
+    for(int i = 0;i < 4;i++) if(score[i] >= 100) return true;
+    return false;
+}
