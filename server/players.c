@@ -11,39 +11,39 @@
 
 
 
-void* player_waits_or_plays (int pos, IPaddress ipv4, UDPsocket udPsocket) {
+void* player_waits_or_plays (int pos, char* hand[], IPaddress ipv4, UDPsocket udPsocket) {
     Player me;
     me.pos = pos;
     // Bind address to the first free channel
     // UDPsocket udpsock;
     // IPaddress *address;
     int chanL;
+    int speila = 1;
+    UDPpacket spela = createPacket(chanL, &(speila), 1, 100, 0, ipv4);
+    UDPpacket skicka_hand = createPacket(chanL,hand,sizeof(*hand),100,0,ipv4);
 
     if ((chanL = SDLNet_UDP_Bind(udpSocket, -1, ipv4)) < 0) {
         syslog(LOG_ERR, "SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
         // do something because we failed to bind
     }
-
-    int speila = 1;
-
-    UDPpacket spela = createPacket(chanL, &(speila), 1, sizeof(speila), 0, ipv4);
     else {
-
         while (1) {
             if (my_turn()) {
-
-
                 if (!(SDLNet_UDP_Send(udpSocket, (&spela)->channel, &spela)))
                     syslog(LOG_ERR, "%s", SDLNET_GetError());
                 else {
-                    // wait(15)
-                    // lyssna
+                    sleep(15);
+
                     // lägg till spelade kort
                 }
-
             }
-
-
+            else {
+                if (!(SDLNet_UDP_Send(udpSocket, (&skicka_hand)->channel, &skicka_hand)))
+                    syslog(LOG_ERR, "%s", SDLNET_GetError());
+                else {
+                    sleep(1);
+                }
+            }
         }
     }
 }

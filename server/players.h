@@ -19,7 +19,7 @@
 #include "SDL2/SDL_net.h"
 #include "SDL2/SDL.h"
 
-void* player_waits_or_plays (int,IPaddress,UDPsocket);
+void* player_waits_or_plays (int,char*[],IPaddress,UDPsocket);
 // Pekare eftersom pthread_create() tar en pekare
 UDPpacket createPacket(int, uint8_t, int, int, int, IPaddress);
 
