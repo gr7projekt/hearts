@@ -50,7 +50,7 @@ int liftCard(SDL_Rect initial_pos[0],SDL_Rect p1[], int mouse_x, int mouse_y, bo
         p1[k-1].x = initial_pos[0].x-DISTANCE_X;
         p1[k-1].y = initial_pos[0].y;
     }
-    return k;
+    return k;   //i main blir k cardNr
 }
 
 void moveCard(SDL_Rect p1[], int k, int mouse_x, int mouse_y)
