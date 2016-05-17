@@ -12,45 +12,45 @@
 1461749311 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadfunctions.h
 	"cardStruct.h"
 
-1463055121 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardstruct.h
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardstruct.h
 
-1463052395 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.h
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.h
 	"includes.h"
 
-1463128933 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.c
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadcard.c
 	"loadCard.h"
 
 1461764084 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardpositions.h
 
-1463047439 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.c
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.c
 	"cardPosition.h"
 
-1462976846 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.h
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.h
 	<SDL_image.h>
 	"resolution.h"
 
-1463125172 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.c
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.c
 	"loadMedia.h"
 
-1463047357 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.h
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.h
 	"includes.h"
 
-1463128516 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.c
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.c
 	"openWeb.h"
 	<windows.h>
 
 1462350722 c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.h
 
-1463131084 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.c
+1463144820 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.c
 	"moveCard.h"
 
-1463126833 c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.h
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.h
 	"includes.h"
 
-1462975148 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\button.c
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\button.c
 	"button.h"
 
-1463047365 c:\users\robert\documents\codeblocks\projekarbete_kortspel\button.h
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\button.h
 	"includes.h"
 
 1462974909 c:\users\robert\documents\codeblocks\projekarbete_kortspel\libraries.h
@@ -66,13 +66,63 @@
 
 1462902678 c:\users\robert\documents\codeblocks\projekarbete_kortspel\struct.h
 
-1463047360 c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.h
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.h
 	"includes.h"
 
-1462902678 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.c
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.c
 	"window.h"
 
-1463126833 c:\users\robert\documents\codeblocks\projekarbete_kortspel\includes.h
+1463152042 c:\users\robert\documents\codeblocks\projekarbete_kortspel\includes.h
+	<stdio.h>
+	<stdbool.h>
+	<time.h>
+	<string.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<unistd.h>
+	"cardStruct.h"
+	"resolution.h"
+	"loadCard.h"
+	"cardPosition.h"
+	"loadMedia.h"
+	"openWeb.h"
+	"moveCard.h"
+	"buttonStruct.h"
+	"window.h"
+	"button.h"
+	"resetTurn.h"
+	"send.h"
+	"logik.h"
+	"position.h"
+
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\buttonstruct.h
+
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\resetturn.h
+	"includes.h"
+
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\resetturn.c
+	"resetTurn.h"
+
+1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.h
+	"includes.h"
+
+1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.c
+	"send.h"
+
+1463149432 c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.h
+	"includes.h"
+
+1463149432 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.c
+	"logik.h"
+
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\button.c
+	"button.h"
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\button.h
+	"includes.h"
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\includes.h
 	<stdio.h>
 	<stdbool.h>
 	<time.h>
@@ -95,23 +145,76 @@
 	"send.h"
 	"logik.h"
 
-1462902678 c:\users\robert\documents\codeblocks\projekarbete_kortspel\buttonstruct.h
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\cardstruct.h
 
-1463056036 c:\users\robert\documents\codeblocks\projekarbete_kortspel\resetturn.h
+1462370093 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\resolution.h
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\loadcard.h
 	"includes.h"
 
-1463056022 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\resetturn.c
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\cardposition.h
+	<SDL_image.h>
+	"resolution.h"
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\loadmedia.h
+	"includes.h"
+
+1462350722 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\openweb.h
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\movecard.h
+	"includes.h"
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\buttonstruct.h
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\window.h
+	"includes.h"
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\resetturn.h
+	"includes.h"
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\send.h
+	"includes.h"
+
+1463132179 c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\logik.h
+	"includes.h"
+
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\cardposition.c
+	"cardPosition.h"
+
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\loadcard.c
+	"loadCard.h"
+
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\loadmedia.c
+	"loadMedia.h"
+
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\logik.c
+	"logik.h"
+
+1463133098 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\movecard.c
+	"moveCard.h"
+
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\openweb.c
+	"openWeb.h"
+	<windows.h>
+
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\resetturn.c
 	"resetTurn.h"
 
-1463084708 c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.h
-	"includes.h"
-
-1463087204 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.c
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\send.c
 	"send.h"
 
-1463128284 c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.h
+1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\window.c
+	"window.h"
+
+1463131148 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\mainclient.c
 	"includes.h"
 
-1463130387 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.c
-	"logik.h"
+1463389240 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\mainclient.c
+	"includes.h"
+
+1463152082 c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.h
+	"includes.h"
+
+1463152608 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.c
+	"position.h"
 

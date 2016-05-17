@@ -23,5 +23,6 @@
 #include "resetTurn.h"
 #include "send.h"
 #include "logik.h"
+#include "position.h"
 
 #endif // INCLUDES_H_INCLUDED
