@@ -21,18 +21,17 @@
 #include "SDL2/SDL_net.h"
 #include "SDL2/SDL.h"
 
-struct args
-{
-    int pos;
-    IPaddress *address;
-    char *hand[];
 
-};
-typedef struct args Args;
+typedef struct {
+    int pos;
+    IPaddress address;
+    char *trick[4];
+
+}Args;
 
 void* player_waits_or_plays (void *);
 // Pekare eftersom pthread_create() tar en pekare
-UDPpacket createPacket(int, uint8_t, int, int, int, IPaddress);
+UDPpacket createPacket(int, uint8_t, int, int, int, IPaddress );
 
 struct player_parms;
 typedef struct player_parms{

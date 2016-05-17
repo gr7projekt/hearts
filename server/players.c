@@ -15,35 +15,53 @@ void* player_waits_or_plays (void *arguments) {
     Args *args = (Args*) arguments;
     Player me;
     me.pos = args->pos;
-    IPaddress *ipv4 = args->address;
+    IPaddress ipv4;
+    ipv4 = *args->address;
     // Bind address to the first free channel
     // UDPsocket udpsock;
     // IPaddress *address;
-    int chanL;
+    int chanL, mottagna_paket;
     uint8_t speila = 1;
     uint8_t hand_data;
     char *str;
-    sprintf(str,"%x%x%x%x%x%x%x%x",*args->hand[0],*args->hand[1],*args->hand[2],
-            *args->hand[3],*args->hand[4],*args->hand[5],*args->hand[6],*args->hand[7]);
+    sprintf(str,"%x%x%x%x%x%x%x%x",*args->trick[0],*args->trick[1],*args->trick[2],
+            *args->trick[3],*args->trick[4],*args->trick[5],*args->trick[6],*args->trick[7]);
     hand_data = atoi(str);
+
+
+
+    // create a UDPsocket on port 6666 (server)
+    UDPsocket udPsocket;
+
+    udPsocket=SDLNet_UDP_Open(ipv4.port);
+    if(!udpsock) {
+        printf("SDLNet_UDP_Open: %s\n", SDLNet_GetError());
+        exit(2);
+    }
+
 
     UDPpacket spela = createPacket(chanL, speila, 1, 100, 0, ipv4);
     UDPpacket skicka_hand = createPacket(chanL,hand_data,sizeof(hand_data),100,0,ipv4);
+    UDPpacket mottaget_paket;
 
-    if ((chanL = SDLNet_UDP_Bind(udpSocket, -1, ipv4)) < 0) {
+    if ((chanL = SDLNet_UDP_Bind(udPsocket, -1, ipv4)) < 0) {
         syslog(LOG_ERR, "SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
         // do something because we failed to bind
     }
     else {
         while (1) {
             if (my_turn()) {
-                if (!(SDLNet_UDP_Send(udpSocket, (&spela)->channel, &spela)))
+                if (!(SDLNet_UDP_Send(udPsocket, (&spela)->channel, &spela)))
                     syslog(LOG_ERR, "%s", SDLNET_GetError());
                 else {
                     sleep(15);
-
-                    // lägg till spelade kort
                 }
+                mottagna_paket = SDLNet_UDP_Recv(udPsocket, &mottaget_paket);
+                if(mottagna_paket) {
+                    //klientens angivna position uppdaterar handen med kortet som skickats
+                    sprintf(args->trick[mottaget_paket.data[0]],"%x%x",mottaget_paket.data[1],mottaget_paket.data[2]);
+                }
+
             }
             else {
                 if (!(SDLNet_UDP_Send(udpSocket, (&skicka_hand)->channel, &skicka_hand)))
