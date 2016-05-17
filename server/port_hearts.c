@@ -16,7 +16,7 @@ uint32_t getIP(char *str)
 
 int start_game_server(int port){
     char static hearts_start[200];
-    sprintf(hearts_start, "%s %s", GAME_SERVER, port);
+    sprintf(hearts_start, "%s %d", GAME_SERVER, port);
     return system(hearts_start);
 }
 int get_random_port_number(void){

@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 		thread_arg[i].pos = i;
 		thread_arg[i].address.port = port;
 		thread_arg[i].address.host = ipv4;
-		strcpy(thread_arg[i].trick,trick);
+		strcpy(*thread_arg[i].trick,*trick);
 		pthread_create(&threads[i], NULL, player_waits_or_plays, (void *) &thread_arg[i]);
 	}
 	return 0;

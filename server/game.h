@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
+#include <stdio.h>
 
 //Takes an array of four cards and returns the score
 int calculate_trick(char* []);
@@ -18,7 +19,8 @@ bool is_two_of_clubs(char []);
 void search_hand(char* [], int*, int);
 bool is_hunded (int []);
 void update_round_score(int *[],char *[]);
-
-#endif SERVER_GAME_H
+void separate_strings(char *, const char *, char *[],int);
+void split(char [],char *);
+#endif
 
 
