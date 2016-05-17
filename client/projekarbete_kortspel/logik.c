@@ -1,7 +1,39 @@
 #include "logik.h"
 
-bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[])
+bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[], int turn, int next_player)
 {
+//    if(next_player == p1[0].id)    //om jag är första spelaren som ska lägga ut ett kort.
+//    {
+//        if(turn == 0)
+//        {
+//
+//        }
+//        else if(turn > 0 && turn < 12)
+//        {
+//
+//        }
+//        else    //turn = sista rundan
+//            return true;
+//    }
+//
+//    else    //om jag inte är första spelaren
+//    {
+//        if(turn == 0)
+//        {
+//
+//        }
+//        else if(turn > 0 && turn < 12)
+//        {
+//
+//        }
+//        else    //turn = sista rundan
+//            return true;
+//    }
+
+
+
+
+
     int count_card = 0;
     int count_picked = 0;
 

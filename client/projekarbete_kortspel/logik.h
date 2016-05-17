@@ -12,7 +12,7 @@
  * \return bool
  *
  */
-bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[]);
+bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[],int turn, int next_player);
 
 
 #endif //LOGIK_H_INCLUDED

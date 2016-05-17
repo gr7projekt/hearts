@@ -51,6 +51,7 @@ int main(int argc, char* args[])
     int turn = 0;
     int leadCard = 0;       //färgen som startade ska man följa.
     bool brokenHeart = false;
+    int next_player = 0;
 
     SDL_Rect position_1[13]; //positionen för korten till spelaren
     SDL_Rect position_2[13];
@@ -58,9 +59,8 @@ int main(int argc, char* args[])
     SDL_Rect position_4[13];
     SDL_Rect advertism_pos[1];
     SDL_Rect dropzone_pos[1];
-    SDL_Rect initial_pos[1];
-
-    SDL_Rect played_pos[4];
+    SDL_Rect initial_pos[1];    //temp var
+    SDL_Rect played_pos[4]; //koordinaterna för spelade kort
 
     initial_pos[0].y = RES_Y-HEIGHT; //korten man börjar med ligger alltid på samma höjd.. botten minus höjden på kortet.
 
@@ -73,6 +73,8 @@ int main(int argc, char* args[])
 
     loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
     loadMediaDropzone(dropzone, gRenderer, gSpriteClipsDropzone);
+
+    position(player_1,player_2,player_3,player_4);  //Även absoluta platsen måste med som man får av server vid anslutning
 
     while(!quit)
     {
@@ -124,11 +126,9 @@ int main(int argc, char* args[])
                     {
                         mouse_x = e.button.x;
                         mouse_y = e.button.y;
+                        if((mouse_x < advertism_pos[0].w+advertism_pos[0].x && mouse_x > advertism_pos[0].x) && (mouse_y < advertism_pos[0].h+advertism_pos[0].y && mouse_y> advertism_pos[0].y))
                         {
-                            if((mouse_x < advertism_pos[0].w+advertism_pos[0].x && mouse_x > advertism_pos[0].x) && (mouse_y < advertism_pos[0].h+advertism_pos[0].y && mouse_y> advertism_pos[0].y))
-                            {
-                                openWeb();
-                            }
+                            openWeb();
                         }
                     }
                 }
@@ -144,11 +144,9 @@ int main(int argc, char* args[])
                             {
                                 cardNr = liftCard(initial_pos, position_1, mouse_x, mouse_y, picked);
                                 click = true;
-                               // printf("initial x pos: %d\n",initial_pos[0].x);
-                               // printf("cardNr: %d\n", cardNr);
                             }
 
-                            if(click==true && cardNr >-1)
+                            if(cardNr >-1)
                             {
                                 mouse_x = e.motion.x;
                                 mouse_y = e.motion.y;
@@ -169,8 +167,7 @@ int main(int argc, char* args[])
                         position_1[cardNr].x = played_pos[0].x; //droppas in på exakt plats
                         position_1[cardNr].y = played_pos[0].y; //droppas in på exakt plats
 
-
-                        if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked))
+                        if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked, turn, next_player))
                         {
                             sendCard(player_1, cardNr);
 
@@ -193,7 +190,7 @@ int main(int argc, char* args[])
                 }
             }
 
-            SDL_SetRenderDrawColor(gRenderer, 0x0D, 0x63, 0x02, 0xFF); //0D 53 02 mörk grön
+            SDL_SetRenderDrawColor(gRenderer, 0x0D, 0x63, 0x02, 0xFF); //0D 63 02
             SDL_RenderClear(gRenderer);
 
             SDL_RenderCopy(gRenderer, dropzone[0], &gSpriteClipsDropzone[0], &dropzone_pos[0] );
