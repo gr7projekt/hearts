@@ -68,12 +68,15 @@ int main(void)
             fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
             exit(EXIT_FAILURE);
         }
+        fprintf(stdout, "SDLNet_TCP_Sent: %s\n",SYN1);
         
         memset(SYN1, '\0', sizeof(SYN1));
         // Servern skickar "ENDOFTRANS" efter varje ACK
         // Klienten väntar på ett portnummer(40-50 k) och spelarposition[0:3]
         do {
             result=SDLNet_TCP_Recv(sd,SYN1,MAXLEN);
+            printf("Recv: %s ",SYN1);
+            sleep(3);
         } while (!strcmp(SYN1, "ENDOFTRANS"));
         
         //sammanfoga strängen som startar spelklienten
