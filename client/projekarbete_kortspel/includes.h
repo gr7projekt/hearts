@@ -24,5 +24,6 @@
 #include "send.h"
 #include "logik.h"
 #include "position.h"
+#include "rendering.h"
 
 #endif // INCLUDES_H_INCLUDED

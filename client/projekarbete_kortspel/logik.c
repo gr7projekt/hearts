@@ -18,15 +18,16 @@ int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* on_table
     }
     else
         tmp = 4;
+//    printf("tmp: %i\n",tmp);
 
-    if(p1[0].relativ_pos == tmp)
-        return 0;
-    else if(p2[0].relativ_pos == tmp)
-        return 1;
-    else if(p3[0].relativ_pos == tmp)
-        return 2;
-    else if(p4[0].relativ_pos == tmp)
-        return 3;
+    if(p1[0].id == tmp)
+        return p1[0].relativ_pos;
+    else if(p2[0].id == tmp)
+        return p2[0].relativ_pos;
+    else if(p3[0].id == tmp)
+        return p3[0].relativ_pos;
+    else if(p4[0].id == tmp)
+        return p4[0].relativ_pos;
     else
         return 4;
 }

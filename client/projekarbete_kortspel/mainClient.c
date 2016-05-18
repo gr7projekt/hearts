@@ -56,7 +56,7 @@ int main(int argc, char* args[])
     bool brokenHeart = false;
 
                     //played card p0,p1,p2,p3 next turn
-    char *on_table[] = {"EE;", "FF;", "FF;", "FF;"};
+    char *on_table[] = {"EE;", "FF;", "FF;", "1A;"};
 //    char *on_table[] = {"FF;", "EE;", "FF;", "FF;"};
 //    char *on_table[] = {"FF;", "FF;", "EE;", "FF;"};
 //    char *on_table[] = {"FF;", "FF;", "FF;", "EE;"};
@@ -138,7 +138,7 @@ int main(int argc, char* args[])
                     {
                         openWeb();
                     }
-                    if(clickButton(e,help.rect))//((mouse_x < help.rect.x+help.rect.w && mouse_x > help.rect.x) && (mouse_y < help.rect.y + help.rect.h && mouse_y > help.rect.y))
+                    if(clickButton(e, help.rect))//((mouse_x < help.rect.x+help.rect.w && mouse_x > help.rect.x) && (mouse_y < help.rect.y + help.rect.h && mouse_y > help.rect.y))
                     {
                         createWindow();
                     }
@@ -208,10 +208,10 @@ int main(int argc, char* args[])
             whoIsPlaying = whos_turn(player_1,player_2,player_3,player_4,on_table);
             SDL_RenderCopy(gRenderer, coin[0], &gSpriteClipsCoin[0], &coin_pos[whoIsPlaying]);
 
+            renderPlayedCard(gRenderer, on_table, played_pos, whoIsPlaying, gSpriteClipsClubs, gSpriteClipsDiamonds, gSpriteClipsHearts, gSpriteClipsSpades); // renderar spelade kort i mitten
+
             SDL_RenderCopy(gRenderer, dropzone[0], &gSpriteClipsDropzone[0], &dropzone_pos[0] );
             SDL_RenderCopy(gRenderer, help.texture,NULL, &help.rect);
-
-
 
             for(int i = 0; i < 13 ; i++ )   //Renderar spelarens egna kort
             {
@@ -235,6 +235,7 @@ int main(int argc, char* args[])
             for(int i = 0; i < 13 - player_4[0].turn ; i++ ){  //Renderar baksida kort höger
                 SDL_RenderCopy(gRenderer, card_4[i], &gSpriteClipsBack[0],&position_4[i] );
             }
+
 
             SDL_RenderCopy(gRenderer, advertisment[0], &gSpriteClipsAdvertisment[0],&advertism_pos[0] );
             SDL_RenderPresent(gRenderer);

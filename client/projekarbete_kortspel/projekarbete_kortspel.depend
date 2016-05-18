@@ -39,7 +39,8 @@
 	"openWeb.h"
 	<windows.h>
 
-1462350722 c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.h
+1463563872 c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.h
+	"includes.h"
 
 1463144820 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.c
 	"moveCard.h"
@@ -72,7 +73,7 @@
 1463491502 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.c
 	"window.h"
 
-1463152042 c:\users\robert\documents\codeblocks\projekarbete_kortspel\includes.h
+1463563872 c:\users\robert\documents\codeblocks\projekarbete_kortspel\includes.h
 	<stdio.h>
 	<stdbool.h>
 	<time.h>
@@ -95,6 +96,7 @@
 	"send.h"
 	"logik.h"
 	"position.h"
+	"rendering.h"
 
 1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\buttonstruct.h
 
@@ -113,7 +115,7 @@
 1463557354 c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.h
 	"includes.h"
 
-1463559066 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.c
+1463564604 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.c
 	"logik.h"
 
 1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\button.c
@@ -209,12 +211,18 @@
 1463131148 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\mainclient.c
 	"includes.h"
 
-1463559280 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\mainclient.c
+1463564243 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\mainclient.c
 	"includes.h"
 
 1463152082 c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.h
 	"includes.h"
 
-1463559263 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.c
+1463561188 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.c
 	"position.h"
+
+1463564339 c:\users\robert\documents\codeblocks\projekarbete_kortspel\rendering.h
+	"includes.h"
+
+1463564339 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\rendering.c
+	"rendering.h"
 
