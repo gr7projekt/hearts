@@ -56,14 +56,14 @@ int main(void)
     memset(SYN0, '\0', sizeof(SYN0));
     
     result=SDLNet_TCP_Recv(sd,SYN0,MAXLEN);
-    printf("%d\n",result);
+    printf("Recv: %d\n",result);
 
     printf("%s\n",SYN0);
 
     if(strcmp(SYN0, "diamonds") == 0)
     {
         len2 = (int) strlen(SYN1)+1;
-        if (SDLNet_TCP_Send(sd, SYN1,len) < len)
+        if (SDLNet_TCP_Send(sd, SYN1,len2) < len2)
         {
             fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
             exit(EXIT_FAILURE);
