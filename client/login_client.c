@@ -86,22 +86,26 @@ int main(void)
             printf("Recv: %s \n",SYN1);
             sleep(3);
         } while (strcmp(SYN1, "account"));
-        len2 = (int) strlen(USER_DATA) + 1;
+
+        char user_name[100]={'0'};
+        char password[30]={'0'};
+        char *tmp;
+
         while(!strcmp(SYN1, "account")) {
-            char user_name[100]={'0'};
-            char password[30]={'0'};
             printf("Ange användarnamn: \n");
-            fgets(user_name, sizeof(user_name) + 1,stdin);
+            fgets(user_name, sizeof(user_name)+1,stdin);
+            //strcpy(user_name,strsep(&user_name," "));
             user_name[strlen(user_name)-1]=';';
             printf("Ange lösenord: \n");
             fgets(password, sizeof(password)+1,stdin);
+            //strcpy(password,strsep(&password," "));
             password[strlen(password)-1]='\0';
             strcat(user_name,password);
-            len2 = (int) sizeof(user_name);
-            if (SDLNet_TCP_Send(sd, user_name, len2) < len2) printf("%s",strerror(errno));
+            len2 = (int) sizeof(user_name+1);
+            if (SDLNet_TCP_Send(sd, user_name, len2) < len2) printf("%s*",strerror(errno));
             printf("Sent: %s\n", user_name);
             sleep(1);
-            printf("%d\n",SDLNet_TCP_Recv(sd,SYN1,MAXLEN));
+            printf("%d-\n",SDLNet_TCP_Recv(sd,SYN1,MAXLEN));
         }
 
         //sammanfoga strängen som startar spelklienten
