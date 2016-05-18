@@ -1,8 +1,54 @@
 #include "logik.h"
 
-bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[], int turn, int next_player)
+int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* on_table[])
 {
-//    if(next_player == p1[0].id)    //om jag är första spelaren som ska lägga ut ett kort.
+    int tmp;
+
+    if(strcmp(on_table[0],"EE;") == 0){
+        tmp = 0;
+    }
+    else if(strcmp(on_table[1],"EE;") == 0){
+        tmp = 1;
+    }
+    else if(strcmp(on_table[2],"EE;") == 0){
+        tmp = 2;
+    }
+    else if(strcmp(on_table[3],"EE;") == 0){
+        tmp = 3;
+    }
+    else
+        tmp = 4;
+
+    if(p1[0].relativ_pos == tmp)
+        return 0;
+    else if(p2[0].relativ_pos == tmp)
+        return 1;
+    else if(p3[0].relativ_pos == tmp)
+        return 2;
+    else if(p4[0].relativ_pos == tmp)
+        return 3;
+    else
+        return 4;
+}
+
+bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[], int turn, char *on_table[] )
+{
+    int no_played = 0;
+    int i_play = 0;
+
+    for(int i=0; i<4; i++){
+        if(strcmp(on_table[i],"FF;") == 0)
+            no_played ++;
+        else if(strcmp(on_table[p1[0].id],"EE;") == 0)
+            i_play ++;
+    }
+    printf("no_played: %i\n",no_played);
+    printf("i_play: %i\n",i_play);
+
+
+
+//
+//    if(no_played == 3 && i_play == 1)    //om jag är första spelaren som ska lägga ut ett kort.
 //    {
 //        if(turn == 0)
 //        {

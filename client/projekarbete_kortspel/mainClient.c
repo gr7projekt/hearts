@@ -21,6 +21,7 @@ SDL_Texture* card_3[13] = {NULL};   //motsatt spelares baksida
 SDL_Texture* card_4[13] = {NULL};   //höger spelares baksida
 SDL_Texture* advertisment[1] = {NULL};
 SDL_Texture* dropzone[1] = {NULL};
+SDL_Texture* coin[1] = {NULL};
 
 SDL_Rect gSpriteClipsClubs[13];
 SDL_Rect gSpriteClipsDiamonds[13];
@@ -29,6 +30,7 @@ SDL_Rect gSpriteClipsSpades[13];
 SDL_Rect gSpriteClipsBack[1];
 SDL_Rect gSpriteClipsAdvertisment[1];
 SDL_Rect gSpriteClipsDropzone[1];
+SDL_Rect gSpriteClipsCoin[1];
 
 int main(int argc, char* args[])
 {
@@ -42,16 +44,22 @@ int main(int argc, char* args[])
 
     SDL_Event e;
 
-    int my_turn = 1;        //lås om jag kan klicka på mina kort eller ej.
     int cardNr = -1;
+    int turn = 0;
+    int leadCard = 0;       //färgen som startade ska man följa.
+    int whoIsPlaying;
+
     bool click = false;
     bool quit = false;
     bool picked[13] = {false};
     bool winner = true;
-    int turn = 0;
-    int leadCard = 0;       //färgen som startade ska man följa.
     bool brokenHeart = false;
-    int next_player = 0;
+
+                    //played card p0,p1,p2,p3 next turn
+    char *on_table[] = {"EE;", "FF;", "FF;", "FF;"};
+//    char *on_table[] = {"FF;", "EE;", "FF;", "FF;"};
+//    char *on_table[] = {"FF;", "FF;", "EE;", "FF;"};
+//    char *on_table[] = {"FF;", "FF;", "FF;", "EE;"};
 
     SDL_Rect position_1[13]; //positionen för korten till spelaren
     SDL_Rect position_2[13];
@@ -61,6 +69,7 @@ int main(int argc, char* args[])
     SDL_Rect dropzone_pos[1];
     SDL_Rect initial_pos[1];    //temp var
     SDL_Rect played_pos[4]; //koordinaterna för spelade kort
+    SDL_Rect coin_pos[5];
 
     initial_pos[0].y = RES_Y-HEIGHT; //korten man börjar med ligger alltid på samma höjd.. botten minus höjden på kortet.
 
@@ -69,8 +78,9 @@ int main(int argc, char* args[])
     }
 
     button help = createButton(0,0,20,20,"help.png",gRenderer);
-    initSpritePosition(position_1,position_2,position_3,position_4,advertism_pos,dropzone_pos,played_pos);
+    initSpritePosition(position_1,position_2,position_3,position_4,advertism_pos,dropzone_pos,played_pos,coin_pos);
 
+    loadMediaCoin(coin, gRenderer, gSpriteClipsCoin);
     loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
     loadMediaDropzone(dropzone, gRenderer, gSpriteClipsDropzone);
 
@@ -120,21 +130,22 @@ int main(int argc, char* args[])
                 {
                     quit = true;
                 }
-                else if(e.type == SDL_MOUSEBUTTONDOWN)
+                else if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
                 {
-                    if(e.button.button == SDL_BUTTON_LEFT)
+                    mouse_x = e.button.x;
+                    mouse_y = e.button.y;
+                    if((mouse_x < advertism_pos[0].w+advertism_pos[0].x && mouse_x > advertism_pos[0].x) && (mouse_y < advertism_pos[0].h+advertism_pos[0].y && mouse_y> advertism_pos[0].y))
                     {
-                        mouse_x = e.button.x;
-                        mouse_y = e.button.y;
-                        if((mouse_x < advertism_pos[0].w+advertism_pos[0].x && mouse_x > advertism_pos[0].x) && (mouse_y < advertism_pos[0].h+advertism_pos[0].y && mouse_y> advertism_pos[0].y))
-                        {
-                            openWeb();
-                        }
+                        openWeb();
+                    }
+                    if(clickButton(e,help.rect))//((mouse_x < help.rect.x+help.rect.w && mouse_x > help.rect.x) && (mouse_y < help.rect.y + help.rect.h && mouse_y > help.rect.y))
+                    {
+                        createWindow();
                     }
                 }
                 else if(e.type == SDL_MOUSEMOTION)
                 {
-                    if(my_turn) //ska endast gå att flytta korten om det är min tur
+                    if(strcmp(on_table[player_1[0].id],"EE;") == 0) //ska endast gå att flytta korten om det är min tur, +
                     {
                         if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
                         {
@@ -167,9 +178,10 @@ int main(int argc, char* args[])
                         position_1[cardNr].x = played_pos[0].x; //droppas in på exakt plats
                         position_1[cardNr].y = played_pos[0].y; //droppas in på exakt plats
 
-                        if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked, turn, next_player))
+                        if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked, turn, on_table))
                         {
-                            sendCard(player_1, cardNr);
+
+                            sendCard(player_1, cardNr, on_table);
 
                             turn++;
                             printf("turn %i\n",turn);
@@ -193,13 +205,13 @@ int main(int argc, char* args[])
             SDL_SetRenderDrawColor(gRenderer, 0x0D, 0x63, 0x02, 0xFF); //0D 63 02
             SDL_RenderClear(gRenderer);
 
+            whoIsPlaying = whos_turn(player_1,player_2,player_3,player_4,on_table);
+            SDL_RenderCopy(gRenderer, coin[0], &gSpriteClipsCoin[0], &coin_pos[whoIsPlaying]);
+
             SDL_RenderCopy(gRenderer, dropzone[0], &gSpriteClipsDropzone[0], &dropzone_pos[0] );
             SDL_RenderCopy(gRenderer, help.texture,NULL, &help.rect);
 
-//            for(int i=0 ; i<4; i++)
-//            {
-//                SDL_RenderCopy(gRenderer, card[i], &gSpriteClipsHearts[i],&played_pos[i]);
-//            }
+
 
             for(int i = 0; i < 13 ; i++ )   //Renderar spelarens egna kort
             {

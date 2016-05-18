@@ -3,6 +3,6 @@
 
 #include "includes.h"
 
-void sendCard(Player player_1[], int nr);
+void sendCard(Player player_1[], int nr, char *on_table[]);
 
 #endif // SEND_H_INCLUDED

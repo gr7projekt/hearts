@@ -3,6 +3,8 @@
 
 #include "includes.h"
 
+void loadMediaCoin(SDL_Texture *coin[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsCoin[]);
+
 /** \brief
  *
  * \param dropzone[] SDL_Texture*

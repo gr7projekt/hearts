@@ -22,17 +22,17 @@
 
 1461764084 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardpositions.h
 
-1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.c
+1463496253 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.c
 	"cardPosition.h"
 
-1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.h
+1463496253 c:\users\robert\documents\codeblocks\projekarbete_kortspel\cardposition.h
 	<SDL_image.h>
 	"resolution.h"
 
-1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.c
+1463496483 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.c
 	"loadMedia.h"
 
-1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.h
+1463496279 c:\users\robert\documents\codeblocks\projekarbete_kortspel\loadmedia.h
 	"includes.h"
 
 1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\openweb.c
@@ -69,7 +69,7 @@
 1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.h
 	"includes.h"
 
-1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.c
+1463491502 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\window.c
 	"window.h"
 
 1463152042 c:\users\robert\documents\codeblocks\projekarbete_kortspel\includes.h
@@ -104,16 +104,16 @@
 1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\resetturn.c
 	"resetTurn.h"
 
-1463132179 c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.h
+1463479763 c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.h
 	"includes.h"
 
-1463132179 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.c
+1463486714 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\send.c
 	"send.h"
 
-1463149432 c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.h
+1463557354 c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.h
 	"includes.h"
 
-1463149432 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.c
+1463559066 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.c
 	"logik.h"
 
 1463132179 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\button.c
@@ -209,12 +209,12 @@
 1463131148 source:c:\users\robert\documents\github\hearts\client\projekarbete_kortspel\mainclient.c
 	"includes.h"
 
-1463389240 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\mainclient.c
+1463559280 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\mainclient.c
 	"includes.h"
 
 1463152082 c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.h
 	"includes.h"
 
-1463152608 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.c
+1463559263 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\position.c
 	"position.h"
 

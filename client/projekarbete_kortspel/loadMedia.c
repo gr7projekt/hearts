@@ -1,5 +1,17 @@
 #include "loadMedia.h"
 
+void loadMediaCoin(SDL_Texture *coin[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsCoin[])
+{
+    SDL_Surface* gDropSurface = IMG_Load("aktiv_spelare.png");
+
+    coin[0] = SDL_CreateTextureFromSurface(gRenderer, gDropSurface);
+
+    gSpriteClipsCoin[0].x = 0;
+    gSpriteClipsCoin[0].y = 0;
+    gSpriteClipsCoin[0].w = 22;
+    gSpriteClipsCoin[0].h = 18;
+}
+
 void loadMediaDropzone(SDL_Texture *dropzone[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsDropzone[])
 {
     SDL_Surface* gDropSurface = IMG_Load("dropzone.png");
