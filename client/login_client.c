@@ -20,6 +20,7 @@ int main(void)
     IPaddress ip;
     TCPsocket sd;
     char server[25] = "", newport[MAXLEN], SYN0[MAXLEN] = "hearts", SYN1[MAXLEN] = "port", log_string[40], pid[7];
+
     int result, len, len2;
     uint16_t port;
     FILE *fd;
@@ -87,8 +88,18 @@ int main(void)
         } while (strcmp(SYN1, "account"));
         len2 = (int) strlen(USER_DATA) + 1;
         while(!strcmp(SYN1, "account")) {
-            if (SDLNet_TCP_Send(sd, USER_DATA, len2) < len2) printf("%s",strerror(errno));
-            printf("Sent: %s\n", USER_DATA);
+            char user_name[100]={'0'};
+            char password[30]={'0'};
+            printf("Ange användarnamn: \n");
+            fgets(user_name, sizeof(user_name) + 1,stdin);
+            user_name[strlen(user_name)-1]=';';
+            printf("Ange lösenord: \n");
+            fgets(password, sizeof(password)+1,stdin);
+            password[strlen(password)-1]='\0';
+            strcat(user_name,password);
+            len2 = (int) sizeof(user_name);
+            if (SDLNet_TCP_Send(sd, user_name, len2) < len2) printf("%s",strerror(errno));
+            printf("Sent: %s\n", user_name);
             sleep(1);
             printf("%d\n",SDLNet_TCP_Recv(sd,SYN1,MAXLEN));
         }
