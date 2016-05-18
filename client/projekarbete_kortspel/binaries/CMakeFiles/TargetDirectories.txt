@@ -1,0 +1,3 @@
+/Users/niclasragnar/Desktop/git/hearts/client/projekarbete_kortspel/binaries/CMakeFiles/edit_cache.dir
+/Users/niclasragnar/Desktop/git/hearts/client/projekarbete_kortspel/binaries/CMakeFiles/rebuild_cache.dir
+/Users/niclasragnar/Desktop/git/hearts/client/projekarbete_kortspel/binaries/CMakeFiles/projekarbete_kortspel.dir
