@@ -54,22 +54,22 @@ void deal_deck(Card_struct shuffled[],char p1[],char p2[],char p3[],char p4[])
     printf("p1:");
     for(int i=0; i<13; i++)
     {
-        printf("%c%c ",p1[i*2],p1[i*2+1]);
+        printf("%c%c",p1[i*2],p1[i*2+1]);
     }
     printf("\np2:");
     for(int i=0; i<13; i++)
     {
-        printf("%c%c ",p2[i*2],p2[i*2+1]);
+        printf("%c%c",p2[i*2],p2[i*2+1]);
     }
     printf("\np3:");
     for(int i=0; i<13; i++)
     {
-        printf("%c%c ",p3[i*2],p3[i*2+1]);
+        printf("%c%c",p3[i*2],p3[i*2+1]);
     }
     printf("\np4:");
     for(int i=0; i<13; i++)
     {
-        printf("%c%c ",p4[i*2],p4[i*2+1]);
+        printf("%c%c",p4[i*2],p4[i*2+1]);
     }
 }
 
