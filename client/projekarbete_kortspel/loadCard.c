@@ -9,13 +9,13 @@ void loadCard(Player player_client[],Player player_2[], Player player_3[], Playe
         player_client[0].game_hand[i].value = i;    //om det är t.ex. en 2'a 7'a eller dam
 
         player_2[0].game_hand[i].suit = 0;
-        player_2[0].game_hand[i].value = 12-i;
+        player_2[0].game_hand[i].value = 0;
 
-        player_3[0].game_hand[i].suit = 3-k;
-        player_3[0].game_hand[i].value = i;
+        player_3[0].game_hand[i].suit = 0;
+        player_3[0].game_hand[i].value = 0;
 
-        player_4[0].game_hand[i].suit = 3-k;
-        player_4[0].game_hand[i].value = 12-i;
+        player_4[0].game_hand[i].suit = 0;
+        player_4[0].game_hand[i].value = 0;
 
         k++;
         if(k>3)

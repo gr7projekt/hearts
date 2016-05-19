@@ -10,15 +10,13 @@
 
 #include "includes.h"
 
+#include <windows.h>
+
 bool init();
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
-SDL_Texture* card[13] = {NULL};     //spelarens kort (det grafiska, inte riktiga handen)
-SDL_Texture* card_2[13] = {NULL};   //vänster spelares baksida
-SDL_Texture* card_3[13] = {NULL};   //motsatt spelares baksida
-SDL_Texture* card_4[13] = {NULL};   //höger spelares baksida
 SDL_Texture* advertisment[1] = {NULL};
 SDL_Texture* dropzone[1] = {NULL};
 SDL_Texture* coin[1] = {NULL};
@@ -34,6 +32,11 @@ SDL_Rect gSpriteClipsCoin[1];
 
 int main(int argc, char* args[])
 {
+    SDL_Texture* card[13] = {NULL};     //spelarens kort (det grafiska, inte riktiga handen)
+    SDL_Texture* card_2[13] = {NULL};   //vänster spelares baksida
+    SDL_Texture* card_3[13] = {NULL};   //motsatt spelares baksida
+    SDL_Texture* card_4[13] = {NULL};   //höger spelares baksida
+
     int mouse_x;
     int mouse_y;
 
@@ -56,10 +59,13 @@ int main(int argc, char* args[])
     bool brokenHeart = false;
 
                     //played card p0,p1,p2,p3 next turn
-    char *on_table[] = {"EE;", "FF;", "FF;", "1A;"};
-//    char *on_table[] = {"FF;", "EE;", "FF;", "FF;"};
-//    char *on_table[] = {"FF;", "FF;", "EE;", "FF;"};
-//    char *on_table[] = {"FF;", "FF;", "FF;", "EE;"};
+    char* trick[] = {"  ","  ","  ","  "};
+    char recieved_trick[13] = {"EE;FF;FF;FF;"};
+    char tmp[4];
+
+//    char *trick[] = {"FF;", "EE;", "FF;", "FF;"};
+//    char *trick[] = {"FF;", "FF;", "EE;", "FF;"};
+//    char *trick[] = {"FF;", "FF;", "FF;", "EE;"};
 
     SDL_Rect position_1[13]; //positionen för korten till spelaren
     SDL_Rect position_2[13];
@@ -90,6 +96,14 @@ int main(int argc, char* args[])
     {
         while(turn < 13 && !quit)
         {
+
+            //recive()
+            seperate(trick, recieved_trick, tmp);
+            for(int i=0; i<4; i++)
+            {
+                printf("%s",trick[i]);
+            }printf("\n");
+
             if(winner)  //om runda är klar och någon vunnit, ladda nya kort.
             {
                 resetTurn(player_1,player_2,player_3,player_4);
@@ -145,7 +159,7 @@ int main(int argc, char* args[])
                 }
                 else if(e.type == SDL_MOUSEMOTION)
                 {
-                    if(strcmp(on_table[player_1[0].id],"EE;") == 0) //ska endast gå att flytta korten om det är min tur, +
+                    if(myturn(trick,player_1))//strcmp(trick[player_1[0].id],"EE;") == 0) //ska endast gå att flytta korten om det är min tur, +
                     {
                         if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
                         {
@@ -175,13 +189,16 @@ int main(int argc, char* args[])
                 {
                     if(((position_1[cardNr].x + WIDTH/2 > dropzone_pos[0].x) && (position_1[cardNr].x + WIDTH/2 < dropzone_pos[0].x+dropzone_pos[0].w))&&((position_1[cardNr].y + HEIGHT/2 > dropzone_pos[0].y) && (position_1[cardNr].y + HEIGHT/2 < dropzone_pos[0].y + dropzone_pos[0].h)))
                     {
-                        position_1[cardNr].x = played_pos[0].x; //droppas in på exakt plats
-                        position_1[cardNr].y = played_pos[0].y; //droppas in på exakt plats
+                        position_1[cardNr].x = -WIDTH;
+                        position_1[cardNr].y = 0;
+//                        position_1[cardNr].x = played_pos[0].x; //droppas in på exakt plats
+//                        position_1[cardNr].y = played_pos[0].y; //droppas in på exakt plats
 
-                        if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked, turn, on_table))
+                        if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked, turn, trick))
                         {
+                            sendCard(player_1, cardNr, trick, recieved_trick);
 
-                            sendCard(player_1, cardNr, on_table);
+                            printf("after sendCard: %c %c\n", trick[0][0], trick[0][1]);
 
                             turn++;
                             printf("turn %i\n",turn);
@@ -194,7 +211,7 @@ int main(int argc, char* args[])
                             picked[cardNr] = false;
                         }
                     }
-                    else    //
+                    else    //om kortet placeras utanför dropbox
                     {
                         position_1[cardNr].x = initial_pos[0].x;
                         position_1[cardNr].y = initial_pos[0].y;
@@ -205,12 +222,17 @@ int main(int argc, char* args[])
             SDL_SetRenderDrawColor(gRenderer, 0x0D, 0x63, 0x02, 0xFF); //0D 63 02
             SDL_RenderClear(gRenderer);
 
-            whoIsPlaying = whos_turn(player_1,player_2,player_3,player_4,on_table);
+            whoIsPlaying = whos_turn(player_1,player_2,player_3,player_4,trick);
+//            printf("wIP: %i\n",whoIsPlaying);
+
             SDL_RenderCopy(gRenderer, coin[0], &gSpriteClipsCoin[0], &coin_pos[whoIsPlaying]);
-
-            renderPlayedCard(gRenderer, on_table, played_pos, whoIsPlaying, gSpriteClipsClubs, gSpriteClipsDiamonds, gSpriteClipsHearts, gSpriteClipsSpades); // renderar spelade kort i mitten
-
             SDL_RenderCopy(gRenderer, dropzone[0], &gSpriteClipsDropzone[0], &dropzone_pos[0] );
+
+            renderPlayedCard(gRenderer, trick, played_pos, whoIsPlaying,
+                             gSpriteClipsClubs, gSpriteClipsDiamonds, gSpriteClipsHearts, gSpriteClipsSpades,
+                             card, card_2, card_3, card_4,
+                             player_1,player_2,player_3,player_4); // renderar spelade kort i mitten
+
             SDL_RenderCopy(gRenderer, help.texture,NULL, &help.rect);
 
             for(int i = 0; i < 13 ; i++ )   //Renderar spelarens egna kort
@@ -240,6 +262,7 @@ int main(int argc, char* args[])
             SDL_RenderCopy(gRenderer, advertisment[0], &gSpriteClipsAdvertisment[0],&advertism_pos[0] );
             SDL_RenderPresent(gRenderer);
 
+            Sleep(100);
         }
         winner = true;
         turn = 0;

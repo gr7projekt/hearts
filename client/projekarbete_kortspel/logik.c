@@ -1,19 +1,53 @@
 #include "logik.h"
 
-int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* on_table[])
+bool myturn(char *trick[], Player player_1[])
+{
+    if(strcmp(trick[player_1[0].id],"EE;")==0)
+    {
+        printf("myturn 1\n");
+        return true;
+    }
+    else if(player_1[0].id == 0)
+    {
+        if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[3],"FF;")!=0) && strcmp(trick[3],"EE;") !=0)
+        {
+            printf("myturn 2\n");
+            return true;
+        }
+        else
+        {
+            printf("myturn 3\n");
+            return false;
+        }
+    }
+    else
+    {
+        if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[player_1[0].id-1],"FF;")!=0) && strcmp(trick[player_1[0].id-1],"EE;")!=0){
+            printf("myturn 4\n");
+            return true;
+        }
+        else
+        {
+            printf("myturn 5\n");
+            return false;
+        }
+    }
+}
+
+int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* trick[])
 {
     int tmp;
 
-    if(strcmp(on_table[0],"EE;") == 0){
+    if((strcmp(trick[0],"EE;") == 0) || (strcmp(trick[0],"FF;")==0 && strcmp(trick[3],"FF;") !=0)){
         tmp = 0;
     }
-    else if(strcmp(on_table[1],"EE;") == 0){
+    else if((strcmp(trick[1],"EE;") == 0) || (strcmp(trick[1],"FF;")==0 && strcmp(trick[0],"FF;") !=0)){
         tmp = 1;
     }
-    else if(strcmp(on_table[2],"EE;") == 0){
+    else if((strcmp(trick[2],"EE;") == 0) || (strcmp(trick[2],"FF;")==0 && strcmp(trick[1],"FF;") !=0)){
         tmp = 2;
     }
-    else if(strcmp(on_table[3],"EE;") == 0){
+    else if((strcmp(trick[3],"EE;") == 0) || (strcmp(trick[3],"FF;")==0 && strcmp(trick[2],"FF;") !=0)){
         tmp = 3;
     }
     else
@@ -32,15 +66,15 @@ int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* on_table
         return 4;
 }
 
-bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[], int turn, char *on_table[] )
+bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[], int turn, char *trick[] )
 {
     int no_played = 0;
     int i_play = 0;
 
     for(int i=0; i<4; i++){
-        if(strcmp(on_table[i],"FF;") == 0)
+        if(strcmp(trick[i],"FF;") == 0)
             no_played ++;
-        else if(strcmp(on_table[p1[0].id],"EE;") == 0)
+        else if(strcmp(trick[p1[0].id],"EE;") == 0)
             i_play ++;
     }
     printf("no_played: %i\n",no_played);

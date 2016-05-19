@@ -3,7 +3,9 @@
 
 #include "includes.h"
 
-int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* on_table[]);
+bool myturn(char *trick[],Player player_1[]);
+
+int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* trick[]);
 
 /** \brief
  *
@@ -14,7 +16,7 @@ int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* on_table
  * \return bool
  *
  */
-bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[],int turn, char *on_table[]);
+bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[],int turn, char *trick[]);
 
 
 #endif //LOGIK_H_INCLUDED

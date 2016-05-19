@@ -2,6 +2,7 @@
 #define INCLUDES_H_INCLUDED
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
 #include <string.h>
@@ -25,5 +26,6 @@
 #include "logik.h"
 #include "position.h"
 #include "rendering.h"
+#include "recieve.h"
 
 #endif // INCLUDES_H_INCLUDED

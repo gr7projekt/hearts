@@ -71,6 +71,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="position.h" />
+		<Unit filename="rendering.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rendering.h" />
 		<Unit filename="resetTurn.c">
 			<Option compilerVar="CC" />
 		</Unit>
