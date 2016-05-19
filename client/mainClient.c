@@ -8,8 +8,7 @@
 //  Modified by Robert K�rrbrant on 2016-05-12 (13:55)
 //
 
-#include <SDL_net.h>
-#include "projekarbete_kortspel/includes.h"
+#include "includes.h"
 
 //#include <windows.h>
 
@@ -87,14 +86,15 @@ int main(int argc, char* args[])
     }
 
     button help = createButton(0,0,20,20,"help.png",gRenderer);
-    initSpritePosition(position_1,position_2,position_3,position_4,advertism_pos,dropzone_pos,played_pos);
+    initSpritePosition(position_1,position_2,position_3,position_4,advertism_pos,dropzone_pos,played_pos,coin_pos);
 
-    //loadMediaCoin(coin, gRenderer, gSpriteClipsCoin);
+    loadMediaCoin(coin, gRenderer, gSpriteClipsCoin);
     loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
     loadMediaDropzone(dropzone, gRenderer, gSpriteClipsDropzone);
 
     position(player_1,player_2,player_3,player_4);  //�ven absoluta platsen m�ste med som man f�r av server vid anslutning
 
+<<<<<<< HEAD
     // create a UDPsocket on any available port (client)
     UDPsocket udpsock;
     UDPpacket *udPpacket;
@@ -122,10 +122,13 @@ int main(int argc, char* args[])
         // do something because we failed to bind
     }
 
+=======
+>>>>>>> parent of 27c486b... har påbörjat UDP-anropen
     while(!quit)
     {
         while(turn < 13 && !quit)
         {
+<<<<<<< HEAD
             SDLNet_UDP_Recv(udpsock, udPpacket);
             strcpy(recieved_trick,(char *) udPpacket->data);
             int k=0;
@@ -135,6 +138,11 @@ int main(int argc, char* args[])
                 trick[k][2]='\0';
                 printf(trick[k]);
             }
+=======
+
+            recieve(recieved_trick);
+            seperate(trick, recieved_trick, tmp);
+>>>>>>> parent of 27c486b... har påbörjat UDP-anropen
           //  for(int i=0; i<4; i++)
           //  {
           //      printf("%s",trick[i]);
@@ -301,10 +309,13 @@ int main(int argc, char* args[])
         winner = true;
         turn = 0;
     }
+<<<<<<< HEAD
     SDLNet_UDP_Unbind(udpsock,channel);
     SDLNet_UDP_Close(udpsock);
     udpsock=NULL; //this helps us know that this UDPsocket is not valid anymore
     SDLNet_Quit();
+=======
+>>>>>>> parent of 27c486b... har påbörjat UDP-anropen
     return 0;
 }
 
