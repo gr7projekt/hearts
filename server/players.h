@@ -18,7 +18,7 @@
 #include <syslog.h>
 #include <errno.h>
 #include "card.h"
-#include "SDL2/SDL_net.h"
+#include "SDL_net.h"
 #include "SDL2/SDL.h"
 
 
@@ -28,7 +28,11 @@ typedef struct {
     char *trick[4];
 
 }Args;
+typedef struct {
+    IPaddress address;
+    char *trick[4];
 
+}Trick;
 void* player_waits_or_plays (void *);
 // Pekare eftersom pthread_create() tar en pekare
 UDPpacket createPacket(int, uint8_t, int, int, int, IPaddress );

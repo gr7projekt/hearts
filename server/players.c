@@ -34,7 +34,7 @@ void* player_waits_or_plays (void *arguments) {
     UDPsocket udPsocket;
 
     udPsocket=SDLNet_UDP_Open(ipv4.port);
-    if(!udpsock) {
+    if(!udPsocket) {
         printf("SDLNet_UDP_Open: %s\n", SDLNet_GetError());
         exit(2);
     }
