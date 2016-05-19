@@ -8,7 +8,8 @@
 //  Modified by Robert K�rrbrant on 2016-05-12 (13:55)
 //
 
-#include "includes.h"
+#include <SDL_net.h>
+#include "projekarbete_kortspel/includes.h"
 
 //#include <windows.h>
 
@@ -86,21 +87,48 @@ int main(int argc, char* args[])
     }
 
     button help = createButton(0,0,20,20,"help.png",gRenderer);
-    initSpritePosition(position_1,position_2,position_3,position_4,advertism_pos,dropzone_pos,played_pos,coin_pos);
+    initSpritePosition(position_1,position_2,position_3,position_4,advertism_pos,dropzone_pos,played_pos);
 
-    loadMediaCoin(coin, gRenderer, gSpriteClipsCoin);
+    //loadMediaCoin(coin, gRenderer, gSpriteClipsCoin);
     loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
     loadMediaDropzone(dropzone, gRenderer, gSpriteClipsDropzone);
 
     position(player_1,player_2,player_3,player_4);  //�ven absoluta platsen m�ste med som man f�r av server vid anslutning
 
+    // create a UDPsocket on any available port (client)
+    UDPsocket udpsock;
+    UDPpacket *udPpacket;
+    IPaddress iPaddress;
+    uint8_t data;
+    int channel;
+
+    if(SDL_Init(0)==-1) {
+        printf("SDL_Init: %s\n", SDL_GetError());
+        exit(1);
+    }
+    udpsock=SDLNet_UDP_Open(0);
+    if(!udpsock) {
+        printf("SDLNet_UDP_Open: %s\n", SDLNet_GetError());
+        exit(2);
+    }
+    // Bind address to the first free channel
+    //UDPsocket udpsock;
+    //IPaddress *address;
+
+
+    channel=SDLNet_UDP_Bind(udpsock, -1, &iPaddress);
+    if(channel==-1) {
+        printf("SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
+        // do something because we failed to bind
+    }
+
     while(!quit)
     {
         while(turn < 13 && !quit)
         {
-
-            recieve(recieved_trick);
-            seperate(trick, recieved_trick, tmp);
+            SDLNet_UDP_Recv(udpsock, udPpacket);
+            udPpacket->data;
+            separate(trick, recieved_trick, tmp);
           //  for(int i=0; i<4; i++)
           //  {
           //      printf("%s",trick[i]);
@@ -267,6 +295,7 @@ int main(int argc, char* args[])
         winner = true;
         turn = 0;
     }
+    SDLNet_Quit();
     return 0;
 }
 
