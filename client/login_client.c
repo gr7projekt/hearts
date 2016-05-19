@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include "game.h"
 #include <SDL2/SDL.h>
 #include <SDL2_net/SDL_net.h>
 
@@ -14,6 +15,7 @@
 #define LOGIN_LOG "/var/tmp/login_log"
 #define EXPECTED_RESPONSE "diamonds"
 #define USER_DATA "Grupp7;password"
+#define SERVER_REPLY "41337;1"
 
 int main(void)
 {
@@ -90,8 +92,9 @@ int main(void)
         char user_name[100]={'0'};
         char password[30]={'0'};
         char *tmp;
+        char *array_of_pointers[4];
 
-        while(!strcmp(SYN1, "account")) {
+/*        while(!strcmp(SYN1, "account")) {
             printf("Ange användarnamn: \n");
             fgets(user_name, sizeof(user_name)+1,stdin);
             //strcpy(user_name,strsep(&user_name," "));
@@ -107,15 +110,17 @@ int main(void)
             sleep(1);
             printf("%d-\n",SDLNet_TCP_Recv(sd,SYN1,MAXLEN));
         }
-
+*/
         //sammanfoga strängen som startar spelklienten
         strcpy(newport, "./");
         strcat(newport, GAME_CLIENT);
+
+        separate_strings(SERVER_REPLY,";",array_of_pointers, sizeof((array_of_pointers)));
         
         //lägg till portnumret och starta en ny spelprocess
         strcat(newport, SYN1);
-        printf("commandline argument: %s \n", newport);
-        execlp("/bin/sh","sh","-c",newport,NULL);
+        printf("commandline argument: %s %s \n", array_of_pointers[0],array_of_pointers[1]);
+        system(newport);
         fprintf(fd, "%s", strerror(errno));
         exit(EXIT_FAILURE);
     }
