@@ -35,7 +35,7 @@ typedef struct {
 }Trick;
 void* player_waits_or_plays (void *);
 // Pekare eftersom pthread_create() tar en pekare
-UDPpacket createPacket(int, uint8_t, int, int, int, IPaddress );
+UDPpacket createPacket(int, uint8_t *, int, int, int, IPaddress );
 
 struct player_parms;
 typedef struct player_parms{

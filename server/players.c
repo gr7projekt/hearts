@@ -16,7 +16,7 @@ void* player_waits_or_plays (void *arguments) {
     Player me;
     me.pos = args->pos;
     IPaddress ipv4;
-    ipv4 = *args->address;
+    ipv4 = args->address;
     // Bind address to the first free channel
     // UDPsocket udpsock;
     // IPaddress *address;
@@ -24,8 +24,8 @@ void* player_waits_or_plays (void *arguments) {
     uint8_t speila = 1;
     uint8_t hand_data;
     char *str;
-    sprintf(str,"%x%x%x%x%x%x%x%x",*args->trick[0],*args->trick[1],*args->trick[2],
-            *args->trick[3],*args->trick[4],*args->trick[5],*args->trick[6],*args->trick[7]);
+    sprintf(str,"%x;%x;%x;%x;",*args->trick[0],*args->trick[1],*args->trick[2],
+            *args->trick[3]);
     hand_data = atoi(str);
 
 
@@ -40,19 +40,23 @@ void* player_waits_or_plays (void *arguments) {
     }
 
 
-    UDPpacket spela = createPacket(chanL, speila, 1, 100, 0, ipv4);
-    UDPpacket skicka_hand = createPacket(chanL,hand_data,sizeof(hand_data),100,0,ipv4);
+    UDPpacket spela = createPacket(chanL, &speila, 1, 100, 0, ipv4);
+    UDPpacket skicka_hand = createPacket(chanL,&hand_data,sizeof(hand_data),100,0,ipv4);
     UDPpacket mottaget_paket;
 
-    if ((chanL = SDLNet_UDP_Bind(udPsocket, -1, ipv4)) < 0) {
+    if ((chanL = SDLNet_UDP_Bind(udPsocket, -1, &ipv4)) < 0) {
         syslog(LOG_ERR, "SDLNet_UDP_Bind: %s\n", SDLNet_GetError());
         // do something because we failed to bind
     }
+
     else {
         while (1) {
-            if (my_turn()) {
-                if (!(SDLNet_UDP_Send(udPsocket, (&spela)->channel, &spela)))
-                    syslog(LOG_ERR, "%s", SDLNET_GetError());
+            int my_turn=1;
+            if (my_turn) {
+                if (!(SDLNet_UDP_Send(udPsocket, (&spela)->channel, &spela))) {
+                    syslog(LOG_ERR, "%s", strerror(errno));
+                    my_turn=0;
+                }
                 else {
                     sleep(15);
                 }
@@ -64,14 +68,17 @@ void* player_waits_or_plays (void *arguments) {
 
             }
             else {
-                if (!(SDLNet_UDP_Send(udpSocket, (&skicka_hand)->channel, &skicka_hand)))
-                    syslog(LOG_ERR, "%s", SDLNET_GetError());
+                if (!(SDLNet_UDP_Send(udPsocket, (&skicka_hand)->channel, &skicka_hand))) {
+                    syslog(LOG_ERR, "%s", strerror(errno));
+                    break;
+                }
                 else {
                     sleep(1);
                 }
             }
         }
     }
+    return 0;
 }
 UDPpacket createPacket(int cnl, uint8_t *data, int len, int maxlen, int status, IPaddress adr){
         UDPpacket pkt;

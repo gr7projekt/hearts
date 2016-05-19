@@ -17,7 +17,7 @@
 
 #define BUFLEN 512
 #define NPACK 4
-#define PORT 41337
+#define GAMEPORT 41337
 
 void diep(char *s) {
     perror(s);
@@ -42,7 +42,7 @@ int main(void) {
 
 	memset((char *) &si_me, 0, sizeof(si_me));
 	si_me.sin_family = AF_INET;
-	si_me.sin_port = htons(PORT);
+	si_me.sin_port = htons(GAMEPORT);
 	si_me.sin_addr.s_addr = htonl(INADDR_ANY);
 	if (bind(s, &si_me, sizeof(si_me))==-1)
 		diep("bind");
@@ -65,7 +65,7 @@ int main(void) {
 }
 int init_net();
 
-int test(int argc, char *argv[])
+void test(int argc,char *argv[])
 {
 	// receives hearts_start, "%s %s %s %s %s %s", GAME_SERVER, port, ipv4 array
 	Trick *trick1;
@@ -73,7 +73,7 @@ int test(int argc, char *argv[])
 
 	if (init_net()) printf("Success on init\n");
 	__uint16_t port = htons((__uint16_t) argv[1]);
-	__uint32_t ipv4 = htonl(IP_ADDRESS);
+	__uint32_t ipv4 = htonl((__uint32_t)IP_ADDRESS);
 
 	iPaddress.host = ipv4;
 	iPaddress.port = port;
@@ -86,7 +86,7 @@ int test(int argc, char *argv[])
 	// IPaddress *address;
 	int chanL=0, mottagna_paket=0;
 	char str[40] = {'\0'};
-	sprintf(str,"%x;%x;%x;%x;",trick1->trick[0],trick1->trick[1],trick1->trick[2],trick1->trick[3]);
+	sprintf(str,"%s;%s;%s;%s;",trick1->trick[0],trick1->trick[1],trick1->trick[2],trick1->trick[3]);
 
 	// create a UDPsocket on port
 	UDPsocket udPsocket;
@@ -95,8 +95,9 @@ int test(int argc, char *argv[])
 		printf("SDLNet_UDP_Open: %s\n", SDLNet_GetError());
 		exit(2);
 	}
-
-	UDPpacket skicka_hand = createPacket(chanL,str,sizeof(str),100,0,iPaddress);
+	uint8_t *string=0;
+	strcpy(string,str);
+	UDPpacket skicka_hand = createPacket(chanL,string,sizeof(str),100,0,iPaddress);
 	UDPpacket mottaget_paket;
 
 	if ((chanL = SDLNet_UDP_Bind(udPsocket, -1, &iPaddress)) < 0) {
@@ -104,7 +105,6 @@ int test(int argc, char *argv[])
 		// do something because we failed to bind
 	}
 
-	return 0;
 }
 
 
