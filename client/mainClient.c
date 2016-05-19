@@ -106,6 +106,7 @@ int main(int argc, char* args[])
         printf("SDL_Init: %s\n", SDL_GetError());
         exit(1);
     }
+    // create a UDPsocket on any available port (client)
     udpsock=SDLNet_UDP_Open(0);
     if(!udpsock) {
         printf("SDLNet_UDP_Open: %s\n", SDLNet_GetError());
@@ -114,7 +115,6 @@ int main(int argc, char* args[])
     // Bind address to the first free channel
     //UDPsocket udpsock;
     //IPaddress *address;
-
 
     channel=SDLNet_UDP_Bind(udpsock, -1, &iPaddress);
     if(channel==-1) {
@@ -127,8 +127,14 @@ int main(int argc, char* args[])
         while(turn < 13 && !quit)
         {
             SDLNet_UDP_Recv(udpsock, udPpacket);
-            udPpacket->data;
-            separate(trick, recieved_trick, tmp);
+            strcpy(recieved_trick,(char *) udPpacket->data);
+            int k=0;
+            for(int i= 0;i<strlen(recieved_trick);i++,k++) {
+                trick[k][0]=recieved_trick[i++];
+                trick[k][1]=recieved_trick[i++];
+                trick[k][2]='\0';
+                printf(trick[k]);
+            }
           //  for(int i=0; i<4; i++)
           //  {
           //      printf("%s",trick[i]);
@@ -295,6 +301,9 @@ int main(int argc, char* args[])
         winner = true;
         turn = 0;
     }
+    SDLNet_UDP_Unbind(udpsock,channel);
+    SDLNet_UDP_Close(udpsock);
+    udpsock=NULL; //this helps us know that this UDPsocket is not valid anymore
     SDLNet_Quit();
     return 0;
 }
