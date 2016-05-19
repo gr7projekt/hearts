@@ -2,15 +2,15 @@
 //
 //  SDLtesta
 //
-//  Created by Jonas Wåhslen on 2015-03-31.
+//  Created by Jonas Wï¿½hslen on 2015-03-31.
 //  Copyright (c) 2015 wahslen. All rights reserved.
 //
-//  Modified by Robert Kärrbrant on 2016-05-12 (13:55)
+//  Modified by Robert Kï¿½rrbrant on 2016-05-12 (13:55)
 //
 
 #include "includes.h"
 
-#include <windows.h>
+//#include <windows.h>
 
 bool init();
 
@@ -33,9 +33,11 @@ SDL_Rect gSpriteClipsCoin[1];
 int main(int argc, char* args[])
 {
     SDL_Texture* card[13] = {NULL};     //spelarens kort (det grafiska, inte riktiga handen)
-    SDL_Texture* card_2[13] = {NULL};   //vänster spelares baksida
+    SDL_Texture* card_2[13] = {NULL};   //vï¿½nster spelares baksida
     SDL_Texture* card_3[13] = {NULL};   //motsatt spelares baksida
-    SDL_Texture* card_4[13] = {NULL};   //höger spelares baksida
+    SDL_Texture* card_4[13] = {NULL};   //hï¿½ger spelares baksida
+
+    Uint16 port = 40000;
 
     int mouse_x;
     int mouse_y;
@@ -49,7 +51,7 @@ int main(int argc, char* args[])
 
     int cardNr = -1;
     int turn = 0;
-    int leadCard = 0;       //färgen som startade ska man följa.
+    int leadCard = 0;       //fï¿½rgen som startade ska man fï¿½lja.
     int whoIsPlaying;
 
     bool click = false;
@@ -67,17 +69,17 @@ int main(int argc, char* args[])
 //    char *trick[] = {"FF;", "FF;", "EE;", "FF;"};
 //    char *trick[] = {"FF;", "FF;", "FF;", "EE;"};
 
-    SDL_Rect position_1[13]; //positionen för korten till spelaren
+    SDL_Rect position_1[13]; //positionen fï¿½r korten till spelaren
     SDL_Rect position_2[13];
     SDL_Rect position_3[13];
     SDL_Rect position_4[13];
     SDL_Rect advertism_pos[1];
     SDL_Rect dropzone_pos[1];
     SDL_Rect initial_pos[1];    //temp var
-    SDL_Rect played_pos[4]; //koordinaterna för spelade kort
+    SDL_Rect played_pos[4]; //koordinaterna fï¿½r spelade kort
     SDL_Rect coin_pos[5];
 
-    initial_pos[0].y = RES_Y-HEIGHT; //korten man börjar med ligger alltid på samma höjd.. botten minus höjden på kortet.
+    initial_pos[0].y = RES_Y-HEIGHT; //korten man bï¿½rjar med ligger alltid pï¿½ samma hï¿½jd.. botten minus hï¿½jden pï¿½ kortet.
 
     if (init()) {
         printf("init worked\n");
@@ -90,21 +92,21 @@ int main(int argc, char* args[])
     loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
     loadMediaDropzone(dropzone, gRenderer, gSpriteClipsDropzone);
 
-    position(player_1,player_2,player_3,player_4);  //Även absoluta platsen måste med som man får av server vid anslutning
+    position(player_1,player_2,player_3,player_4);  //ï¿½ven absoluta platsen mï¿½ste med som man fï¿½r av server vid anslutning
 
     while(!quit)
     {
         while(turn < 13 && !quit)
         {
 
-            //recive()
+          //  recieve(recieved_trick);
             seperate(trick, recieved_trick, tmp);
-            for(int i=0; i<4; i++)
-            {
-                printf("%s",trick[i]);
-            }printf("\n");
+          //  for(int i=0; i<4; i++)
+          //  {
+          //      printf("%s",trick[i]);
+          //  }printf("\n");
 
-            if(winner)  //om runda är klar och någon vunnit, ladda nya kort.
+            if(winner)  //om runda ï¿½r klar och nï¿½gon vunnit, ladda nya kort.
             {
                 resetTurn(player_1,player_2,player_3,player_4);
                 winner = false;
@@ -159,7 +161,7 @@ int main(int argc, char* args[])
                 }
                 else if(e.type == SDL_MOUSEMOTION)
                 {
-                    if(myturn(trick,player_1))//strcmp(trick[player_1[0].id],"EE;") == 0) //ska endast gå att flytta korten om det är min tur, +
+                    if(myturn(trick,player_1))//strcmp(trick[player_1[0].id],"EE;") == 0) //ska endast gï¿½ att flytta korten om det ï¿½r min tur, +
                     {
                         if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
                         {
@@ -185,14 +187,14 @@ int main(int argc, char* args[])
                     click = false;
                 }
 
-                if(click == false && cardNr >-1)        //cardNr> -1 måste finnas för att undvika en bugg att baksidan laddas hos spelaren och blockerar kort.
+                if(click == false && cardNr >-1)        //cardNr> -1 mï¿½ste finnas fï¿½r att undvika en bugg att baksidan laddas hos spelaren och blockerar kort.
                 {
                     if(((position_1[cardNr].x + WIDTH/2 > dropzone_pos[0].x) && (position_1[cardNr].x + WIDTH/2 < dropzone_pos[0].x+dropzone_pos[0].w))&&((position_1[cardNr].y + HEIGHT/2 > dropzone_pos[0].y) && (position_1[cardNr].y + HEIGHT/2 < dropzone_pos[0].y + dropzone_pos[0].h)))
                     {
                         position_1[cardNr].x = -WIDTH;
                         position_1[cardNr].y = 0;
-//                        position_1[cardNr].x = played_pos[0].x; //droppas in på exakt plats
-//                        position_1[cardNr].y = played_pos[0].y; //droppas in på exakt plats
+//                        position_1[cardNr].x = played_pos[0].x; //droppas in pï¿½ exakt plats
+//                        position_1[cardNr].y = played_pos[0].y; //droppas in pï¿½ exakt plats
 
                         if(checkCard(player_1, cardNr, leadCard, brokenHeart, picked, turn, trick))
                         {
@@ -204,14 +206,14 @@ int main(int argc, char* args[])
                             printf("turn %i\n",turn);
                             cardNr = -1;
                         }
-                        else    //om kortet inte fick läggas i mitten
+                        else    //om kortet inte fick lï¿½ggas i mitten
                         {
                             position_1[cardNr].x = initial_pos[0].x;
                             position_1[cardNr].y = initial_pos[0].y;
                             picked[cardNr] = false;
                         }
                     }
-                    else    //om kortet placeras utanför dropbox
+                    else    //om kortet placeras utanfï¿½r dropbox
                     {
                         position_1[cardNr].x = initial_pos[0].x;
                         position_1[cardNr].y = initial_pos[0].y;
@@ -248,21 +250,19 @@ int main(int argc, char* args[])
                 else
                     continue;
             }
-            for(int i = 0; i < 13 - player_2[0].turn ; i++ ){  //Renderar baksida kort till vänster
+            for(int i = 0; i < 13 - player_2[0].turn ; i++ ){  //Renderar baksida kort till vï¿½nster
                 SDL_RenderCopy(gRenderer, card_2[i], &gSpriteClipsBack[0],&position_2[i] );
             }
             for(int i = 0; i < 13 - player_3[0].turn ; i++ ){  //Renderar baksida kort mittemot
                 SDL_RenderCopy(gRenderer, card_3[i], &gSpriteClipsBack[0],&position_3[i] );
             }
-            for(int i = 0; i < 13 - player_4[0].turn ; i++ ){  //Renderar baksida kort höger
+            for(int i = 0; i < 13 - player_4[0].turn ; i++ ){  //Renderar baksida kort hï¿½ger
                 SDL_RenderCopy(gRenderer, card_4[i], &gSpriteClipsBack[0],&position_4[i] );
             }
 
 
             SDL_RenderCopy(gRenderer, advertisment[0], &gSpriteClipsAdvertisment[0],&advertism_pos[0] );
             SDL_RenderPresent(gRenderer);
-
-            Sleep(100);
         }
         winner = true;
         turn = 0;

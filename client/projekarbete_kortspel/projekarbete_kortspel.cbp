@@ -71,6 +71,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="position.h" />
+		<Unit filename="recieve.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="recieve.h" />
 		<Unit filename="rendering.c">
 			<Option compilerVar="CC" />
 		</Unit>

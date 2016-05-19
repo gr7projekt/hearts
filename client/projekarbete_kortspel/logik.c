@@ -4,31 +4,31 @@ bool myturn(char *trick[], Player player_1[])
 {
     if(strcmp(trick[player_1[0].id],"EE;")==0)
     {
-        printf("myturn 1\n");
+        //printf("lock 1\n");
         return true;
     }
     else if(player_1[0].id == 0)
     {
         if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[3],"FF;")!=0) && strcmp(trick[3],"EE;") !=0)
         {
-            printf("myturn 2\n");
+            //printf("lock 2\n");
             return true;
         }
         else
         {
-            printf("myturn 3\n");
+            //printf("lock 3\n");
             return false;
         }
     }
     else
     {
         if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[player_1[0].id-1],"FF;")!=0) && strcmp(trick[player_1[0].id-1],"EE;")!=0){
-            printf("myturn 4\n");
+            //printf("lock 4\n");
             return true;
         }
         else
         {
-            printf("myturn 5\n");
+            //printf("lock 5\n");
             return false;
         }
     }

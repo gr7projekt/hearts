@@ -84,9 +84,8 @@
 1463654675 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\logik.c
 	"logik.h"
 
-1463654790 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\mainclient.c
+1463688653 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\mainclient.c
 	"includes.h"
-	<windows.h>
 
 1463144820 source:c:\users\robert\documents\codeblocks\projekarbete_kortspel\movecard.c
 	"moveCard.h"
