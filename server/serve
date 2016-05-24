@@ -1,0 +1,585 @@
+Last login: Wed May 18 23:49:17 on ttys005
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+Password:
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ vi /var/tmp/login_log
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+what?!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+what?!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+what?!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+login_log        login_log.12514  login_log.12713  login_log.12877
+login_log.12322  login_log.12537  login_log.12736  login_log.12900
+login_log.12345  login_log.12649  login_log.12758  login_log.12922
+login_log.12374  login_log.12664  login_log.12810  
+login_log.12492  login_log.12691  login_log.12847  
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo ls -l /var/tmp/
+total 120
+srw-r--r--  1 jlipecki  wheel   0 17 Maj 08:14 filesystemui.socket
+-rw-r-----  1 jlipecki  wheel  55 18 Maj 16:36 hearts_error_log.10315
+-rw-r-----  1 jlipecki  wheel  32 18 Maj 17:00 hearts_error_log.10349
+-rw-r-----  1 jlipecki  wheel  55 18 Maj 17:02 hearts_error_log.10373
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:02 hearts_error_log.10396
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:16 hearts_error_log.10425
+-rw-r-----  1 jlipecki  wheel  55 18 Maj 17:21 hearts_error_log.10451
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:21 hearts_error_log.10474
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:22 hearts_error_log.10498
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:20 hearts_error_log.25022
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:23 hearts_error_log.25060
+-rw-r-----  1 jlipecki  wheel  31  4 Maj 11:25 hearts_error_log.25081
+-rw-r-----  1 jlipecki  wheel  55  4 Maj 11:26 hearts_error_log.25106
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:27 hearts_error_log.25137
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:34 hearts_error_log.25273
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:26 hearts_error_log.25590
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:31 hearts_error_log.25897
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:35 hearts_error_log.25997
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:36 hearts_error_log.26030
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:40 hearts_error_log.26117
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:46 hearts_error_log.26205
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:46 hearts_error_log.26224
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:47 hearts_error_log.26260
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:37 hearts_error_log.8126
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:40 hearts_error_log.8167
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:47 hearts_error_log.8228
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:58 hearts_error_log.8310
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:07 hearts_error_log.8381
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:11 hearts_error_log.8431
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:26 hearts_error_log.8509
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:28 hearts_error_log.8531
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:33 hearts_error_log.8571
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:34 hearts_error_log.8593
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:37 hearts_error_log.8620
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:40 hearts_error_log.8647
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:41 hearts_error_log.8669
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:53 hearts_error_log.8746
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:53 hearts_error_log.8768
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 11:01 hearts_error_log.8821
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 11:23 hearts_error_log.8927
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:00 hearts_error_log.9113
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:07 hearts_error_log.9137
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:07 hearts_error_log.9152
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:07 hearts_error_log.9167
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:08 hearts_error_log.9182
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:13 hearts_error_log.9202
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:14 hearts_error_log.9217
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 12:14 hearts_error_log.9232
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 12:15 hearts_error_log.9247
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:15 hearts_error_log.9262
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:19 hearts_error_log.9310
+-rw-r-----  1 jlipecki  wheel  25 18 Maj 12:24 hearts_error_log.9339
+-rw-r-----  1 jlipecki  wheel  25 18 Maj 12:24 hearts_error_log.9354
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:28 hearts_error_log.9375
+-rw-r-----  1 jlipecki  wheel  45 18 Maj 12:29 hearts_error_log.9390
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:38 hearts_error_log.9454
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:38 hearts_error_log.9469
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:40 hearts_error_log.9491
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:42 hearts_error_log.9507
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:49 hearts_error_log.9557
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:52 hearts_error_log.9608
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:57 hearts_error_log.9658
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:07 hearts_error_log.9732
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 13:09 hearts_error_log.9747
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 13:09 hearts_error_log.9762
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:10 hearts_error_log.9777
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:14 hearts_error_log.9807
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:21 hearts_error_log.9828
+-rw-r--r--  1 jlipecki  wheel   7 19 Maj 00:06 login_log
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:01 login_log.12322
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:02 login_log.12345
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:03 login_log.12374
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:37 login_log.12492
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:38 login_log.12514
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:39 login_log.12537
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 23:56 login_log.12649
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:58 login_log.12664
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:59 login_log.12691
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:59 login_log.12713
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:00 login_log.12736
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:02 login_log.12758
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:04 login_log.12810
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:09 login_log.12847
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:12 login_log.12877
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:12 login_log.12900
+-rw-r--r--  1 jlipecki  wheel   0 19 Maj 00:14 login_log.12922
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log.12922 
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log.12900
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log.12877
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo ls -l /var/tmp/
+total 112
+srw-r--r--  1 jlipecki  wheel   0 17 Maj 08:14 filesystemui.socket
+-rw-r-----  1 jlipecki  wheel  55 18 Maj 16:36 hearts_error_log.10315
+-rw-r-----  1 jlipecki  wheel  32 18 Maj 17:00 hearts_error_log.10349
+-rw-r-----  1 jlipecki  wheel  55 18 Maj 17:02 hearts_error_log.10373
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:02 hearts_error_log.10396
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:16 hearts_error_log.10425
+-rw-r-----  1 jlipecki  wheel  55 18 Maj 17:21 hearts_error_log.10451
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:21 hearts_error_log.10474
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 17:22 hearts_error_log.10498
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:20 hearts_error_log.25022
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:23 hearts_error_log.25060
+-rw-r-----  1 jlipecki  wheel  31  4 Maj 11:25 hearts_error_log.25081
+-rw-r-----  1 jlipecki  wheel  55  4 Maj 11:26 hearts_error_log.25106
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:27 hearts_error_log.25137
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 11:34 hearts_error_log.25273
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:26 hearts_error_log.25590
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:31 hearts_error_log.25897
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:35 hearts_error_log.25997
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:36 hearts_error_log.26030
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:40 hearts_error_log.26117
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:46 hearts_error_log.26205
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:46 hearts_error_log.26224
+-rw-r-----  1 jlipecki  wheel   0  4 Maj 13:47 hearts_error_log.26260
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:37 hearts_error_log.8126
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:40 hearts_error_log.8167
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:47 hearts_error_log.8228
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 09:58 hearts_error_log.8310
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:07 hearts_error_log.8381
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:11 hearts_error_log.8431
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:26 hearts_error_log.8509
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:28 hearts_error_log.8531
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:33 hearts_error_log.8571
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:34 hearts_error_log.8593
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:37 hearts_error_log.8620
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:40 hearts_error_log.8647
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:41 hearts_error_log.8669
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:53 hearts_error_log.8746
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 10:53 hearts_error_log.8768
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 11:01 hearts_error_log.8821
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 11:23 hearts_error_log.8927
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:00 hearts_error_log.9113
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:07 hearts_error_log.9137
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:07 hearts_error_log.9152
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:07 hearts_error_log.9167
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:08 hearts_error_log.9182
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:13 hearts_error_log.9202
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:14 hearts_error_log.9217
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 12:14 hearts_error_log.9232
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 12:15 hearts_error_log.9247
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:15 hearts_error_log.9262
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:19 hearts_error_log.9310
+-rw-r-----  1 jlipecki  wheel  25 18 Maj 12:24 hearts_error_log.9339
+-rw-r-----  1 jlipecki  wheel  25 18 Maj 12:24 hearts_error_log.9354
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:28 hearts_error_log.9375
+-rw-r-----  1 jlipecki  wheel  45 18 Maj 12:29 hearts_error_log.9390
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:38 hearts_error_log.9454
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:38 hearts_error_log.9469
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:40 hearts_error_log.9491
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:42 hearts_error_log.9507
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:49 hearts_error_log.9557
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:52 hearts_error_log.9608
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 12:57 hearts_error_log.9658
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:07 hearts_error_log.9732
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 13:09 hearts_error_log.9747
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 13:09 hearts_error_log.9762
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:10 hearts_error_log.9777
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:14 hearts_error_log.9807
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 13:21 hearts_error_log.9828
+-rw-r--r--  1 jlipecki  wheel   0 19 Maj 00:17 login_log
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:01 login_log.12322
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:02 login_log.12345
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:03 login_log.12374
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:37 login_log.12492
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:38 login_log.12514
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:39 login_log.12537
+-rw-r-----  1 jlipecki  wheel  49 18 Maj 23:56 login_log.12649
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:58 login_log.12664
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:59 login_log.12691
+-rw-r-----  1 jlipecki  wheel   0 18 Maj 23:59 login_log.12713
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:00 login_log.12736
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:02 login_log.12758
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:04 login_log.12810
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:09 login_log.12847
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:12 login_log.12877
+-rw-r-----  1 jlipecki  wheel   0 19 Maj 00:12 login_log.12900
+-rw-r--r--  1 jlipecki  wheel   0 19 Maj 00:14 login_log.12922
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+open for business!Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+open for business!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ man fprintf
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+Password:
+open for business!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+open for business!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+open for business!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+open for business!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ sudo cat /var/tmp/login_log
+open for business!
+Not-the-Droid-You-are-Looking-for:~ jlipecki$ ssh grupp7@130.237.84.89
+grupp7@130.237.84.89's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+You have mail.
+Last login: Thu May 19 00:57:11 2016 from c80-216-222-105.bredband.comhem.se
+grupp7@debian:~$ cd hearts/server/
+grupp7@debian:~/hearts/server$ ls
+account.c   encrypt.c     gameserver.c.save    kill_server.sh  port_hearts.c
+account.h   encrypt.h     gameserver.c.save.1  makefile        port_hearts.h
+account.o   game.c        gameserver.c.save.2  nextplayer.c    server.c
+card.h      game.h        InetS3.c             players.c       syn-ack-server
+compserver  gameserver.c  InetS.c              players.h       test
+grupp7@debian:~/hearts/server$ git add .
+fatal: Unable to create '/home/grupp7/hearts/.git/index.lock': Permission denied
+grupp7@debian:~/hearts/server$ su
+Password: 
+root@debian:/home/grupp7/hearts/server# git add .
+root@debian:/home/grupp7/hearts/server# git commit
+[master fe0b1b0] gameservern uppdaterad?
+ Committer: root <root@debian>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 93 insertions(+)
+ delete mode 100644 server/encrypt.o
+ create mode 100644 server/gameserver.c.save.1
+ create mode 100644 server/gameserver.c.save.2
+ delete mode 100644 server/gameserver.o
+root@debian:/home/grupp7/hearts/server# git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+root@debian:/home/grupp7/hearts/server# https://github.com/gr7projekt/hearts/tree/master/server
+bash: https://github.com/gr7projekt/hearts/tree/master/server: No such file or directory
+root@debian:/home/grupp7/hearts/server# https://github.com/gr7projekt/hearts/tree/master/server
+bash: https://github.com/gr7projekt/hearts/tree/master/server: No such file or directory
+root@debian:/home/grupp7/hearts/server# ^C
+root@debian:/home/grupp7/hearts/server# cd ..
+root@debian:/home/grupp7/hearts# git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+root@debian:/home/grupp7/hearts# https://github.com/gr7projekt/hearts
+bash: https://github.com/gr7projekt/hearts: No such file or directory
+root@debian:/home/grupp7/hearts# exit
+exit
+grupp7@debian:~/hearts/server$ cd ..
+grupp7@debian:~/hearts$ git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+grupp7@debian:~/hearts$ https://github.com/gr7projekt/hearts
+-bash: https://github.com/gr7projekt/hearts: No such file or directory
+grupp7@debian:~/hearts$ git
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+The most commonly used git commands are:
+   add        Add file contents to the index
+   bisect     Find by binary search the change that introduced a bug
+   branch     List, create, or delete branches
+   checkout   Checkout a branch or paths to the working tree
+   clone      Clone a repository into a new directory
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   fetch      Download objects and refs from another repository
+   grep       Print lines matching a pattern
+   init       Create an empty Git repository or reinitialize an existing one
+   log        Show commit logs
+   merge      Join two or more development histories together
+   mv         Move or rename a file, a directory, or a symlink
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+   rebase     Forward-port local commits to the updated upstream head
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+   show       Show various types of objects
+   status     Show the working tree status
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+'git help -a' and 'git help -g' lists available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+grupp7@debian:~/hearts$ git status
+On branch master
+nothing to commit, working directory clean
+grupp7@debian:~/hearts$ git pull
+fatal: No remote repository specified.  Please, specify either a URL or a
+remote name from which new revisions should be fetched.
+grupp7@debian:~/hearts$ git pull https://github.com/gr7projekt/hearts
+error: cannot open .git/FETCH_HEAD: Permission denied
+
+grupp7@debian:~/hearts$ su
+Password: 
+root@debian:/home/grupp7/hearts# git pull https://github.com/gr7projekt/hearts
+remote: Counting objects: 150, done.
+remote: Compressing objects: 100% (118/118), done.
+remote: Total 150 (delta 69), reused 16 (delta 16), pack-reused 14
+Receiving objects: 100% (150/150), 113.70 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (72/72), completed with 13 local objects.
+From https://github.com/gr7projekt/hearts
+ * branch            HEAD       -> FETCH_HEAD
+Removing server/.DS_Store
+Removing cmake/CMakeLists.txt
+Removing client/projekarbete_kortspel/SDL_test.o
+Removing .DS_Store
+Merge made by the 'recursive' strategy.
+ .DS_Store                                          | Bin 10244 -> 0 bytes
+ Shuffle.c                                          |  94 +++-
+ client/.idea/client.iml                            |  13 +
+ client/.idea/workspace.xml                         | 416 ++++++++++++++
+ client/game.c                                      | 108 ++++
+ client/game.h                                      |  32 ++
+ client/klientacksyn.c                              |   7 +-
+ client/login_client.c                              | 132 +++++
+ .../.idea/projekarbete_kortspel.iml                |  13 +
+ client/projekarbete_kortspel/.idea/workspace.xml   | 177 ++++++
+ client/projekarbete_kortspel/SDL_test.o            | Bin 2853 -> 0 bytes
+ .../bin/Debug/projekarbete_kortspel.exe            | Bin 162562 -> 165070 bytes
+ client/projekarbete_kortspel/includes.h            |   1 +
+ client/projekarbete_kortspel/logik.c               |  34 +-
+ client/projekarbete_kortspel/logik.h               |   2 +-
+ client/projekarbete_kortspel/mainClient.c          |  23 +-
+ client/projekarbete_kortspel/moveCard.c            |   4 +-
+ client/projekarbete_kortspel/obj/Debug/logik.o     | Bin 3550 -> 3590 bytes
+ .../projekarbete_kortspel/obj/Debug/mainClient.o   | Bin 26193 -> 26895 bytes
+ client/projekarbete_kortspel/obj/Debug/moveCard.o  | Bin 4521 -> 4541 bytes
+ client/projekarbete_kortspel/obj/Debug/position.o  | Bin 0 -> 3303 bytes
+ client/projekarbete_kortspel/position.c            |  27 +
+ client/projekarbete_kortspel/position.h            |  17 +
+ .../projekarbete_kortspel.cbp                      |  10 +-
+ .../projekarbete_kortspel.depend                   | 147 ++++-
+ .../projekarbete_kortspel.layout                   |  92 ++--
+ cmake/CMakeLists.txt                               |  31 --
+ server/.DS_Store                                   | Bin 8196 -> 0 bytes
+ .../.idea/inspectionProfiles/Project_Default.xml   |  10 +
+ .../.idea/inspectionProfiles/profiles_settings.xml |   7 +
+ server/.idea/misc.xml                              |  19 +
+ server/.idea/modules.xml                           |   8 +
+ server/.idea/server.iml                            | 373 +++++++++++++
+ server/.idea/vcs.xml                               |   6 +
+ server/.idea/workspace.xml                         | 608 +++++++++++++++++++++
+ server/CMakeLists.txt                              |  22 +
+ server/account.h                                   |   2 +-
+ server/game.c                                      |  97 +++-
+ server/game.h                                      |  18 +-
+ server/gameserver.c                                |  22 +-
+ server/players.c                                   |  53 +-
+ server/players.h                                   |  19 +-
+ server/port_hearts.c                               |   5 +-
+ server/serve_client.c                              | 119 ++++
+ 44 files changed, 2574 insertions(+), 194 deletions(-)
+ delete mode 100644 .DS_Store
+ create mode 100644 client/.idea/client.iml
+ create mode 100644 client/.idea/workspace.xml
+ create mode 100644 client/game.c
+ create mode 100644 client/game.h
+ create mode 100644 client/login_client.c
+ create mode 100644 client/projekarbete_kortspel/.idea/projekarbete_kortspel.iml
+ create mode 100644 client/projekarbete_kortspel/.idea/workspace.xml
+ delete mode 100644 client/projekarbete_kortspel/SDL_test.o
+ create mode 100644 client/projekarbete_kortspel/obj/Debug/position.o
+ create mode 100644 client/projekarbete_kortspel/position.c
+ create mode 100644 client/projekarbete_kortspel/position.h
+ delete mode 100755 cmake/CMakeLists.txt
+ delete mode 100644 server/.DS_Store
+ create mode 100644 server/.idea/inspectionProfiles/Project_Default.xml
+ create mode 100644 server/.idea/inspectionProfiles/profiles_settings.xml
+ create mode 100644 server/.idea/misc.xml
+ create mode 100644 server/.idea/modules.xml
+ create mode 100644 server/.idea/server.iml
+ create mode 100644 server/.idea/vcs.xml
+ create mode 100644 server/.idea/workspace.xml
+ create mode 100644 server/CMakeLists.txt
+ create mode 100644 server/serve_client.c
+root@debian:/home/grupp7/hearts# ls
+client	game		 playerfunction.c	server
+cmake	heart-rules.txt  Pokerstarts.xcodeproj	Shuffle.c
+root@debian:/home/grupp7/hearts# cd server/
+root@debian:/home/grupp7/hearts/server# ls
+account.c	encrypt.h	     InetS3.c	     port_hearts.c
+account.h	game.c		     InetS.c	     port_hearts.h
+account.o	game.h		     kill_server.sh  serve_client.c
+card.h		gameserver.c	     makefile	     server.c
+CMakeLists.txt	gameserver.c.save    nextplayer.c    syn-ack-server
+compserver	gameserver.c.save.1  players.c	     test
+encrypt.c	gameserver.c.save.2  players.h
+root@debian:/home/grupp7/hearts/server# gcc -o serve serve_client.c players.c port_hearts.c
+serve_client.c:13:21: fatal error: SDL_net.h: No such file or directory
+ #include <SDL_net.h>
+                     ^
+compilation terminated.
+In file included from players.c:9:0:
+players.h:21:21: fatal error: SDL_net.h: No such file or directory
+ #include "SDL_net.h"
+                     ^
+compilation terminated.
+port_hearts.c: In function ‘separate_strings’:
+port_hearts.c:73:49: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+     for (ap = list; (*ap = strsep(&inputstring, (const char *) *separators)) != NULL;)
+                                                 ^
+root@debian:/home/grupp7/hearts/server# cat makefile
+all: clean account.o gameserver.o encrypt.o InetS3.o port_hearts.o players.o game.o gameserver InetS3 
+
+clean:
+	rm -f *.o
+	rm -f gameserver
+	rm -f inets3
+
+account.o: 
+	gcc -c `mysql_config --cflags --libs` -lmysql account.c
+
+encrypt.o:
+	gcc -c -lmcrypt encrypt.c
+
+gameserver.o:
+	gcc -c `sdl2-config --cflags` `mysql_config --cflags --libs` gameserver.c
+
+players.o:
+	gcc -c `sdl2-config --cflags` players.c
+
+game.o:
+	gcc -c game.c
+
+gameserver:
+	gcc -o gameserver gameserver.o encrypt.o account.o players.o game.o `sdl2-config --libs` `mysql_config --libs` -lSDL2_net -lmysqlclient -lmcrypt -lpthread
+
+port_hearts.o:
+	gcc -c `mysql_config --cflags --libs` port_hearts.c
+
+InetS3.o:
+	gcc -c InetS3.c `mysql_config --cflags --libs` -lmysqlclient
+
+InetS3:
+	gcc -o InetS3 InetS3.o account.o encrypt.o -lmysqlclient
+
+root@debian:/home/grupp7/hearts/server# gcc -o serve serve_client.c players.c port_hearts.c `sdl2-config --libs` `mysql_config --libs` -lSDL2_net
+serve_client.c:13:21: fatal error: SDL_net.h: No such file or directory
+ #include <SDL_net.h>
+                     ^
+compilation terminated.
+In file included from players.c:9:0:
+players.h:21:21: fatal error: SDL_net.h: No such file or directory
+ #include "SDL_net.h"
+                     ^
+compilation terminated.
+port_hearts.c: In function ‘separate_strings’:
+port_hearts.c:73:49: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+     for (ap = list; (*ap = strsep(&inputstring, (const char *) *separators)) != NULL;)
+                                                 ^
+root@debian:/home/grupp7/hearts/server# ls
+account.c  CMakeLists.txt  game.c	      gameserver.c.save.1  kill_server.sh  players.h	   server.c
+account.h  compserver	   game.h	      gameserver.c.save.2  makefile	   port_hearts.c   syn-ack-server
+account.o  encrypt.c	   gameserver.c       InetS3.c		   nextplayer.c    port_hearts.h   test
+card.h	   encrypt.h	   gameserver.c.save  InetS.c		   players.c	   serve_client.c
+root@debian:/home/grupp7/hearts/server# nano InetS3.c 
+root@debian:/home/grupp7/hearts/server# nano port_hearts.c
+root@debian:/home/grupp7/hearts/server# nano port_hearts.h
+root@debian:/home/grupp7/hearts/server# cat makefile
+all: clean account.o gameserver.o encrypt.o InetS3.o port_hearts.o players.o game.o gameserver InetS3 
+
+clean:
+	rm -f *.o
+	rm -f gameserver
+	rm -f inets3
+
+account.o: 
+	gcc -c `mysql_config --cflags --libs` -lmysql account.c
+
+encrypt.o:
+	gcc -c -lmcrypt encrypt.c
+
+gameserver.o:
+	gcc -c `sdl2-config --cflags` `mysql_config --cflags --libs` gameserver.c
+
+players.o:
+	gcc -c `sdl2-config --cflags` players.c
+
+game.o:
+	gcc -c game.c
+
+gameserver:
+	gcc -o gameserver gameserver.o encrypt.o account.o players.o game.o `sdl2-config --libs` `mysql_config --libs` -lSDL2_net -lmysqlclient -lmcrypt -lpthread
+
+port_hearts.o:
+	gcc -c `mysql_config --cflags --libs` port_hearts.c
+
+InetS3.o:
+	gcc -c InetS3.c `mysql_config --cflags --libs` -lmysqlclient
+
+InetS3:
+	gcc -o InetS3 InetS3.o account.o encrypt.o -lmysqlclient
+
+root@debian:/home/grupp7/hearts/server# nano gameserver.c
+root@debian:/home/grupp7/hearts/server# nano serve_client.c 
+
+  GNU nano 2.2.6                        File: serve_client.c                                            Modified  
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <signal.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <pthread.h>
+#include "SDL2/SDL_net.h"
+#include "SDL2/SDL.h"
+#include "players.h"
+#include "port_hearts.h"
+
+#define BUFLEN 512
+#define NPACK 4
+#define GAMEPORT 41337
+
+void diep(char *s) {
+    perror(s);
+    exit(1);
+}
+// from UDP made simple at https://www.abc.se/~m6695/udp.html
+int main(void) {
+        struct sockaddr_in si_me, si_other;
+        int s, i, slen=sizeof(si_other);
+        char buf[BUFLEN];
+        char *trick[] = {"02","00","2A","1C"};
+        char trick_to_send[20];
+        for(int i =0; i<NPACK;i++) {
+                if (!i) strcpy(trick_to_send, trick[i]);
+
+^G Get Help        ^O WriteOut        ^R Read File       ^Y Prev Page       ^K Cut Text        ^C Cur Pos
+^X Exit            ^J Justify         ^W Where Is        ^V Next Page       ^U UnCut Text      ^T To Spell

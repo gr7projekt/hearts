@@ -96,13 +96,96 @@ void separate_strings(char *inputstring, const char *separators, char *fill_this
     for (array_pointers = fill_this_array_of_pointers; (*array_pointers = strsep(&string, separators)) != NULL;)
         if (**array_pointers != '\0') if (++array_pointers >= &fill_this_array_of_pointers[size_of_array_to_fill]) break;
 }
-void split(char input[],char *separators){
-    char static *line_ref;
-    line_ref =strdup(input);
-    do {
-        fprintf(stdout, "%s;", strsep(&line_ref, separators));
-    } while (line_ref != '\0');
+// Parses data into given list using given separator
+// Returns number of items parsed into list, 20 at the most.
+int split(char *str,char separator,char *list[]) {
+    // http://stackoverflow.com/questions/3217629/
+    // in-c-how-do-i-find-the-index-of-a-character-within-a-string
+    int index,i=0;
+    char *e, *string;
+    char sep[] = {separator,'\0'};
+    string = str;
+    if (str[((int) strlen(str))-1] != separator) strcat(string,sep);
+
+    while((e = strchr(string, separator)) && i < 20) {
+        index = (int) (e - string);
+        string[index] = '\0';
+        list[i++] = string;
+        list[i] = "";
+        string = &string[index + 1];
+    }
+    return i;
 }
+//Set 'char *list[4] values to "FF"
+void FF_trick(char *list[]){
+    for (int k = 0; k < 4; k++) {
+        list[k] = malloc(3);
+        memset(list[k], 'F', 2);
+    }
+}
+//Set 'char *hand[13] values to "FF"
+void FF_hand(char *hand[]){
+    int i =0;
+    while(i < 3) FF_trick(&hand[(i++)*4]);
+    FF_trick(&hand[9]);
+}
+void new_deck(Card deck[])
+{
+    int i=0;
+    int j=0;
+    int k=0;
+
+    for(i=0;i<4;i++)
+    {
+        for(j=0;j<13;j++)
+        {
+            deck[k].suit=i;     //0 Klöver 1 Ruter 2 Hjärter 3 Spader
+            deck[k].value=j;
+            k++;
+        }
+    }
+}
+
+void shuffle_deck(Card deck[], Card shuffled[])
+{
+    int i=0;
+    int r;
+
+    srand(time(NULL));
+
+    //Fisher-Yates shuffle
+    for(i=0;i<51;i++)   //bara 51 ggr, 52'a kortet tilldelas sist.
+    {
+        r=rand();
+        r=r%(51-i);
+
+        shuffled[i].suit=deck[r].suit;
+        shuffled[i].value=deck[r].value;
+
+        deck[r].suit=deck[51-i].suit;
+        deck[r].value=deck[51-i].value;
+    }
+    shuffled[51].suit=deck[0].suit;
+    shuffled[51].value=deck[0].value;
+    //shuffle klar
+}
+
+void print_deck(Card deck[])
+{
+    for(int i=0;i<52;i++)
+    {
+        if(deck[i].suit == 0)
+            printf("clubs %d\n",deck[i].value+2);
+        else if(deck[i].suit == 1)
+            printf("diamonds %d\n",deck[i].value+2);
+        else if(deck[i].suit == 2)
+            printf("hearts %d\n",deck[i].value+2);
+        else
+            printf("spades %d\n",deck[i].value+2);
+    }
+    printf("\n\n");
+}
+
 
 
 

@@ -10,7 +10,15 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
+struct card_struct{
+    int suit;
+    int value;
+};
+typedef struct card_struct Card;
 //Takes an array of four cards and returns the score
 int calculate_trick(char* []);
 bool is_hearts(char);
@@ -26,7 +34,12 @@ void is_twenty_six(int[]);
 bool is_hundred (int []);
 void update_round_score(int [], int[], int);
 void separate_strings(char *, const char *, char *[],int);
-void split(char [],char *);
+int split(char *,char,char *[]);
+void FF_trick(char *[]);
+void FF_hand(char *[]);
+void print_deck(Card []);
+void shuffle_deck(Card[],Card[]);
+void new_deck(Card []);
 #endif
 
 

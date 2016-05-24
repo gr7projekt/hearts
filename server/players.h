@@ -17,33 +17,27 @@
 #include <stdio.h>
 #include <syslog.h>
 #include <errno.h>
-#include "card.h"
-#include "SDL_net.h"
-#include "SDL2/SDL.h"
+#include "game.h"
 
-
-typedef struct {
-    int pos;
-    IPaddress address;
+void *player_waits_or_plays (void *);
+struct game_struct;
+typedef struct game_struct{
     char *trick[4];
+    char *hand[13];
+    char *hands[4][13];
+    char *deck[52];
+    int trick_score[4];
+    int hand_scores[4];
+    int round_score[4];
 
-}Args;
-typedef struct {
-    IPaddress address;
-    char *trick[4];
-
-}Trick;
-void* player_waits_or_plays (void *);
-// Pekare eftersom pthread_create() tar en pekare
-UDPpacket createPacket(int, uint8_t *, int, int, int, IPaddress );
-
+}Game;
 struct player_parms;
 typedef struct player_parms{
     int pos;
     int id;
-    int score;
-    Card game_hand[13];
-    Card won_hand[52];
+    Game *game;
 }Player;
+
+
 
 #endif /* players_h */
