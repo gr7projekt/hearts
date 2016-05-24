@@ -2,11 +2,13 @@
 #define INCLUDES_H_INCLUDED
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
 #include <string.h>
-#include <SDL.h>    //<SDL2/SDL.h>
-#include <SDL_image.h>  //<SDL2_image/SDL_image.h>
+#include <SDL2/SDL.h> //<SDL.h>
+#include <SDL2_image/SDL_image.h>  //<SDL_image.h>
+#include <SDL2_net/SDL_net.h>
 #include <SDL_ttf.h>
 #include <unistd.h>
 
@@ -24,5 +26,12 @@
 #include "send.h"
 #include "logik.h"
 #include "position.h"
+#include "rendering.h"
+#include "recieve.h"
+
+UDPsocket sd;
+IPaddress srvadd;
+UDPpacket *p;
+UDPpacket *pOUT;
 
 #endif // INCLUDES_H_INCLUDED

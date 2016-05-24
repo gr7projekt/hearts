@@ -1,8 +1,89 @@
 #include "logik.h"
 
-bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[], int turn, int next_player)
+bool myturn(char *trick[], Player player_1[])
 {
-//    if(next_player == p1[0].id)    //om jag är första spelaren som ska lägga ut ett kort.
+    if(strcmp(trick[player_1[0].id],"EE;")==0)
+    {
+    //    printf("myturn 1\n");
+        return true;
+    }
+    else if(player_1[0].id == 0)
+    {
+        if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[3],"FF;")!=0) && strcmp(trick[3],"EE;") !=0)
+        {
+     //       printf("myturn 2\n");
+            return true;
+        }
+        else
+        {
+     //       printf("myturn 3\n");
+            return false;
+        }
+    }
+    else
+    {
+        if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[player_1[0].id-1],"FF;")!=0) && strcmp(trick[player_1[0].id-1],"EE;")!=0){
+     //       printf("myturn 4\n");
+            return true;
+        }
+        else
+        {
+     //       printf("myturn 5\n");
+            return false;
+        }
+    }
+}
+
+int whos_turn(Player p1[], Player p2[], Player p3[], Player p4[], char* trick[])
+{
+    int tmp;
+
+    if((strcmp(trick[0],"EE;") == 0) || (strcmp(trick[0],"FF;")==0 && strcmp(trick[3],"FF;") !=0)){
+        tmp = 0;
+    }
+    else if((strcmp(trick[1],"EE;") == 0) || (strcmp(trick[1],"FF;")==0 && strcmp(trick[0],"FF;") !=0)){
+        tmp = 1;
+    }
+    else if((strcmp(trick[2],"EE;") == 0) || (strcmp(trick[2],"FF;")==0 && strcmp(trick[1],"FF;") !=0)){
+        tmp = 2;
+    }
+    else if((strcmp(trick[3],"EE;") == 0) || (strcmp(trick[3],"FF;")==0 && strcmp(trick[2],"FF;") !=0)){
+        tmp = 3;
+    }
+    else
+        tmp = 4;
+//    printf("tmp: %i\n",tmp);
+
+    if(p1[0].id == tmp)
+        return p1[0].relativ_pos;
+    else if(p2[0].id == tmp)
+        return p2[0].relativ_pos;
+    else if(p3[0].id == tmp)
+        return p3[0].relativ_pos;
+    else if(p4[0].id == tmp)
+        return p4[0].relativ_pos;
+    else
+        return 4;
+}
+
+bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[], int turn, char *trick[] )
+{
+    int no_played = 0;
+    int i_play = 0;
+
+    for(int i=0; i<4; i++){
+        if(strcmp(trick[i],"FF;") == 0)
+            no_played ++;
+        else if(strcmp(trick[p1[0].id],"EE;") == 0)
+            i_play ++;
+    }
+    printf("no_played: %i\n",no_played);
+    printf("i_play: %i\n",i_play);
+
+
+
+//
+//    if(no_played == 3 && i_play == 1)    //om jag ï¿½r fï¿½rsta spelaren som ska lï¿½gga ut ett kort.
 //    {
 //        if(turn == 0)
 //        {
@@ -16,7 +97,7 @@ bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[]
 //            return true;
 //    }
 //
-//    else    //om jag inte är första spelaren
+//    else    //om jag inte ï¿½r fï¿½rsta spelaren
 //    {
 //        if(turn == 0)
 //        {
@@ -37,15 +118,15 @@ bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[]
     int count_card = 0;
     int count_picked = 0;
 
-    //LOGIK 1 - samma färg: OK
+    //LOGIK 1 - samma fï¿½rg: OK
     if(p1[0].game_hand[nr].suit == leadCard)
     {
         printf("following suit, ok \n");
         return true;
     }
 
-    //LOGIK 2 - om hjärter inte brutits, kolla att vi inte lägger ett hjärter
-    //SKA ENDAST SKE OM JAG BÖRJAR
+    //LOGIK 2 - om hjï¿½rter inte brutits, kolla att vi inte lï¿½gger ett hjï¿½rter
+    //SKA ENDAST SKE OM JAG Bï¿½RJAR
 //    if(brokenHeart == false)
 //    {
 //        if(p1[0].game_hand[nr].suit == 2)
