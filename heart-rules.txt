@@ -1,0 +1,16 @@
+Objecitve:
+Be the player with the lowest score. When a player reaches 100 points the games ends.
+
+Scoring:
+At the end of each hand players count the number of hearts they have taken & if won, also the queen of spades.
+
+Each card of the heart suit is 1 point & queen of spades is 13 points.
+If a player takes all points, he does not receive 26 points. Instead the other players each get 26 points.
+
+The play:
+After receiving your cards you pick 3 cards of your hand to pass to the player to the left.
+
+The player with 2 of clubs starts by playing that card.
+You must follow suite if possible. If a player does not have the current suit, any suit may be discarded. The highest card of the suit led wins the trick. The winner of the last trick begins the next.
+
+The first time a heart or the queen of spades is discarded no other hearts may be played that hand. In the first round a heart may only be discarded if the player has all 13 hearts.

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+gcc -c `sdl2-config --cflags` $1.c
+gcc -o $1 $1.o `sdl2-config --cflags` -lSDL2_net
+rm $1.o

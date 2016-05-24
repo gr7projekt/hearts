@@ -22,26 +22,22 @@
 #include <signal.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include "port_hearts.h"
 
 /* Change this to whatever your daemon is called */
 #define DAEMON_NAME "HEARTS_SERVER"
 
 /* Change this to the user under which to run */
 #define RUN_AS_USER "Grupp_7"
-
 #define IP_ADDRESS "130.237.84.89"
-
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
 
 void sigchld_handlr(int);
 void sigchld_handler(int);
 void daemonize(const char *);
-int hearts (char *,int);
 
 int main(int argc,char const *argv[])
 {
-    int done, pid, s2, inet_fd;
+    int pid, s2, inet_fd, port=0, connections=0;
     ssize_t r;
     socklen_t t;
     struct sockaddr_in inet, inet2;
@@ -50,7 +46,7 @@ int main(int argc,char const *argv[])
     memset(str,'\0',sizeof(str));
     
     /* Initialize the logging interface */
-    openlog(DAEMON_NAME, LOG_PID, LOG_LOCAL5 );
+    openlog(DAEMON_NAME, LOG_PID, LOG_DAEMON );
     syslog(LOG_INFO, "Starting_daemon" );
     
     /* Daemonize */
@@ -75,17 +71,18 @@ int main(int argc,char const *argv[])
         exit(1);
     } else syslog(LOG_INFO, "Socket bound!\n");
     
-    if (listen(inet_fd, 4) == -1) {
+    if (listen(inet_fd, 8) == -1) {             //8 connections will serve 2 games
         syslog(LOG_ERR,  "%s",strerror(errno));
         exit(1);
     }
-    syslog(LOG_INFO, "listening for up to 4 connections!\n");
+    syslog(LOG_INFO, "listening for up to 8 connections!\n");
     
+    struct sigaction sa;
+    sa.sa_handler = sigchld_handlr; // reap all dead processes
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART;
     for(;;) {
-        struct sigaction sa;
-        sa.sa_handler = sigchld_handlr; // reap all dead processes
-        sigemptyset(&sa.sa_mask);
-        sa.sa_flags = SA_RESTART;
+        if (!(connections%4)) port=get_random_port_number();
         if (sigaction(SIGCHLD, &sa, NULL) == -1) {      //WNOHANG!
             syslog(LOG_ERR,  "%s",strerror(errno));
             exit(EXIT_FAILURE);
@@ -103,34 +100,57 @@ int main(int argc,char const *argv[])
         }
         else if(!pid){                              //serverbarnet ärver accepten, socketen och fildeskriptorn.
             syslog(LOG_INFO,"Connected.\n");
-            
-            done = 0;
+            int i=0, done = 0;
+            char arg2[3]={'\0'},ascii_port[6]={'\0'},sent_arguments[100]={'\0'};
+            memset(ascii_port,'\0',(size_t) sizeof(ascii_port));
+            memset(sent_arguments,'\0',(size_t) sizeof(sent_arguments));
             do {
-                r = recv(s2, arguments,100, 0);
+
+                //Inget fel eller avslut, enligt tilldelning
+                r = recv (s2,arguments,sizeof(arguments), 0);
                 if (r <= 0) {
                     if (r < 0) perror("recv");
                     done = 1;                                   //försäkrar oss om att accept-loopen avslutas nedan ...
-                }                                               //om recv returnerar 0 eller -1.
-                if (!done){                                     //Inget fel eller avslut, enligt tilldelning
-                    if(!(hearts(arguments,s2))){
-                        strcpy(arguments,"ENDOFTRANS");
-                        if (send(s2,arguments,strlen(arguments),0) < 0) {  //skicka tillbaka strängen
-                            perror("send");
-                            done = 1;                   //försäkrar oss om att accept-loopen avslutas
-                        }
-                        else done = 0;
-                    }
-                    //memset(arguments,'\0',sizeof(arguments));
                 }
-            } while (!done);                        //så länge klienten skickar data håller vi öppet 24/7
-            printf("I'm server %d and my client just signed off!\n",getpid());
+                else syslog(LOG_INFO, "received: %s", arguments);
+                if(!(syn_ack(arguments,i,s2))){
+                    //svara med portnummer och starta spelservern
+                    if(i==2){
+                        if(!(start_game_server((connections%4),port))){
+                            syslog(LOG_ERR,"no port assigned to game server");
+                            exit(EXIT_FAILURE);
+                        }
+                    }
+                    //skicka portnummer till klienten!
+                    if(i){
+                        syslog(LOG_INFO,"port = %s",port);
+                        sprintf(ascii_port, "%d", port);
+                        strcpy(arguments,ascii_port);
+                        sprintf(arg2," %d",connections%4);
+                        strcat(arguments,arg2);
+                    }
+                    syslog(LOG_INFO, "Sending string: %s", arguments);
+                    if (send(s2,arguments,strlen(arguments),0) < 0) {  //skicka tillbaka strängen
+                        perror("send");
+                        done = 1;                   //försäkrar oss om att accept-loopen avslutas
+                    }
+                    syslog(LOG_INFO,"sent string: %s",strcpy(sent_arguments,arguments));
+                    //strcpy(arguments, "ENDOFTRANS");
+                }
+                i++; //syn-ack räknare
+                close(s2);
+            } while (!done);
+            //close(s2);
+            syslog(LOG_INFO, "I'm server %d and my client just signed off!\n",getpid());
             syslog(LOG_NOTICE, "terminated" );
             closelog();
             exit(0);
         }
         else close(s2);
+        connections++;
     }
     /* Finish up */
+    closelog();
     return 0;
 }
 
@@ -142,17 +162,20 @@ void sigchld_handlr(int s)
 void sigchld_handler(int s)
 {
     switch(s) {
-        case(SIGTSTP):  exit((int)SIG_IGN);  break;/* Various TTY signals */
-        case(SIGTTOU):  exit((int)SIG_IGN); break;
-        case(SIGTTIN):  exit((int)SIG_IGN); break;
-        case(SIGHUP):   exit((int)SIG_IGN); break;/* Ignore hangup signal */
-        case SIGALRM:   exit(EXIT_FAILURE); break;
+        case SIGTSTP :  exit((long) SIG_IGN);  break;/* Various TTY signals */
+        case SIGTTOU :  exit((long) SIG_IGN); break;
+        case SIGTTIN :  exit((long) SIG_IGN); break;
+        case SIGHUP :   exit((long) SIG_IGN); break;/* Ignore hangup signal */
+        case SIGALRM :   exit(EXIT_FAILURE); break;
+            
+        //Här måste vi hantera avslut. Skriv om!
+//En användare avslutar sin uppkoppling till servern utan att vara uppkopplad till ett spelbord.
         case SIGUSR1:   exit(EXIT_SUCCESS); break;
-        case SIGCHLD:   exit(EXIT_FAILURE); break;
-        default:        exit((int)SIG_DFL); break;
+//En användare har avslutat, skicka ett meddelande till de andra spelarna!!!  
+        case SIGCHLD:   exit(2); break;            
+        default:        exit((long) SIG_DFL); break;
     }
 }
-
 void daemonize(const char *lockfile)
 {
     pid_t pid, sid, parent,child;
@@ -172,7 +195,7 @@ void daemonize(const char *lockfile)
     //printf("Ready for the lockfile!\n");
     /* Create the lock file as the current user */
     if ( lockfile && lockfile[0] ) {
-        lfp = open(lockfile,O_RDWR|O_CREAT,0640);   //|O_EXCL taken care of in the start-file
+        lfp = open(lockfile,O_RDWR|O_EXCL,0640);   //|O_EXCL taken care of in the start-file
         if ( lfp < 0 ) {
             syslog( LOG_ERR, "unable to create lock file %s, code=%d (%s)\n",
                    lockfile, errno, strerror(errno) );
@@ -255,39 +278,10 @@ void daemonize(const char *lockfile)
     freopen("/dev/null", "w", stderr);
     
     /* Tell the parent process that we are A-okay */
-    kill(parent, SIGUSR1 );
+    kill(getppid(), SIGUSR1 );
 }
 
-int hearts (char* arguments,int fd){
-    pid_t child_pid;
-    if(strcmp("quit",arguments)){             //Avsluta
-        close(1);
-        dup(fd);
-        return SIGTERM;
-    }
-    else {
-        /* Duplicate this process. */
-        child_pid = fork ();
-        if (child_pid != 0){
-            /* This is the parent process. */
-            close(1);
-            wait(0);
-            return 0;
-        }
-        
-        else {
-            //Redirect stdout to socket
-            close(1);
-            dup(fd);
-            /* Now execute the commands in a new session*/
-            execlp("/bin/sh","bash","-c", "echo Hello World!", NULL);
-            /* The execlp function returns only if an error occurs. */
-            perror("Exec\n");
-            abort ();
-        }
-    }
-    return 0;
-}
+
 
 
 
