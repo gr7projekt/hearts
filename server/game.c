@@ -64,12 +64,12 @@ bool do_I_start(char* hand[]){
     for(int i = 0;i < 13;i++) if (is_two_of_clubs(hand[i])) return true;
     return false;
 }
-void is_twenty_six(int hand_score[]){
-    for(int i=0;i<4;i++) if (hand_score[i]==26){
+void is_twenty_six(int hand_score[],int len){
+    for(int i=0;i<len;i++) if (hand_score[i]==26){
             hand_score[i] = 0;
-            hand_score[(i+1)%4] = 26;
-            hand_score[(i+2)%4] = 26;
-            hand_score[(i+3)%4] = 26;
+            hand_score[(i+1)%len] = 26;
+            hand_score[(i+2)%len] = 26;
+            hand_score[(i+3)%len] = 26;
             break;
         }
 }
@@ -184,6 +184,43 @@ void print_deck(Card deck[])
             printf("spades %d\n",deck[i].value+2);
     }
     printf("\n\n");
+}
+void convert_card_struct(Card shuffled_deck[],char *deck[],char *string){
+    for(int i=0;i<52;i++){
+        deck[i] = malloc(3);
+        sprintf(deck[i],"%x%x",(shuffled_deck[i].suit),(shuffled_deck[i].value));
+        if (!i){
+            strcpy(string,deck[i]);
+            strcat(string,";");
+        }
+        else {
+            strcat(string,deck[i]);
+            strcat(string,";");
+        }
+    }
+}
+void compile_card_string(Card shuffled_deck[],char *string){
+    strcpy(string,"");
+    char *tmp[52];
+    for(int i=0;i<52;i++){
+        tmp[i] = malloc(4);
+        sprintf(tmp[i],"%x%x",(shuffled_deck[i].suit),(shuffled_deck[i].value));
+        strcat(string,tmp[i]);
+        strcat(string,";");
+    }
+}
+void compile_send_string(char *array[],char string[],int length){
+    for(int i=0;i<length;i++){
+        if (!i) strcpy(string,array[i]);
+        else {
+            strcat(string,";");
+            strcat(string,array[i]);
+        }
+    } strcat(string,";");
+}
+int find_DD(char *str[],int len){
+    for (int i = 0; i < len; i++) if(!(strcmp(str[i],"DD"))) return i;
+    return -1;
 }
 
 
