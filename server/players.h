@@ -28,7 +28,7 @@ typedef struct game_struct{
     char *hand[13];
     char *hands[4][13];
     char *deck[52];
-    char buffer[40];
+    char buffer[4][40];
     int trick_score[4];
     int hand_scores[4];
     int round_score[4];
