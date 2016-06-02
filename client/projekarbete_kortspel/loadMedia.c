@@ -26,7 +26,7 @@ void loadMediaDropzone(SDL_Texture *dropzone[], SDL_Renderer *gRenderer, SDL_Rec
 
 void loadMediaAdvertisment(SDL_Texture *advertisment[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsAdvertisment[])
 {
-    SDL_Surface* gAdvSurface = IMG_Load("advertisment.png");
+    SDL_Surface* gAdvSurface = IMG_Load("advertisment2.png");
 
     advertisment[0] = SDL_CreateTextureFromSurface(gRenderer, gAdvSurface);
 
@@ -326,13 +326,11 @@ void loadMediaSpades(int i,SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rec
 }
 
 
-void loadMediaBack(int i, SDL_Texture *card_2[], SDL_Texture *card_3[], SDL_Texture *card_4[],SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsBack[])
+void loadMediaBack(SDL_Texture *card_back[],SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsBack[])
 {
     SDL_Surface* gCardSurface = IMG_Load("CARD.png");
 
-    card_2[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
-    card_3[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
-    card_4[i] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
+    card_back[0] = SDL_CreateTextureFromSurface(gRenderer, gCardSurface);
 
 //    baksida kort har värde 0.
     gSpriteClipsBack[ 0 ].x = WIDTH*1;

@@ -1,14 +1,15 @@
 #ifndef INCLUDES_H_INCLUDED
 #define INCLUDES_H_INCLUDED
 
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_net.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
 #include <string.h>
-#include <SDL.h>    //<SDL2/SDL.h>
-#include <SDL_image.h>  //<SDL2_image/SDL_image.h>
-#include <SDL_ttf.h>
 #include <unistd.h>
 
 #include "cardStruct.h"
@@ -27,5 +28,12 @@
 #include "position.h"
 #include "rendering.h"
 #include "recieve.h"
+
+#define IPC "130.237.84.89"
+
+UDPsocket sd;
+IPaddress srvadd;
+UDPpacket *p;
+UDPpacket *pOUT;
 
 #endif // INCLUDES_H_INCLUDED

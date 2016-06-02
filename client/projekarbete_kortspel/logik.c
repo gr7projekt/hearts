@@ -4,31 +4,31 @@ bool myturn(char *trick[], Player player_1[])
 {
     if(strcmp(trick[player_1[0].id],"EE;")==0)
     {
-        //printf("lock 1\n");
+    //    printf("myturn 1\n");
         return true;
     }
     else if(player_1[0].id == 0)
     {
         if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[3],"FF;")!=0) && strcmp(trick[3],"EE;") !=0)
         {
-            //printf("lock 2\n");
+     //       printf("myturn 2\n");
             return true;
         }
         else
         {
-            //printf("lock 3\n");
+     //       printf("myturn 3\n");
             return false;
         }
     }
     else
     {
         if((strcmp(trick[player_1[0].id],"FF;")==0 && strcmp(trick[player_1[0].id-1],"FF;")!=0) && strcmp(trick[player_1[0].id-1],"EE;")!=0){
-            //printf("lock 4\n");
+     //       printf("myturn 4\n");
             return true;
         }
         else
         {
-            //printf("lock 5\n");
+     //       printf("myturn 5\n");
             return false;
         }
     }
@@ -83,7 +83,7 @@ bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[]
 
 
 //
-//    if(no_played == 3 && i_play == 1)    //om jag är första spelaren som ska lägga ut ett kort.
+//    if(no_played == 3 && i_play == 1)    //om jag ï¿½r fï¿½rsta spelaren som ska lï¿½gga ut ett kort.
 //    {
 //        if(turn == 0)
 //        {
@@ -97,7 +97,7 @@ bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[]
 //            return true;
 //    }
 //
-//    else    //om jag inte är första spelaren
+//    else    //om jag inte ï¿½r fï¿½rsta spelaren
 //    {
 //        if(turn == 0)
 //        {
@@ -118,15 +118,15 @@ bool checkCard(Player p1[], int nr, int leadCard, int brokenHeart, bool picked[]
     int count_card = 0;
     int count_picked = 0;
 
-    //LOGIK 1 - samma färg: OK
+    //LOGIK 1 - samma fï¿½rg: OK
     if(p1[0].game_hand[nr].suit == leadCard)
     {
         printf("following suit, ok \n");
         return true;
     }
 
-    //LOGIK 2 - om hjärter inte brutits, kolla att vi inte lägger ett hjärter
-    //SKA ENDAST SKE OM JAG BÖRJAR
+    //LOGIK 2 - om hjï¿½rter inte brutits, kolla att vi inte lï¿½gger ett hjï¿½rter
+    //SKA ENDAST SKE OM JAG Bï¿½RJAR
 //    if(brokenHeart == false)
 //    {
 //        if(p1[0].game_hand[nr].suit == 2)

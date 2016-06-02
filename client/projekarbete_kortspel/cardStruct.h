@@ -6,6 +6,8 @@ typedef struct my_Card
 {
     int suit;
     int value;
+    char char_suit;
+    char char_value;
 }Card;
 
 struct player_parms;

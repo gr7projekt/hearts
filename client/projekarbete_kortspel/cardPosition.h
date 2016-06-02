@@ -1,7 +1,7 @@
 #ifndef CARDPOSITION_H_INCLUDED
 #define CARDPOSITION_H_INCLUDED
 
-#include <SDL_image.h>
+#include "includes.h"
 #include "resolution.h"
 
 #define DISTANCE_X 35

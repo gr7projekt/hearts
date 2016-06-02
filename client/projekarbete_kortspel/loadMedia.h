@@ -85,7 +85,7 @@ void loadMediaSpades(int i,SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rec
  * \return void
  *
  */
-void loadMediaBack(int i, SDL_Texture *card_2[], SDL_Texture *card_3[], SDL_Texture *card_4[],SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsBack[]);
+void loadMediaBack( SDL_Texture *card_back[],SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsBack[]);
 
 
 #endif // LOADMEDIA_H_INCLUDED

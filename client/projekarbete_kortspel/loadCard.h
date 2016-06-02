@@ -7,7 +7,8 @@
  *
  */
 
-void loadCard(Player player_client[],Player player_2[], Player player_3[], Player player_4[]);
+void loadCard(Player player_client[],Player player_2[], Player player_3[], Player player_4[], char recieved_str[]);
 
+void sortHand(Player player_client[]);
 
 #endif // LOADCARD_H_INCLUDED

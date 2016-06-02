@@ -19,10 +19,10 @@
  * \param gSpriteClipsHearts[] SDL_Rect
  * \param gSpriteClipsSpades[] SDL_Rect
  *
- * \param card1[] SDL_Texture*
- * \param card2[] SDL_Texture*
- * \param card3[] SDL_Texture*
- * \param card4[] SDL_Texture*
+ * \param card_club[] SDL_Texture*
+ * \param card_diamond[] SDL_Texture*
+ * \param card_heart[] SDL_Texture*
+ * \param card_spade[] SDL_Texture*
  *
  * \param p1[] Player
  * \param p2[] Player
@@ -33,7 +33,7 @@
  */
 void renderPlayedCard(SDL_Renderer *gRenderer, char *trick[], SDL_Rect played_pos[], int whoIsPlaying,
                       SDL_Rect gSpriteClipsClubs[], SDL_Rect gSpriteClipsDiamonds[], SDL_Rect gSpriteClipsHearts[], SDL_Rect gSpriteClipsSpades[],
-                      SDL_Texture* card1[], SDL_Texture* card2[], SDL_Texture* card3[], SDL_Texture* card4[],
+                      SDL_Texture* card_club[],SDL_Texture* card_diamond[], SDL_Texture* card_heart[], SDL_Texture* card_spade[],
                       Player p1[], Player p2[], Player p3[], Player p4[]);
 
 #endif //RENDERING_H_INCLUDED

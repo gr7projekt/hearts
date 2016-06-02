@@ -2,18 +2,17 @@
 
 #ifdef _WIN32
 #include <windows.h>
+
 #endif // _WIN32
 
 void openWeb()
 {
-
-
 //koden togs från:
 //http://faq.cprogramming.com/cgi-bin/smartfaq.cgi?answer=1044654269&id=1043284392
 //2016-04-27 (15:30)
 
     #ifdef _WIN32
-        char szPath[] = "www.kth.se";
+        char szPath[] = "https://youtu.be/u2aQwSGwVyM";
         HINSTANCE hRet = ShellExecute(HWND_DESKTOP,"open",szPath,NULL,NULL,SW_SHOW);
 
   //(1)Parent window //(2)Operation to perform //(3)Path to program //(4)Parameters //(5)Default directory //(6)How to open
@@ -27,13 +26,13 @@ void openWeb()
             {
                 MessageBox(HWND_DESKTOP,"Unable to start program","",MB_OK);
             }
-    #elif _APPLE_
-        printf("i openweb(), _APPLE_\n");
-    #elif _linux_
+    #elif __APPLE__
+        printf("i openweb(), __APPLE__\n");
+    #elif __linux
         printf("i openweb(), _linux_\n");
-    #elif _unix_
+    #elif __unix
         printf("i openweb(), _unix_\n");
     #else
-        system("open http://www.kth.se");
+        system("open https://youtu.be/u2aQwSGwVyM");
     #endif //
 }
