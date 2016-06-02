@@ -12,6 +12,20 @@ void seperate(char *trick[],char recieved_trick[],char tmp[])
     }
 }
 
+void getIP(char ip[])
+{
+    char file[]="ip.txt";
+    FILE *fp;
+    fp = fopen(file,"r");
+
+    if(fp != NULL){
+            fscanf(fp,"%s",ip);
+    }
+    else
+        printf("nop\n");
+    fclose(fp);
+}
+
 void recieve(char recieved_trick[])
 {
     Uint16 port = 41337;

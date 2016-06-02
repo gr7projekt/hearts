@@ -200,7 +200,7 @@
 1464213005 c:\users\robert\documents\codeblocks\hearts\client\projekarbete_kortspel\rendering.h
 	"includes.h"
 
-1464179754 c:\users\robert\documents\codeblocks\hearts\client\projekarbete_kortspel\recieve.h
+1464858709 c:\users\robert\documents\codeblocks\hearts\client\projekarbete_kortspel\recieve.h
 	"includes.h"
 
 1464096801 source:c:\users\robert\documents\codeblocks\hearts\client\projekarbete_kortspel\cardposition.c
@@ -215,7 +215,7 @@
 1464253416 source:c:\users\robert\documents\codeblocks\hearts\client\projekarbete_kortspel\logik.c
 	"logik.h"
 
-1464605779 source:c:\users\robert\documents\codeblocks\hearts\client\projekarbete_kortspel\mainclient.c
+1464855444 source:c:\users\robert\documents\codeblocks\hearts\client\projekarbete_kortspel\mainclient.c
 	"includes.h"
 	<windows.h>
 

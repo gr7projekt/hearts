@@ -37,16 +37,19 @@ int main(int argc, char* argv[])
     SDL_Texture* card_heart[13] = {NULL};   //hearts - hjärter
     SDL_Texture* card_spade[13] = {NULL};   //spades - spader
 
-//    SDL_Texture* card[13] = {NULL};     //clubs - klöver
-//    SDL_Texture* card_2[13] = {NULL};   //diamonds - ruter
-//    SDL_Texture* card_3[13] = {NULL};   //hearts - hjärter
-//    SDL_Texture* card_4[13] = {NULL};   //spades - spader
     SDL_Texture* card_back[1] = {NULL};
 
     //int preport = //atoi(argv[1]);
     Uint16 port = 41337; //(Uint16)preport;
 
-    if(port >= 40000 && port <= 50000) {
+    if(argc==3)
+    {
+        printf("nr of args: %d\n",argc);
+        printf("arg 2(port): %d\n",atoi(argv[1]));
+        printf("arg 3(pos): %d\n",atoi(argv[2]));
+    }
+
+    if(port >= 40000 && port <= 50000){
 
         int mouse_x;
         int mouse_y;
@@ -88,16 +91,20 @@ int main(int argc, char* argv[])
         SDL_Rect played_pos[4]; //koordinaterna f�r spelade kort
         SDL_Rect coin_pos[5];
 
-        initial_pos[0].y =
-                RES_Y - HEIGHT; //korten man b�rjar med ligger alltid p� samma h�jd.. botten minus h�jden p� kortet.
+        initial_pos[0].y = RES_Y - HEIGHT; //korten man b�rjar med ligger alltid p� samma h�jd.. botten minus h�jden p� kortet.
 
         if (init()) {
             printf("init worked\n");
         }
 
+
+        char ip[20];
+        getIP(ip);
+        printf("ip: %s\n",ip);
+
+
         button help = createButton(0, 0, 20, 20, "help.png", gRenderer);
-        initSpritePosition(position_1, position_2, position_3, position_4, advertism_pos, dropzone_pos, played_pos,
-                           coin_pos);
+        initSpritePosition(position_1, position_2, position_3, position_4, advertism_pos, dropzone_pos, played_pos, coin_pos);
 
         loadMediaCoin(coin, gRenderer, gSpriteClipsCoin);
         loadMediaAdvertisment(advertisment, gRenderer, gSpriteClipsAdvertisment);
