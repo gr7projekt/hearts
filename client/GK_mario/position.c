@@ -25,3 +25,11 @@ void position(Player p1[], Player p2[], Player p3[], Player p4[])
         p4[0].id = p4[0].id-4;
     }
 }
+
+void zeropoint(Player p1[], Player p2[], Player p3[], Player p4[])
+{
+    strcpy(p1[0].score,"001");
+    strcpy(p2[0].score,"002");
+    strcpy(p3[0].score,"003");
+    strcpy(p4[0].score,"004");
+}

@@ -28,6 +28,7 @@
 #include "position.h"
 #include "rendering.h"
 #include "recieve.h"
+#include "game.h"
 
 #define MESSAGE "# This is the gamelog for the card game Hearts, \n# developed for the network communications course at KTH Haninge, spring term 2016"
 #define PORT 41337

@@ -24,18 +24,6 @@ void loadMediaDropzone(SDL_Texture *dropzone[], SDL_Renderer *gRenderer, SDL_Rec
     gSpriteClipsDropzone[ 0 ].h = DROP_Y;
 }
 
-void loadMediaAdvertisment(SDL_Texture *advertisment[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsAdvertisment[])
-{
-    SDL_Surface* gAdvSurface = IMG_Load("advertisment.png");
-
-    advertisment[0] = SDL_CreateTextureFromSurface(gRenderer, gAdvSurface);
-
-    gSpriteClipsAdvertisment[ 0 ].x = 0;
-    gSpriteClipsAdvertisment[ 0 ].y = 0;
-    gSpriteClipsAdvertisment[ 0 ].w = 140;
-    gSpriteClipsAdvertisment[ 0 ].h = 400;
-}
-
 void loadMediaClubs(int i, SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsClubs[])
 {
     SDL_Surface* gCardSurface = IMG_Load("CARD.png");

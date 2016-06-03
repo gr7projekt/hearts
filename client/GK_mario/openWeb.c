@@ -13,7 +13,7 @@ void openWeb()
 //2016-04-27 (15:30)
 
     #ifdef _WIN32
-        char szPath[] = "www.kth.se";
+        char szPath[] = "https://youtu.be/u2aQwSGwVyM";
         HINSTANCE hRet = ShellExecute(HWND_DESKTOP,"open",szPath,NULL,NULL,SW_SHOW);
 
   //(1)Parent window //(2)Operation to perform //(3)Path to program //(4)Parameters //(5)Default directory //(6)How to open
@@ -27,13 +27,13 @@ void openWeb()
             {
                 MessageBox(HWND_DESKTOP,"Unable to start program","",MB_OK);
             }
-    #elif _APPLE_
+    #elif __APPLE__
         printf("i openweb(), _APPLE_\n");
-    #elif _linux_
+    #elif __linux__
         printf("i openweb(), _linux_\n");
-    #elif _unix_
+    #elif __unix__
         printf("i openweb(), _unix_\n");
     #else
-        system("open http://www.kth.se");
+        system("open https://youtu.be/u2aQwSGwVyM");
     #endif //
 }

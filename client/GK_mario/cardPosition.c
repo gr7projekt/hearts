@@ -1,6 +1,6 @@
 #include "cardPosition.h"
 
-void initSpritePosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[], SDL_Rect adv[], SDL_Rect drop[], SDL_Rect played_pos[], SDL_Rect coin_pos[])
+void initSpritePosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[], SDL_Rect drop[], SDL_Rect played_pos[], SDL_Rect coin_pos[])
 {
     for(int i=0 ; i<13; i++)
     {
@@ -44,11 +44,6 @@ void initSpritePosition(SDL_Rect p1[],SDL_Rect p2[], SDL_Rect p3[], SDL_Rect p4[
     played_pos[3].x = RES_X/2 + WIDTH/2;
     played_pos[3].h = HEIGHT;
     played_pos[3].w = WIDTH;
-
-    adv[0].y = RES_Y/2-200;
-    adv[0].x = RES_X+10;  //+10 för att få avstånd från högra korten till reklamen
-    adv[0].h = 400;
-    adv[0].w = 65;        //75 pixlar höger om de högra korten, 65 för reklamen.
 
     drop[0].y = RES_Y/2-DROP_Y/2;
     drop[0].x = RES_X/2-DROP_X/2;

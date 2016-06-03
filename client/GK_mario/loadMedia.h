@@ -23,18 +23,7 @@ void loadMediaDropzone(SDL_Texture *dropzone[], SDL_Renderer *gRenderer, SDL_Rec
  * \return void
  *
  */
-void loadMediaAdvertisment(SDL_Texture *advertisment[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsAdvertisment[]);
 
-
-/** \brief
- *
- * \param i int
- * \param card[] SDL_Texture*
- * \param gRenderer SDL_Renderer*
- * \param gSpriteClipsClubs[] SDL_Rect
- * \return void
- *
- */
 void loadMediaClubs(int i, SDL_Texture *card[], SDL_Renderer *gRenderer, SDL_Rect gSpriteClipsClubs[]);
 
 

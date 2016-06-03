@@ -68,7 +68,7 @@ void DD_trick(char *[],int);
 void FF_hand(char *[]);
 void print_deck(CARD []);
 void shuffle_deck(CARD [],CARD []);
-void compile_send_string(char *[],char [],int);
+void compile_send_string(char *[],char *,int);
 #endif
 
 

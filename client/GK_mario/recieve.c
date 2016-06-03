@@ -21,10 +21,24 @@ void seperate(char *trick[],char recieved_trick[],char tmp[],int *starting_playe
     }
 }
 
+void getIP(char ip[])
+{
+    char file[]="ip.txt";
+    FILE *fp;
+    fp = fopen(file,"r");
+
+    if(fp != NULL){
+            fscanf(fp,"%s",ip);
+    }
+    else
+        printf("nop\n");
+    fclose(fp);
+}
+
 void recievehand(char recieved_trick[])
 {
     //int my_pos= (int) argv[2];
-    int my_pos=0;
+    int my_pos = 1;
     char *trick[4];
     DD_trick(trick,my_pos);
 
@@ -123,7 +137,7 @@ void recievehand(char recieved_trick[])
 void receiveontable(char recievetable[])
 {
      //int my_pos= (int) argv[2];
-     int my_pos=3;
+     int my_pos = 0;
      char *trick[4];
      DD_trick(trick,my_pos);
 

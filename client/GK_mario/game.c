@@ -200,7 +200,7 @@ void print_deck(CARD deck[])
     }
     printf("\n\n");
 }
-void compile_send_string(char *array[],char string[],int length){
+void compile_send_string(char *array[],char *string,int length){
     for(int i=0;i<length;i++){
         if (!i) strcpy(string,array[i]);
         else {

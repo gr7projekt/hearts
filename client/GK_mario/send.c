@@ -1,12 +1,12 @@
 #include "send.h"
-#include "includes.h"
 
 #define IP "137.237.84.89"
 
-void sendCard(Player player_1[], int nr, char* trick[], char recieved_trick[], Uint16 *port)
+void sendCard(Player player_1[], int nr, char* trick[], char recieved_trick[], Uint16 *port,char tmp[])
 {
     UDPpacket *packet2;
     char str[4];
+    printf("recieved_trick i borjan: %s\n",recieved_trick);
 
     /*  Check for parameters
          if (argc < 3)
@@ -16,11 +16,11 @@ void sendCard(Player player_1[], int nr, char* trick[], char recieved_trick[], U
          }
          */
     /* Initialize SDL_net */
-    if (SDLNet_Init() < 0)
-    {
-        fprintf(stderr, "SDLNet_Init: %s\n", SDLNet_GetError());
-        exit(EXIT_FAILURE);
-    }
+//    if (SDLNet_Init() < 0)
+//    {
+//        fprintf(stderr, "SDLNet_Init: %s\n", SDLNet_GetError());
+//        exit(EXIT_FAILURE);
+//    }
 
     /* Open a socket on random port */
     if (!(sd = SDLNet_UDP_Open(0)))
@@ -55,43 +55,32 @@ void sendCard(Player player_1[], int nr, char* trick[], char recieved_trick[], U
         str[1] = 'C';
     else
         str[1] = (char) player_1[0].game_hand[nr].value + '0';
+
     str[2]='\0';
-//    str[2]=';';
-//    str[3]='\0';
+
     printf("str[0]: %c\n",str[0]);
     printf("str[1]: %c\n",str[1]);
 
-//    recieved_trick[player_1[0].id*3] = str[0]; //*3 d� varje enskilld plats har XX; dvs 3 tecken.. pid*3 f�r startplatsen
-//    recieved_trick[player_1[0].id*3+1] = str[1];
-//    recieved_trick[player_1[0].id*3+2] = str[2];
+    tmp[player_1[0].id * 3] = str[0];
+    tmp[player_1[0].id * 3 +1] = str[1];
+
+    memcpy(trick[player_1[0].id],str,3);
 
     for(int i=0;i<4;i++)
         printf("trick[%d]: %s\n",i,trick[i]);
 
 
-    memcpy(trick[player_1[0].id],str,3);
 
-    compile_send_string(trick,recieved_trick,4);
+    printf("send tmp: %s\n",tmp); //denna ska skickas
 
-//    trick[player_1[0].id] = strdup(str);
-
-
-    printf("send recieved_trick: %s\n",recieved_trick); //de här ska skickas
-
-    printf("Send me some\n");
     strcpy((char *)packet2->data, recieved_trick);
     packet2->len = strlen((char*)packet2->data);
-    printf("%s\n", (char*)packet2->data);
+    printf("packet2->data %s\n", (char*)packet2->data);
     SDLNet_UDP_Send(sd, -1, packet2);
     /*if (!strcmp((char *)p->data, "quit")) {
         quit = 1;
     }*/
 
-    for(int i=0;i<4;i++)
-    {
-        printf("%s",trick[i]);
-    }
-    printf("\n");
 
     //fprintf(stdout,"player id, SuitValue: %i%s \n",player_1[0].id,trick[player_1[0].id]);
 }

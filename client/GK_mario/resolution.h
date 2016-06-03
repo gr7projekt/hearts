@@ -24,4 +24,9 @@
 #define DROP_X 300
 #define DROP_Y 200
 
+/** storleken på renderade texten
+ *
+ */
+#define SHAPE_SIZE 14
+
 #endif // RESOLUTION_H_INCLUDED
