@@ -1,0 +1,129 @@
+# depslib dependency file v1.0
+1464896114 source:c:\users\robert\documents\codeblocks\game_client\button.c
+	"button.h"
+
+1464896114 c:\users\robert\documents\codeblocks\game_client\button.h
+	"includes.h"
+
+1465071657 c:\users\robert\documents\codeblocks\game_client\includes.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<time.h>
+	<string.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_net.h>
+	<SDL_ttf.h>
+	<unistd.h>
+	"cardStruct.h"
+	"resolution.h"
+	"loadCard.h"
+	"cardPosition.h"
+	"loadMedia.h"
+	"openWeb.h"
+	"moveCard.h"
+	"buttonStruct.h"
+	"window.h"
+	"button.h"
+	"resetTurn.h"
+	"send.h"
+	"logik.h"
+	"position.h"
+	"rendering.h"
+	"recieve.h"
+	"game.h"
+
+1464963573 c:\users\robert\documents\codeblocks\game_client\cardstruct.h
+
+1464943035 c:\users\robert\documents\codeblocks\game_client\resolution.h
+
+1464896114 c:\users\robert\documents\codeblocks\game_client\loadcard.h
+	"includes.h"
+
+1464963383 c:\users\robert\documents\codeblocks\game_client\cardposition.h
+	<SDL_image.h>
+	"resolution.h"
+
+1464963429 c:\users\robert\documents\codeblocks\game_client\loadmedia.h
+	"includes.h"
+
+1464896115 c:\users\robert\documents\codeblocks\game_client\openweb.h
+	"includes.h"
+
+1464896115 c:\users\robert\documents\codeblocks\game_client\movecard.h
+	"includes.h"
+
+1464896114 c:\users\robert\documents\codeblocks\game_client\buttonstruct.h
+
+1464896115 c:\users\robert\documents\codeblocks\game_client\window.h
+	"includes.h"
+
+1464896115 c:\users\robert\documents\codeblocks\game_client\resetturn.h
+	"includes.h"
+
+1465071812 c:\users\robert\documents\codeblocks\game_client\send.h
+	"includes.h"
+
+1465043257 c:\users\robert\documents\codeblocks\game_client\logik.h
+	"includes.h"
+
+1464940602 c:\users\robert\documents\codeblocks\game_client\position.h
+	"includes.h"
+
+1464946981 c:\users\robert\documents\codeblocks\game_client\rendering.h
+	"includes.h"
+
+1465071739 c:\users\robert\documents\codeblocks\game_client\recieve.h
+	"includes.h"
+
+1464953625 c:\users\robert\documents\codeblocks\game_client\game.h
+	<stdbool.h>
+	<stddef.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+
+1464963386 source:c:\users\robert\documents\codeblocks\game_client\cardposition.c
+	"cardPosition.h"
+
+1465073431 source:c:\users\robert\documents\codeblocks\game_client\game.c
+	"game.h"
+
+1465042861 source:c:\users\robert\documents\codeblocks\game_client\loadcard.c
+	"loadCard.h"
+
+1464963429 source:c:\users\robert\documents\codeblocks\game_client\loadmedia.c
+	"loadMedia.h"
+
+1465043257 source:c:\users\robert\documents\codeblocks\game_client\logik.c
+	"logik.h"
+
+1465044548 source:c:\users\robert\documents\codeblocks\game_client\movecard.c
+	"moveCard.h"
+
+1464963079 source:c:\users\robert\documents\codeblocks\game_client\openweb.c
+	"openWeb.h"
+	<windows.h>
+
+1465034678 source:c:\users\robert\documents\codeblocks\game_client\position.c
+	"position.h"
+
+1465071657 source:c:\users\robert\documents\codeblocks\game_client\recieve.c
+	"recieve.h"
+
+1465050533 source:c:\users\robert\documents\codeblocks\game_client\rendering.c
+	"rendering.h"
+
+1464896115 source:c:\users\robert\documents\codeblocks\game_client\resetturn.c
+	"resetTurn.h"
+
+1465071812 source:c:\users\robert\documents\codeblocks\game_client\send.c
+	"send.h"
+
+1464896115 source:c:\users\robert\documents\codeblocks\game_client\window.c
+	"window.h"
+
